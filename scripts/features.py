@@ -3,10 +3,18 @@ import os, json, glob, re
 import numpy as np, pandas as pd
 from collections import defaultdict
 
-BASE = os.path.join(os.path.dirname(__file__), "..", "data")
+BASE = os.environ.get("KEIBA_DATA") or os.path.join(os.path.dirname(__file__), "..", "data")
 GOING = {"良": 0, "稍重": 1, "重": 2, "不良": 3}
 SURF = {"芝": 0, "ダ": 1, "障": 2}
-PLACE = {"札幌":1,"函館":2,"福島":3,"新潟":4,"東京":5,"中山":6,"中京":7,"京都":8,"阪神":9,"小倉":10}
+PLACE = {"札幌":1,"函館":2,"福島":3,"新潟":4,"東京":5,"中山":6,"中京":7,"京都":8,"阪神":9,"小倉":10,
+         "門別":30,"盛岡":35,"水沢":36,"浦和":42,"船橋":43,"大井":44,"川崎":45,"金沢":46,"笠松":47,"名古屋":48,"園田":50,"姫路":51,"高知":54,"佐賀":55}
+NAR = {k for k, v in PLACE.items() if v >= 30}
+def nar_class(name):
+    """地方のレース名からクラスを数値化（大きいほど上）"""
+    n = (name or "").upper().translate(str.maketrans("ＡＢＣ１２３", "ABC123")).replace("JRA", "")
+    for k, v in [("JPNIII",7),("JPNII",8),("JPNI",9),("JPN1",9),("JPN2",8),("JPN3",7),("重賞",6),("OP",6),("オープン",6),("A1",5.5),("A2",5),("A",5),("B1",4.5),("B2",4),("B3",3.8),("B",4),("C1",3.5),("C2",3),("C3",2.5),("C4",2.2),("C",3),("新馬",1),("未勝利",1.5),("2歳",2)]:
+        if k in n: return v
+    return 3
 SEX = {"牡": 0, "牝": 1, "セ": 2}
 
 def iter_races():
@@ -31,6 +39,7 @@ def load_history():
     rows = []
     for r in iter_races():
         if not r.get("date") or r.get("surface") == "障": continue
+        if r.get("place") in NAR: r["class"] = nar_class(r.get("name"))
         for h in r["horses"]:
             rows.append({**{k: r.get(k) for k in ["race_id","date","place","r","surface","distance","going","class","n","handicap"]}, **h})
     df = pd.DataFrame(rows)

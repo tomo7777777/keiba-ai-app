@@ -2,3 +2,4 @@ __pycache__/
 data/train_cache.pkl
 data/test_pred.pkl
 data/ids_*.json
+data/nar/
