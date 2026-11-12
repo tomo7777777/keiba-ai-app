@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>競馬AIラボ</title>
+<meta name="theme-color" content="#14382b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo-mark" aria-hidden="true">馬</span><div><h1>競馬AIラボ</h1><p>中央競馬・AI予想</p></div></div>
+  <select id="dateSel" aria-label="開催日"></select>
+</header>
+<nav class="tabs" role="tablist">
+  <a href="#/" data-tab="today">全レース</a>
+  <a href="#/pick" data-tab="pick">勝負レース</a>
+  <a href="#/record" data-tab="record">成績</a>
+  <a href="#/about" data-tab="about">使い方</a>
+</nav>
+<main id="app"><div class="skeleton"></div><div class="skeleton"></div></main>
+<footer class="foot">予想は参考情報です。馬券の購入はご自身の判断で、無理のない範囲でお楽しみください。</footer>
+<script src="app.js"></script>
+</body>
+</html>

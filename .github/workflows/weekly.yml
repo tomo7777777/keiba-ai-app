@@ -1,0 +1,33 @@
+name: 週次の学習し直し
+on:
+  schedule:
+    - cron: "0 18 * * 1"   # 日本時間 火曜 3:00（月曜開催の結果も含める）
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: 先週の結果を取り込み・未精算の予想を確定
+        env: { TZ: Asia/Tokyo }
+        run: |
+          python scripts/collect_history.py $(date -d '10 days ago' +%Y%m%d) $(date -d 'yesterday' +%Y%m%d)
+          python scripts/results.py
+      - name: 学習し直しと検証
+        run: |
+          python scripts/pack.py
+          python scripts/train.py $(date -d '6 months ago' +%Y-%m-01)
+          python scripts/backtest.py
+          python scripts/train.py --final
+      - name: 保存
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs data
+          git diff --cached --quiet || (git commit -m "weekly retrain $(date +%F)" && git pull --rebase && git push)
