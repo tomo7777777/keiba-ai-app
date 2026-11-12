@@ -22,7 +22,9 @@ def iter_races():
 def get_race(race_id):
     p = f"{BASE}/races/{race_id}.json"
     if os.path.exists(p): return json.load(open(p))
-    return _RACE_CACHE.setdefault("all", {r["race_id"]: r for r in iter_races()}).get(race_id)
+    if "all" not in _RACE_CACHE:
+        _RACE_CACHE["all"] = {r["race_id"]: r for r in iter_races()}
+    return _RACE_CACHE["all"].get(race_id)
 _RACE_CACHE = {}
 
 def load_history():
