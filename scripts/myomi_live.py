@@ -68,9 +68,12 @@ def lock_race(r, date):
               "locked_at": now().strftime("%H:%M"), "status": "locked"})
     p = MY.pick(horses)
     # オッズ記録（今後の期待値分析用）
-    snap = {"馬連": nk.get_combo_odds(r["race_id"], "馬連", nar=NAR), "ワイド": nk.get_combo_odds(r["race_id"], "ワイド", nar=NAR)}
+    def combo(kind, **kw):
+        try: return nk.get_combo_odds(r["race_id"], kind, nar=NAR, **kw) or {}
+        except Exception as e: print("オッズ取得失敗", kind, r["race_id"], type(e).__name__, e); return {}
+    snap = {"馬連": combo("馬連"), "ワイド": combo("ワイド")}
     if p:
-        sf = nk.get_combo_odds(r["race_id"], "三連複", nar=NAR, jiku=p["axis"])
+        sf = combo("三連複", jiku=p["axis"])
         snap["三連複"] = {k: v for k, v in sf.items() if str(p["axis"]) in k.split("-")}
         for b in p["bets"].values():
             for t in b["tickets"]:
