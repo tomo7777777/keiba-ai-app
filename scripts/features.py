@@ -9,6 +9,11 @@ SURF = {"芝": 0, "ダ": 1, "障": 2}
 PLACE = {"札幌":1,"函館":2,"福島":3,"新潟":4,"東京":5,"中山":6,"中京":7,"京都":8,"阪神":9,"小倉":10,
          "門別":30,"盛岡":35,"水沢":36,"浦和":42,"船橋":43,"大井":44,"川崎":45,"金沢":46,"笠松":47,"名古屋":48,"園田":50,"姫路":51,"高知":54,"佐賀":55}
 NAR = {k for k, v in PLACE.items() if v >= 30}
+def jra_grade(name, cur):
+    """中央の重賞をレース名から判定（G3=7, G2=8, G1=9）"""
+    for k, v in [("GIII)", 7), ("GII)", 8), ("GI)", 9)]:
+        if k in name: return v
+    return cur
 def nar_class(name):
     """地方のレース名からクラスを数値化（大きいほど上）"""
     n = (name or "").upper().translate(str.maketrans("ＡＢＣ１２３", "ABC123")).replace("JRA", "")
@@ -40,6 +45,7 @@ def load_history():
     for r in iter_races():
         if not r.get("date") or r.get("surface") == "障": continue
         if r.get("place") in NAR: r["class"] = nar_class(r.get("name"))
+        elif "G" in (r.get("name") or ""): r["class"] = jra_grade(r["name"], r.get("class"))
         for h in r["horses"]:
             rows.append({**{k: r.get(k) for k in ["race_id","date","place","r","surface","distance","going","class","n","handicap"]}, **h})
     df = pd.DataFrame(rows)
