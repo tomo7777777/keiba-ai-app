@@ -26,7 +26,7 @@ function route() {
   const h = location.hash.replace('#/', '') || 'today';
   document.querySelectorAll('.tabs a').forEach(a => a.classList.toggle('on', a.dataset.tab === h));
   sel.style.visibility = (h === 'today' || h === 'pick') ? 'visible' : 'hidden';
-  ({ today: viewToday, pick: viewPick, record: viewRecord, about: viewAbout }[h] || viewToday)();
+  ({ today: viewToday, pick: viewPick, myomi: viewMyomi, record: viewRecord, about: viewAbout }[h] || viewToday)();
   window.scrollTo(0, 0);
 }
 
@@ -147,6 +147,85 @@ function viewAbout() {
   <li><b>狙い</b>：単勝10〜80倍で、期待値1.3以上の馬（1レース1頭）。単勝1点。当たりは少なく、外れが続くこともあります。</li>
   <li>印と買い目は当日朝に固定し、後から変えません。オッズの表示だけ更新されます。</li></ul></div>
   <div class="card"><h3>AIの中身</h3><p>2024年以降の中央競馬約1万レースの結果から、馬の近走成績・走破タイムの速さ・上がり3F・距離や馬場の適性・騎手と調教師の成績・枠順・斤量・馬体重、そして単勝オッズ（世間の評価）を合わせて学習しています。毎週火曜に最新の結果で学習し直します。</p>
-  <p>印と買い目は、当日朝に単勝オッズが出そろった時点で固定します。</p></div>`;
+  <p>印と買い目は、当日朝に単勝オッズが出そろった時点で固定します。</p></div>
+  <div class="card"><h3>妙味軸とは（試験運用）</h3>
+  <p>1番人気ではなく、<b>単勝3〜10倍の中から「人気から見た3着以内の確率」よりAIの確率が1.3倍以上高い馬</b>を1頭選び、軸にします。</p>
+  <p>買い方は各100円で、複勝（軸）・ワイド（軸-相手3頭）・馬連（軸-相手5頭）・3連複（軸-相手4頭の6点）。相手はAIの3着内確率が高い順です。</p>
+  <p>各レースの発走40分前ごろのオッズで判定し、それ以降は変えません。条件に合う馬がいないレースは見送ります（1日に数レース程度）。</p>
+  <p>過去データでは回収率100%超えの買い方もありましたが、件数が少なく偶然の可能性があります。実際の成績で確かめていきます。</p></div>`;
+}
+
+/* ===== 妙味軸（中央・地方） ===== */
+const MY = { circuit: 'nar', idx: {}, date: {}, day: null, rec: {}, bt: null };
+const BET_ORDER = ['fuku', 'wide', 'umaren', 'sanfuku'];
+async function viewMyomi() {
+  const c = MY.circuit;
+  app.innerHTML = '<div class="skeleton"></div>';
+  if (!MY.idx[c]) { try { MY.idx[c] = await j(`data/myomi/${c}/index.json`); } catch { MY.idx[c] = { days: [] }; } }
+  try { MY.rec[c] = await j(`data/myomi/${c}/record.json`); } catch { MY.rec[c] = null; }
+  if (!MY.bt) { try { MY.bt = await j('data/myomi/backtest.json'); } catch { MY.bt = {}; } }
+  const days = MY.idx[c].days || [];
+  const d = MY.date[c] || days[0];
+  MY.day = null;
+  if (d) { try { MY.day = await j(`data/myomi/${c}/days/${d}.json`); } catch {} }
+  const day = MY.day;
+  const races = day ? [...day.races].sort((a, b) => (a.start || '').localeCompare(b.start || '') || a.race_id.localeCompare(b.race_id)) : [];
+  const picks = races.filter(r => r.pick), skip = races.filter(r => r.status === 'locked' && !r.pick);
+  const wait = races.filter(r => r.status === 'wait');
+  let inv = 0, ret = 0, settled = 0;
+  picks.forEach(r => Object.values(r.pick.bets).forEach(b => { if (b.inv !== undefined) { inv += b.inv; ret += b.ret; settled++; } }));
+  const head = `<div class="place-chips">
+      <button class="chip ${c === 'nar' ? 'on' : ''}" data-c="nar">地方</button>
+      <button class="chip ${c === 'jra' ? 'on' : ''}" data-c="jra">中央</button>
+      ${days.length ? `<select class="msel" aria-label="日付">${days.map(x => `<option value="${x}" ${x === d ? 'selected' : ''}>${fmtDate(x)}</option>`).join('')}</select>` : ''}
+    </div>
+    <div class="demo myomi-note">試験運用中：1番人気以外から、人気より実力が上とAIが見た馬を軸にします。過去検証では有望でしたが、まだ実績で確かめている段階です。</div>`;
+  let body = '';
+  if (!day) body = `<div class="notice">${c === 'nar' ? '地方競馬' : '中央競馬'}の妙味軸はまだありません。<br>開催日に、各レースの発走40分前ごろ自動で判定します。</div>`;
+  else {
+    body = `<div class="kpis">
+      <div class="kpi"><div class="l">軸レース</div><div class="v">${picks.length}</div><div class="s">判定済み ${picks.length + skip.length} / ${races.length}R</div></div>
+      <div class="kpi"><div class="l">この日の収支</div><div class="v ${ret - inv >= 0 ? 'plus' : 'minus'}">${settled ? (ret - inv >= 0 ? '+' : '') + yen(ret - inv) : '-'}</div><div class="s">円（各100円・全券種）</div></div></div>
+      ${picks.length ? picks.map(myomiCard).join('') : `<div class="notice">${wait.length ? 'まだ判定前です。発走40分前ごろに判定します。' : 'この日は条件に合う軸がありませんでした。'}</div>`}
+      ${wait.length ? `<p class="legend">判定待ち ${wait.length}R（次は ${esc(wait[0].place)}${wait[0].r}R ${esc(wait[0].start)}発走）</p>` : ''}
+      ${skip.length ? `<details class="race"><summary><span class="rname">見送り ${skip.length}R</span><span class="rsub">条件（単勝3〜10倍・ズレ1.3倍以上）に合う馬なし</span></summary><div class="body"><p class="legend">${skip.map(r => `${esc(r.place)}${r.r}R`).join('・')}</p></div></details>` : ''}`;
+  }
+  app.innerHTML = head + body + myomiRecord(c);
+  app.querySelectorAll('.chip[data-c]').forEach(b => b.onclick = () => { MY.circuit = b.dataset.c; viewMyomi(); });
+  const ms = app.querySelector('.msel'); if (ms) ms.onchange = () => { MY.date[c] = ms.value; viewMyomi(); };
+}
+function myomiCard(r) {
+  const p = r.pick, ax = r.horses.find(h => h.umaban === p.axis) || {};
+  const name = u => (r.horses.find(h => h.umaban === u) || {}).name || '';
+  const bets = BET_ORDER.filter(k => p.bets[k]).map(k => {
+    const b = p.bets[k];
+    const tks = b.tickets.map(t => { const w = r.result && isWin(t[0], t[1], r.result.payout); return `<span class="${w ? 'win' : ''}">${t[1]}${t[3] && t[0] !== '複勝' ? `<small> ${t[3]}倍${t[0] === 'ワイド' ? '〜' : ''}</small>` : ''}</span>`; }).join('');
+    const res = b.inv !== undefined ? `<div class="res">${yen(b.inv)}円 → <b>${yen(b.ret)}円</b></div>` : `<div class="res">${b.tickets.length}点・${yen(b.tickets.length * 100)}円</div>`;
+    return `<div class="bet myomi"><h4><span>${b.label}</span></h4><div class="tk">${tks}</div>${res}</div>`;
+  }).join('');
+  const hit = p.bets && Object.values(p.bets).some(b => b.hit > 0);
+  const res = r.result ? `<div class="top3">軸 ${ax.rank ?? '-'}着　結果 <b>${r.result.order.join('-')}</b></div>` : '';
+  return `<details class="race" open><summary>
+    <span class="rno">${esc((r.place || '').slice(0, 2))}<br>${r.r}R</span>
+    <span class="rname">${esc(r.name)}</span>
+    <span class="badges">${hit ? '<span class="b hit">的中</span>' : ''}<span class="b ner">ズレ ${p.gap}倍</span></span>
+    <span class="rsub">${esc(r.start)}発走 ${esc(r.surface ?? '')}${r.distance ?? ''}m ${r.n}頭・${esc(r.locked_at)}判定</span>${res}
+  </summary><div class="body">
+    <div class="axis"><span class="uma w${ax.waku}">${ax.umaban}</span><div><div class="hn">${esc(ax.name)}</div>
+      <div class="hs">${esc(ax.jockey)}・単勝 ${ax.odds}倍（${ax.pop}番人気）</div>
+      <div class="hs">3着以内の確率：AI <b>${Math.round(ax.p3 * 100)}%</b> ／ 人気から見ると ${Math.round(ax.m3 * 100)}%</div></div></div>
+    <p class="legend">相手（AIの3着内確率順）：${p.partners.map(u => `${u} ${esc(name(u))}`).join('、')}</p>
+    <div class="bets">${bets}</div></div></details>`;
+}
+function myomiRecord(c) {
+  const rec = MY.rec[c], bt = (MY.bt || {})[c];
+  let h = `<h2 class="sec">${c === 'nar' ? '地方' : '中央'}の妙味軸 実績</h2>`;
+  if (rec && rec.axis_n) {
+    h += `<div class="card"><p class="legend" style="margin-top:0">軸の3着内率 ${pct(rec.axis_top3, rec.axis_n)}（${rec.axis_n}R）</p><table class="tbl"><thead><tr><th>買い方</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th></tr></thead><tbody>${
+      BET_ORDER.filter(k => rec.bets[k]).map(k => { const s = rec.bets[k]; return `<tr><td>${esc(s.label)}</td><td class="num">${s.races}</td><td class="num">${pct(s.hit_races, s.races)}</td><td class="num ${s.ret >= s.inv ? 'ev-hi' : ''}">${pct(s.ret, s.inv)}</td></tr>`; }).join('')}</tbody></table></div>`;
+  } else h += '<div class="notice">実績はまだありません。結果が出しだい自動で集計します。</div>';
+  if (bt) h += `<div class="card"><h3>過去データでの検証</h3><p class="legend" style="margin-top:0">${esc(bt.period)}・学習に使っていない期間。確定オッズで計算しているため実際とは差が出ます。</p>
+    <table class="tbl"><thead><tr><th>買い方</th><th class="num">R</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${bt.rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num">${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>`;
+  return h;
 }
 init();

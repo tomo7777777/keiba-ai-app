@@ -25,6 +25,13 @@ jobs:
           python scripts/train.py $(date -d '6 months ago' +%Y-%m-01)
           python scripts/backtest.py
           python scripts/train.py --final
+          python scripts/train_myomi.py jra
+      - name: 地方（妙味軸）の学び直し
+        env: { TZ: Asia/Tokyo }
+        run: |
+          python scripts/collect_nar.py $(date -d '10 days ago' +%Y%m%d) $(date -d 'yesterday' +%Y%m%d)
+          KEIBA_DATA=data/nar python scripts/pack.py
+          KEIBA_DATA=data/nar python scripts/train_myomi.py nar
       - name: 保存
         run: |
           git config user.name "github-actions[bot]"

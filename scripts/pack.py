@@ -1,7 +1,7 @@
 """data/races/*.json を年ごとの data/history/YYYY.jsonl.gz にまとめる（リポジトリを軽くするため）"""
 import os, glob, json, gzip
 from collections import defaultdict
-B = os.path.join(os.path.dirname(__file__), "..", "data")
+B = os.environ.get("KEIBA_DATA") or os.path.join(os.path.dirname(__file__), "..", "data")
 os.makedirs(f"{B}/history", exist_ok=True)
 by = defaultdict(dict)
 for f in glob.glob(f"{B}/history/*.jsonl.gz"):

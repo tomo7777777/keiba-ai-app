@@ -100,9 +100,12 @@ def parse_result(race_id):
     race["payout"] = pay
     return race
 
-def parse_card(race_id):
-    """出馬表（レース前）"""
-    h = get(f"https://race.netkeiba.com/race/shutuba.html?race_id={race_id}")
+NAR_PLACES = {"30":"門別","35":"盛岡","36":"水沢","42":"浦和","43":"船橋","44":"大井","45":"川崎","46":"金沢","47":"笠松","48":"名古屋","50":"園田","51":"姫路","54":"高知","55":"佐賀"}
+
+def parse_card(race_id, nar=False):
+    """出馬表（レース前）。nar=True で地方競馬"""
+    host = "nar.netkeiba.com" if nar else "race.netkeiba.com"
+    h = get(f"https://{host}/race/shutuba.html?race_id={race_id}")
     if not h: return None
     s = BeautifulSoup(h, "lxml")
     d1 = s.select_one(".RaceData01"); d2 = s.select_one(".RaceData02")
@@ -140,6 +143,7 @@ def parse_card(race_id):
             "weight": int(wt.group(1)) if wt else None, "wdiff": int(wt.group(2)) if wt else None,
         })
     race["n"] = len(rows); race["horses"] = rows
+    if nar: race["place"] = NAR_PLACES.get(race_id[4:6])
     return race
 
 def get_odds(race_id):
@@ -155,3 +159,52 @@ def get_odds(race_id):
         return out, j.get("status")
     except Exception:
         return {}, None
+
+
+def nar_race_list(date):
+    """地方競馬のその日のレースID一覧（ばんえい除く）"""
+    h = get(f"https://nar.netkeiba.com/top/race_list_sub.html?kaisai_date={date}")
+    return sorted({i for i in re.findall(r"race_id=(\d{12})", h or "") if i[4:6] in NAR_PLACES})
+
+def get_odds_nar(race_id):
+    """地方の単勝オッズ -> ({馬番: オッズ}, 状態)。状態 real=発売中/確定"""
+    try:
+        r = S.get(f"https://nar.netkeiba.com/api/api_get_nar_odds.html?race_id={race_id}&type=1&action=update", timeout=20)
+        j = r.json(); time.sleep(0.4)
+        out = {}
+        for k, v in (j.get("ary_odds") or {}).items():
+            try:
+                if k.isdigit() and float(v["Odds"]) > 0: out[int(k)] = float(v["Odds"])
+            except (ValueError, KeyError, TypeError): pass
+        return out, j.get("odds_status")
+    except Exception:
+        return {}, None
+
+def _combo_key(k, sep):
+    return "-".join(str(int(x)) for x in k.split(sep))
+
+def get_combo_odds(race_id, kind, nar=False, jiku=None):
+    """組み合わせ馬券のオッズ {"1-2": 12.3}。kind: 馬連/ワイド/三連複（ワイドは下限）
+    地方は三連複を軸馬ごとのページで取得（jiku 指定）"""
+    out = {}
+    try:
+        if nar:
+            b = {"馬連": "b4", "ワイド": "b5", "三連複": "b7"}[kind]
+            url = f"https://nar.netkeiba.com/odds/odds_get_form.html?type={b}&race_id={race_id}&housiki=c0"
+            if kind == "三連複" and jiku: url += f"&jiku={jiku}"
+            r = S.get(url, timeout=20); t = r.content.decode("euc-jp", "ignore"); time.sleep(0.4)
+            for k, v in re.findall(r'id="chk_[^"]*?_' + b + r'_c0_([\d_]+)"[^>]*>\s*([\d,.]+)', t):
+                try: out[_combo_key(k, "_")] = float(v.replace(",", ""))
+                except ValueError: pass
+        else:
+            t = {"馬連": 4, "ワイド": 5, "三連複": 7}[kind]
+            r = S.get(f"https://race.netkeiba.com/api/api_get_jra_odds.html?race_id={race_id}&type={t}&action=update", timeout=20)
+            j = r.json(); time.sleep(0.4)
+            o = j.get("data", {}).get("odds", {}).get(str(t), {}) if isinstance(j.get("data"), dict) else {}
+            for k, v in o.items():
+                try:
+                    if v and float(v[0]) > 0: out["-".join(str(int(k[i:i+2])) for i in range(0, len(k), 2))] = float(v[0])
+                except (ValueError, TypeError): pass
+    except Exception as e:
+        print("combo odds error", race_id, kind, type(e).__name__)
+    return out
