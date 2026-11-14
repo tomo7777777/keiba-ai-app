@@ -84,3 +84,5 @@ h2.sec{font-size:16px;margin:18px 2px 10px}
 .bet .tk small{font-family:var(--mono);font-size:10px;color:var(--muted)}
 .axis{display:flex;gap:10px;align-items:flex-start;margin:4px 0 8px;padding:10px 12px;background:#fbf6e6;border-radius:10px;border:1px solid #e8dcb4}
 .axis .uma{flex:none}
+.ev-h{font-size:15px;margin:16px 0 8px}.ev-h small{font-weight:400;color:var(--muted);font-size:12px}
+.ev-card .axis{margin:4px 0 8px}
