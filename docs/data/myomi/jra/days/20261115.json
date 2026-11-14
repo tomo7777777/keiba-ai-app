@@ -28,7 +28,12 @@
    "surface": "芝",
    "distance": 1800,
    "n": 16,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:09",
+    "kind": null,
+    "fav": 5.0
+   }
   },
   {
    "race_id": "202603030403",
@@ -264,7 +269,12 @@
    "surface": "ダ",
    "distance": 1800,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:09",
+    "kind": null,
+    "fav": 1.6
+   }
   },
   {
    "race_id": "202608050402",
@@ -388,5 +398,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T06:02+09:00"
+ "updated": "2026-11-15T06:08+09:00"
 }
