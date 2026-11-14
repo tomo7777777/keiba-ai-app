@@ -69,6 +69,11 @@ def ev_race(r, date):
         ax = next(h for h in hs if h["umaban"] == sel["axis"]); sel.update({"name": ax["name"], "jockey": ax["jockey"]})
         nm = {h["umaban"]: h["name"] for h in hs}
         for t in sel["tickets"]: t.append(" / ".join(nm.get(int(u), "") for u in t[1].split("-")))
+        try:
+            so = nk.get_combo_odds(r["race_id"], "三連複", nar=NAR, jiku=sel["axis"]) or {}
+            sel["san"] = EVW.pick_san(hs, so, sel["axis"], json.load(open(EVW.SAN_PATHS[circuit])))
+        except Exception as e:
+            print("3連複エラー", r["race_id"], type(e).__name__, e); sel["san"] = []
     r["ev"] = {"at": now().strftime("%H:%M"), "tickets": tickets, "sel": sel}
     return True
 
@@ -127,6 +132,9 @@ def settle_race(r):
     if r.get("ev") and r["ev"].get("sel"):
         inv, ret, hit = S.settle([t[:3] for t in r["ev"]["sel"]["tickets"]], res["payout"])
         r["ev"]["sel"].update({"inv": inv, "ret": ret, "hit": hit})
+        if r["ev"]["sel"].get("san"):
+            inv, ret, hit = S.settle([t[:3] for t in r["ev"]["sel"]["san"]], res["payout"])
+            r["ev"]["sel"]["san_res"] = {"inv": inv, "ret": ret, "hit": hit}
     return True
 
 def summarize():
@@ -138,8 +146,12 @@ def summarize():
             rec["races"] += 1
             b = (r.get("ev") or {}).get("sel")
             if b and b.get("inv"):
-                tgt = rec.setdefault("ev", {}).setdefault(b["kind"], {"label": "本命レース" if b["kind"] == "hon" else "穴レース", "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
+                tgt = rec.setdefault("ev", {}).setdefault(b["kind"], {"label": ("本命レース" if b["kind"] == "hon" else "穴レース") + " ワイド", "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
                 tgt["races"] += 1; tgt["hit_races"] += int(b["ret"] > 0); tgt["tickets"] += b["inv"] // 100; tgt["inv"] += b["inv"]; tgt["ret"] += b["ret"]
+                sr = b.get("san_res")
+                if sr and sr["inv"]:
+                    t2 = rec["ev"].setdefault(b["kind"] + "_san", {"label": ("本命レース" if b["kind"] == "hon" else "穴レース") + " 3連複", "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
+                    t2["races"] += 1; t2["hit_races"] += int(sr["ret"] > 0); t2["tickets"] += sr["inv"] // 100; t2["inv"] += sr["inv"]; t2["ret"] += sr["ret"]
             p = r.get("pick")
             if not p: continue
             ax = next((h for h in r["horses"] if h["umaban"] == p["axis"]), {})
