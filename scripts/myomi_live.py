@@ -138,9 +138,13 @@ def lock_race(r, date):
 
 def settle_race(r):
     res = nk.parse_result(r["race_id"])
-    if not res or not res.get("horses") or not res.get("payout"): return False
-    if NAR: res["place"] = r.get("place")
-    json.dump(res, open(f"{RACES}/{r['race_id']}.json", "w"), ensure_ascii=False)
+    if res and res.get("horses") and res.get("payout"):
+        if NAR: res["place"] = r.get("place")
+        json.dump(res, open(f"{RACES}/{r['race_id']}.json", "w"), ensure_ascii=False)
+    else:   # db.netkeiba への反映が遅いときは、当日の結果ページから読む
+        try: res = nk.parse_result_live(r["race_id"], nar=NAR)
+        except Exception as e: print("結果ページエラー", r["race_id"], type(e).__name__, e); res = None
+        if not res: return False
     rk = {h["umaban"]: h["rank"] for h in res["horses"]}; fo = {h["umaban"]: h["odds"] for h in res["horses"]}
     for h in r.get("horses", []): h["rank"] = rk.get(h["umaban"]); h["final_odds"] = fo.get(h["umaban"])
     order = sorted([h for h in res["horses"] if h["rank"]], key=lambda h: h["rank"])

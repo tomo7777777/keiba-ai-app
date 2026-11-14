@@ -208,3 +208,36 @@ def get_combo_odds(race_id, kind, nar=False, jiku=None):
     except Exception as e:
         print("combo odds error", race_id, kind, type(e).__name__)
     return out
+
+
+_PAY_K = {"単勝": ("単勝", 1, False), "複勝": ("複勝", 1, False), "枠連": ("枠連", 2, True), "馬連": ("馬連", 2, True),
+          "ワイド": ("ワイド", 2, True), "馬単": ("馬単", 2, False), "3連複": ("三連複", 3, True), "3連単": ("三連単", 3, False)}
+
+def parse_result_live(race_id, nar=False):
+    """当日の結果ページ（race/nar.netkeiba）から着順と払戻を読む。db.netkeiba の反映が遅いときの代わり"""
+    host = "nar.netkeiba.com" if nar else "race.netkeiba.com"
+    h = get(f"https://{host}/race/result.html?race_id={race_id}")
+    if not h: return None
+    s = BeautifulSoup(h, "lxml")
+    t = s.select_one("table#All_Result_Table")
+    if not t: return None
+    horses = []
+    for tr in t.select("tr")[1:]:
+        td = [x.get_text(" ", strip=True) for x in tr.select("td")]
+        if len(td) < 11 or not td[2].isdigit(): continue
+        horses.append({"umaban": int(td[2]), "rank": int(td[0]) if td[0].isdigit() else None, "odds": _num(td[10])})
+    pay = {}
+    for tr in s.select("table.Payout_Detail_Table tr"):
+        th = tr.select_one("th"); tds = tr.select("td")
+        if not th or len(tds) < 2 or th.get_text(strip=True) not in _PAY_K: continue
+        name, k, srt = _PAY_K[th.get_text(strip=True)]
+        nums = [x for x in tds[0].get_text("|", strip=True).split("|") if x.isdigit()]
+        yens = [int(re.sub(r"[^0-9]", "", x)) for x in tds[1].get_text("|", strip=True).split("|") if re.sub(r"[^0-9]", "", x)]
+        groups = [nums[i:i + k] for i in range(0, len(nums), k)]
+        out = []
+        for g, y in zip(groups, yens):
+            if srt: g = sorted(g, key=int)
+            out.append(["-".join(g), y])
+        if out: pay[name] = out
+    if not horses or not pay or not any(h["rank"] for h in horses): return None
+    return {"race_id": race_id, "horses": horses, "payout": pay}
