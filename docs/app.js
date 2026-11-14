@@ -179,7 +179,7 @@ async function viewMyomi() {
       <button class="chip ${c === 'jra' ? 'on' : ''}" data-c="jra">中央</button>
       ${days.length ? `<select class="msel" aria-label="日付">${days.map(x => `<option value="${x}" ${x === d ? 'selected' : ''}>${fmtDate(x)}</option>`).join('')}</select>` : ''}
     </div>
-    <div class="demo myomi-note">試験運用中：1番人気以外から、人気より実力が上とAIが見た馬を軸にします。過去検証では有望でしたが、まだ実績で確かめている段階です。</div>`;
+    <div class="demo myomi-note">試験運用中：1番人気以外から、人気より実力が上とAIが見た馬を軸にします。最近のデータでは100%超えでしたが、古い期間では届かず（地方の複勝で97%）、まだ儲かる方法とは言えません。記録用として続けています。</div>`;
   let body = '';
   if (!day) body = `<div class="notice">${c === 'nar' ? '地方競馬' : '中央競馬'}の妙味軸はまだありません。<br>開催日に、各レースの発走40分前ごろ自動で判定します。</div>`;
   else {
@@ -217,6 +217,9 @@ function myomiCard(r) {
     <p class="legend">相手（AIの3着内確率順）：${p.partners.map(u => `${u} ${esc(name(u))}`).join('、')}</p>
     <div class="bets">${bets}</div></div></details>`;
 }
+function btTable(rows) {
+  return `<table class="tbl"><thead><tr><th>買い方</th><th class="num">R</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num ${r[2] >= 100 ? 'ev-hi' : ''}">${r[2]}%</td><td class="num">${esc(r[3])}</td></tr>`).join('')}</tbody></table>`;
+}
 function myomiRecord(c) {
   const rec = MY.rec[c], bt = (MY.bt || {})[c];
   let h = `<h2 class="sec">${c === 'nar' ? '地方' : '中央'}の妙味軸 実績</h2>`;
@@ -225,7 +228,7 @@ function myomiRecord(c) {
       BET_ORDER.filter(k => rec.bets[k]).map(k => { const s = rec.bets[k]; return `<tr><td>${esc(s.label)}</td><td class="num">${s.races}</td><td class="num">${pct(s.hit_races, s.races)}</td><td class="num ${s.ret >= s.inv ? 'ev-hi' : ''}">${pct(s.ret, s.inv)}</td></tr>`; }).join('')}</tbody></table></div>`;
   } else h += '<div class="notice">実績はまだありません。結果が出しだい自動で集計します。</div>';
   if (bt) h += `<div class="card"><h3>過去データでの検証</h3><p class="legend" style="margin-top:0">${esc(bt.period)}・学習に使っていない期間。確定オッズで計算しているため実際とは差が出ます。</p>
-    <table class="tbl"><thead><tr><th>買い方</th><th class="num">R</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${bt.rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num">${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>`;
+    ${btTable(bt.rows)}${bt.old ? `<h3 style="margin-top:14px">古い期間での確認</h3><p class="legend" style="margin-top:0">${esc(bt.old.period)}。この期間では100%を超えませんでした。</p>${btTable(bt.old.rows)}` : ''}</div>`;
   return h;
 }
 init();
