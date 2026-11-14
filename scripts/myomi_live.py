@@ -6,7 +6,7 @@
 import os, sys, json, glob, pickle, datetime as dt
 import numpy as np, pandas as pd
 sys.path.insert(0, os.path.dirname(__file__))
-import netkeiba as nk, features as F, strategy as S, myomi as MY
+import netkeiba as nk, features as F, strategy as S, myomi as MY, evwide as EVW
 
 circuit = sys.argv[1] if len(sys.argv) > 1 else "jra"
 NAR = circuit == "nar"
@@ -14,6 +14,7 @@ if NAR: assert "nar" in F.BASE, "地方は KEIBA_DATA=data/nar を指定"
 JST = dt.timezone(dt.timedelta(hours=9))
 LOCK_MIN = 40      # 発走何分前から固定するか
 RESULT_MIN = 15    # 発走何分後から結果を取りに行くか
+EV_MIN = 16        # 期待値ワイド（地方・試験記録）：発走何分前から最新オッズで判定するか
 OUT = os.path.join(MY.ROOT, "docs", "data", "myomi", circuit)
 DAYS = os.path.join(OUT, "days"); os.makedirs(DAYS, exist_ok=True)
 RACES = os.path.join(F.BASE, "races"); os.makedirs(RACES, exist_ok=True)
@@ -43,6 +44,26 @@ def model_state(date):
         _STATE["s"] = F.state_from_base(base, pd.Timestamp(date))
         _STATE["M"] = pickle.load(open(MY.model_path(circuit), "rb"))
     return _STATE["s"], _STATE["M"]
+
+def ev_race(r, date):
+    """期待値ワイド（試験記録）：発走直前の最新オッズで、期待値1.0以上のワイドを記録"""
+    card = nk.parse_card(r["race_id"], nar=NAR)
+    if not card or not card.get("horses") or any(h["umaban"] is None for h in card["horses"]): return False
+    odds, st = nk.get_odds_nar(r["race_id"])
+    if st == "yoso" or len(odds) < 0.8 * len(card["horses"]): return False
+    card["class"] = F.nar_class(card.get("name"))
+    (hist, jock, trn), M = model_state(date)
+    card["horses"] = [h for h in card["horses"] if odds.get(h["umaban"])]; card["n"] = len(card["horses"])
+    d = F.race_rows(card, lambda k: hist.horse.get(k), jock, trn, pd.Timestamp(date))
+    d = F.add_market(d, [odds.get(h["umaban"]) for h in card["horses"]])
+    d = MY.add_market_places(d); d = MY.predict(M, d)
+    hs = [{"umaban": h["umaban"], "odds": odds[h["umaban"]], "p3": float(x["p3"]), "m3": float(x["m3"])}
+          for h, (_, x) in zip(card["horses"], d.iterrows())]
+    try: wide = nk.get_combo_odds(r["race_id"], "ワイド", nar=True) or {}
+    except Exception: wide = {}
+    if not wide: return False
+    r["ev"] = {"at": now().strftime("%H:%M"), "tickets": EVW.pick(hs, wide)}
+    return True
 
 def lock_race(r, date):
     card = nk.parse_card(r["race_id"], nar=NAR)
@@ -96,6 +117,11 @@ def settle_race(r):
         for b in r["pick"]["bets"].values():
             inv, ret, hit = S.settle([t[:3] for t in b["tickets"]], res["payout"])
             b.update({"inv": inv, "ret": ret, "hit": hit})
+    if r.get("ev"):
+        for k, _, th in EVW.TIERS:
+            tk = [t[:3] for t in r["ev"]["tickets"] if t[4] >= th]
+            inv, ret, hit = S.settle(tk, res["payout"]) if tk else (0, 0, 0)
+            r["ev"][k] = {"inv": inv, "ret": ret, "hit": hit}
     return True
 
 def summarize():
@@ -105,6 +131,11 @@ def summarize():
         for r in day["races"]:
             if not r.get("result"): continue
             rec["races"] += 1
+            for k, label, _ in (EVW.TIERS if r.get("ev") else []):
+                b = r["ev"].get(k)
+                if not b or not b["inv"]: continue
+                tgt = rec.setdefault("ev", {}).setdefault(k, {"label": label, "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
+                tgt["races"] += 1; tgt["hit_races"] += int(b["ret"] > 0); tgt["tickets"] += b["inv"] // 100; tgt["inv"] += b["inv"]; tgt["ret"] += b["ret"]
             p = r.get("pick")
             if not p: continue
             ax = next((h for h in r["horses"] if h["umaban"] == p["axis"]), {})
@@ -137,6 +168,11 @@ def main():
                     if lock_race(r, date): changed = True; print("固定", r["race_id"], "軸" if r.get("pick") else "見送り")
                 except Exception as e:
                     print("固定エラー", r["race_id"], type(e).__name__, e)
+        if NAR and not r.get("ev") and r["status"] != "wait" and 0 < mins <= EV_MIN:
+            try:
+                if ev_race(r, date): changed = True; print("期待値ワイド", r["race_id"], len(r["ev"]["tickets"]), "点")
+            except Exception as e:
+                print("期待値エラー", r["race_id"], type(e).__name__, e)
         if r["status"] in ("locked", "missed") and not r.get("result") and mins < -RESULT_MIN:
             if settle_race(r): changed = True; print("結果", r["race_id"])
     day["updated"] = t.isoformat(timespec="minutes")

@@ -59,6 +59,9 @@ main{max-width:760px;margin:0 auto;padding:14px 12px 30px}
 .tk{display:flex;flex-wrap:wrap;gap:5px}
 .tk span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:12px;font-family:var(--mono)}
 .tk span.win{background:var(--hit);color:#fff;border-color:var(--hit)}
+.tk span.strong{border-color:var(--accent,#b8860b);font-weight:700}
+.ev-card{padding:10px 12px}
+.ev-card .rsub{margin-bottom:6px}
 .res{font-size:12px;margin-top:6px;color:var(--muted)}
 .res b{color:var(--ink)}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
