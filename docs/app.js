@@ -23,18 +23,24 @@ async function loadDay(d) {
 window.addEventListener('hashchange', route);
 
 function route() {
-  let h = location.hash.replace('#/', '') || 'today';
+  let [h, sub] = (location.hash.replace('#/', '') || 'today').split('/');
   if (h === 'myomi') h = MY.circuit;
   if (h === 'nar' || h === 'jra') MY.circuit = h;
+  state.sub = sub || '';
   document.querySelectorAll('.tabs a').forEach(a => a.classList.toggle('on', a.dataset.tab === h));
   sel.style.visibility = (h === 'today' || h === 'pick') ? 'visible' : 'hidden';
   ({ today: viewToday, pick: viewPick, nar: viewMyomi, jra: viewMyomi, record: viewRecord, about: viewAbout }[h] || viewToday)();
   window.scrollTo(0, 0);
 }
+// 2段目のタブ
+function subTabs(base, items, cur) {
+  return `<nav class="subtabs">${items.map(([k, label, n]) => `<a href="#/${base}/${k}" class="${k === cur ? 'on' : ''}">${label}${n !== undefined ? `<span class="cnt">${n}</span>` : ''}</a>`).join('')}</nav>`;
+}
 
 function raceSummary(r, open = false) {
   const hon = r.bets?.honmei, ner = r.bets?.nerai;
-  const hitB = (hon?.hit || ner?.hit) ? '<span class="b hit">的中</span>' : '';
+  const bs = [hon, ner].filter(b => b && b.inv !== undefined), bi = bs.reduce((a, b) => a + b.inv, 0), br = bs.reduce((a, b) => a + b.ret, 0);
+  const hitB = !bs.length ? '' : br === 0 ? `<span class="b pl-b lose">−${yen(bi)}円</span>` : br < bi ? `<span class="b pl-b gami">ガミ −${yen(bi - br)}円</span>` : `<span class="b hit">的中 +${yen(br - bi)}円</span>`;
   const top = [...r.horses].sort((a, b) => b.pw - a.pw).slice(0, 3);
   const res = r.result ? `<div class="top3">◎${top[0].umaban}（${top[0].rank ?? '-'}着）　結果 <b>${r.result.order.join('-')}</b></div>` :
     `<div class="top3">◎${top[0].umaban} ${esc(top[0].name)}</div>`;
@@ -104,13 +110,16 @@ function viewPick() {
   const picks = d.races.filter(r => r.bets && Object.keys(r.bets).length).sort((a, b) => (a.start || '').localeCompare(b.start || '') || a.race_id.localeCompare(b.race_id));
   let inv = 0, ret = 0, settled = 0;
   picks.forEach(r => Object.values(r.bets).forEach(b => { if (b.inv !== undefined) { inv += b.inv; ret += b.ret; settled++; } }));
-  const hon = picks.filter(r => r.bets.honmei).length, ner = picks.filter(r => r.bets.nerai).length;
-  app.innerHTML = `${demoNote(d)}<div class="kpis">
-    <div class="kpi"><div class="l">本命レース</div><div class="v">${hon}</div><div class="s">◎の勝率40%以上</div></div>
-    <div class="kpi"><div class="l">狙いレース</div><div class="v">${ner}</div><div class="s">単勝10〜80倍・期待値1.3以上</div></div>
-    <div class="kpi"><div class="l">この日の収支</div><div class="v ${ret - inv >= 0 ? 'plus' : 'minus'}">${settled ? (ret - inv >= 0 ? '+' : '') + yen(ret - inv) : '-'}</div><div class="s">円（各100円）</div></div>
-    <div class="kpi"><div class="l">回収率</div><div class="v">${settled ? pct(ret, inv) : '-'}</div><div class="s">確定分のみ</div></div></div>
-    ${picks.length ? picks.map(r => raceSummary(r)).join('') : '<div class="notice">この日は条件に合うレースがありません。</div>'}`;
+  const fin = picks.filter(r => r.result), up = picks.filter(r => !r.result);
+  const hon = up.filter(r => r.bets.honmei), ner = up.filter(r => r.bets.nerai);
+  const cur = ['hon', 'ner', 'done'].includes(state.sub) ? state.sub : 'hon';
+  let body = '';
+  if (cur === 'hon') body = `<p class="legend sub-note">◎の勝率40%以上のレース。発走前のレースだけを表示します。</p>` + (hon.length ? hon.map(r => raceSummary(r)).join('') : '<div class="notice">発走前の本命レースはありません。<br>終わったレースは「終了」タブにあります。</div>');
+  if (cur === 'ner') body = `<p class="legend sub-note">単勝10〜80倍・期待値1.3以上の馬がいるレース。発走前のレースだけを表示します。</p>` + (ner.length ? ner.map(r => raceSummary(r)).join('') : '<div class="notice">発走前の狙いレースはありません。<br>終わったレースは「終了」タブにあります。</div>');
+  if (cur === 'done') body = `<div class="ev-day"><div><span class="l">この日の収支（結果が出た${fin.length}R）</span><span class="v ${ret - inv >= 0 ? 'plus' : 'minus'}">${settled ? (ret - inv >= 0 ? '+' : '−') + yen(Math.abs(ret - inv)) + '円' : '-'}</span></div><div class="s">${settled ? `購入 ${yen(inv)}円 → 払戻 ${yen(ret)}円（回収率 ${pct(ret, inv)}）` : 'まだ結果が出たレースはありません'}</div></div>`
+    + (fin.length ? (() => { const fh = [...fin].reverse().filter(r => r.bets.honmei), fn = [...fin].reverse().filter(r => r.bets.nerai && !r.bets.honmei);
+        return `<h3 class="ev-h">本命レース <small>${fh.length}R</small></h3>${fh.map(r => raceSummary(r)).join('') || '<p class="legend">なし</p>'}<h3 class="ev-h">狙いレース <small>${fn.length}R</small></h3>${fn.map(r => raceSummary(r)).join('') || '<p class="legend">なし</p>'}`; })() : '<div class="notice">まだ終わったレースはありません。</div>');
+  app.innerHTML = demoNote(d) + subTabs('pick', [['hon', '本命', hon.length], ['ner', '狙い', ner.length], ['done', '終了', fin.length]], cur) + body;
 }
 
 async function viewRecord() {
@@ -176,7 +185,7 @@ async function viewMyomi() {
   const wait = races.filter(r => r.status === 'wait');
   let inv = 0, ret = 0, settled = 0;
   picks.forEach(r => Object.values(r.pick.bets).forEach(b => { if (b.inv !== undefined) { inv += b.inv; ret += b.ret; settled++; } }));
-  const head = `<div class="circ-band ${c}"><div><div class="circ-t">${c === 'nar' ? '地方競馬' : '中央競馬'}</div><div class="circ-s">${c === 'nar' ? '高知・佐賀・大井など（NAR）' : '東京・京都・中山など（JRA）'}</div></div>
+  const head = `<div class="circ-band ${c}"><div class="circ-t">${c === 'nar' ? '地方競馬' : '中央競馬'}</div>
       ${days.length ? `<select class="msel" aria-label="日付">${days.map(x => `<option value="${x}" ${x === d ? 'selected' : ''}>${fmtDate(x)}</option>`).join('')}</select>` : ''}</div>`;
   const myNote = `<h2 class="sec">妙味軸（試験記録）</h2><div class="demo myomi-note">1番人気以外から、人気より実力が上とAIが見た馬を軸にします。古い期間では100%に届かず（地方の複勝で97%）、記録用として続けています。</div>`;
   let body = '';
@@ -189,7 +198,22 @@ async function viewMyomi() {
       ${wait.length ? `<p class="legend">判定待ち ${wait.length}R（次は ${esc(wait[0].place)}${wait[0].r}R ${esc(wait[0].start)}発走）</p>` : ''}
       ${skip.length ? `<details class="race"><summary><span class="rname">見送り ${skip.length}R</span><span class="rsub">条件（単勝3〜10倍・ズレ1.3倍以上）に合う馬なし</span></summary><div class="body"><p class="legend">${skip.map(r => `${esc(r.place)}${r.r}R`).join('・')}</p></div></details>` : ''}`;
   }
-  app.innerHTML = head + evSection(c, races) + myNote + body + myomiRecord(c);
+  const evs = races.filter(r => r.ev && r.ev.sel), fin = evs.filter(r => r.result), up = evs.filter(r => !r.result);
+  const hon = up.filter(r => r.ev.sel.kind === 'hon'), ana = up.filter(r => r.ev.sel.kind === 'ana');
+  const judged = races.filter(r => r.ev).length, nextW = races.find(r => !r.ev && !r.result);
+  const cur = ['hon', 'ana', 'done', 'rec', 'myomi'].includes(state.sub) ? state.sub : 'hon';
+  const none = k => `<div class="notice">発走前の${k}レースはありません。<br>${nextW ? `各レースの発走15分前ごろに判定します（次は ${esc(nextW.place)}${nextW.r}R ${esc(nextW.start)}発走）。` : 'この日の判定は終わりました。'}<br>終わったレースは「終了」タブにあります。</div>`;
+  let main = '';
+  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気のレース（発走が近い順）</p>` + (hon.length ? hon.map(evCard).join('') : none('本命'));
+  if (cur === 'ana') main = `<p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴'));
+  if (cur === 'done') {
+    const fh = [...fin].reverse().filter(r => r.ev.sel.kind === 'hon'), fa = [...fin].reverse().filter(r => r.ev.sel.kind === 'ana');
+    main = evDaySummary(fin) + (fin.length ? `<h3 class="ev-h">本命レース <small>${fh.length}R</small></h3>${fh.map(evCard).join('') || '<p class="legend">なし</p>'}<h3 class="ev-h">穴レース <small>${fa.length}R</small></h3>${fa.map(evCard).join('') || '<p class="legend">なし</p>'}` : '<div class="notice">まだ終わったレースはありません。</div>')
+      + (judged ? `<p class="legend">判定済み ${judged}R（うち見送り ${judged - evs.length}R）</p>` : '');
+  }
+  if (cur === 'rec') main = evRecord(c);
+  if (cur === 'myomi') main = myNote + body + myomiRecord(c);
+  app.innerHTML = head + subTabs(c, [['hon', '本命', hon.length], ['ana', '穴', ana.length], ['done', '終了', fin.length], ['rec', '成績'], ['myomi', '妙味軸']], cur) + main;
   const ms = app.querySelector('.msel'); if (ms) ms.onchange = () => { MY.date[c] = ms.value; viewMyomi(); };
 }
 function myomiCard(r) {
@@ -225,9 +249,16 @@ function evStat(inv, ret, settled) {
 }
 function evLine(r, name, tks, chips, res) {
   const settled = !!res, inv = res ? res.inv : tks.length * 100, ret = res ? res.ret : 0, st = evStat(inv, ret, settled);
+  if (!settled && evStarted(r)) st.label = '結果待ち';
   return `<div class="evl ${st.cls}"><div class="evl-h"><b>${name}</b><span class="evb ${st.cls}">${st.label}</span>
     <span class="evl-m">${settled ? `${yen(inv)} → <b>${yen(ret)}円</b>` : `${tks.length}点 ${yen(inv)}円`}</span>
     ${settled ? `<span class="evl-pl">${st.pl}</span>` : ''}</div><div class="evl-t">${chips}</div></div>`;
+}
+function evStarted(r) {
+  if (!r.start || !/^\d{8}$/.test(String(MY.date[MY.circuit] || (MY.day && MY.day.date) || ''))) return false;
+  const d = String(MY.date[MY.circuit] || MY.day.date), [hh, mm] = r.start.split(':').map(Number);
+  const t = new Date(`${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}T${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:00+09:00`);
+  return Date.now() > t.getTime();
 }
 function evCard(r) {
   const s = r.ev.sel, pay = r.result && r.result.payout, win = t => pay && isWin(t[0], t[1], pay);
@@ -245,32 +276,25 @@ function evCard(r) {
   const inv = parts.reduce((a, p) => a + (settled ? (p[1] || 0) : p[3] * 100), 0), ret = settled ? parts.reduce((a, p) => a + (p[2] || 0), 0) : 0;
   const st = evStat(inv, ret, settled);
   return `<div class="card ev-card ${st.cls}">
-    <div class="evc-h"><b class="evc-r">${esc(r.place)} ${r.r}R</b><span class="evc-t">${esc(r.start)}発走</span>${r.result ? `<span class="evc-res">結果 <b>${r.result.order.join('-')}</b></span>` : ''}</div>
+    <div class="evc-h"><b class="evc-r">${esc(r.place)} ${r.r}R</b><span class="evc-t">${esc(r.start)}発走</span>${r.result ? `<span class="evc-res">結果 <b>${r.result.order.join('-')}</b></span>` : evStarted(r) ? '<span class="evc-res hs">発走済み・結果待ち</span>' : ''}</div>
     <div class="evc-ax"><span class="uma">${s.axis}</span><div><b>${esc(s.name || '')}</b> <span class="hs">${s.pop}番人気・単勝${s.odds}倍・${esc(s.jockey || '')}</span>
       <div class="hs">3着内の確率 AI <b>${Math.round(s.p3 * 100)}%</b>（人気から見ると${Math.round(s.m3 * 100)}%）</div></div></div>
     ${lines.join('')}
     <div class="evc-sum ${st.cls}"><span>合計</span>${settled ? `<span class="evb ${st.cls}">${ret > 0 && ret < inv ? 'ガミ（損）' : ret >= inv ? 'プラス' : 'ハズレ'}</span>` : ''}<span>${settled ? `${yen(inv)} → <b>${yen(ret)}円</b>` : `購入 ${yen(inv)}円`}</span>${settled ? `<b class="evc-pl">${st.pl}</b>` : `<span class="hs">${esc(r.ev.at)}判定</span>`}</div></div>`;
 }
-function evSection(c, races) {
+function evDaySummary(fin) {
+  let inv = 0, ret = 0;
+  for (const r of fin) { const s = r.ev.sel; for (const x of [{ inv: s.inv, ret: s.ret }, s.san_res, s.tan_res]) if (x) { inv += x.inv; ret += x.ret; } }
+  const d = ret - inv;
+  return `<div class="ev-day"><div><span class="l">この日の収支（結果が出た${fin.length}R）</span><span class="v ${fin.length ? (d >= 0 ? 'plus' : 'minus') : ''}">${fin.length ? (d >= 0 ? '+' : '−') + yen(Math.abs(d)) + '円' : '-'}</span></div><div class="s">${fin.length ? `購入 ${yen(inv)}円 → 払戻 ${yen(ret)}円（回収率 ${pct(ret, inv)}）` : 'まだ結果が出たレースはありません'}</div></div>`;
+}
+function evRecord(c) {
   const rec = (MY.rec[c] || {}).ev || {}, bt = ((MY.bt || {})[c] || {}).ev;
-  const done = races.filter(r => r.ev), sel = done.filter(r => r.ev.sel);
-  let h = `<h2 class="sec">${c === 'nar' ? '地方' : '中央'}の期待値AI（試験記録）</h2><details class="demo myomi-note"><summary>しくみ（タップで表示）</summary>発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}<br>「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</details>`;
-  const fin = sel.filter(r => r.result && r.ev.sel.inv !== undefined);
-  if (fin.length) {
-    let inv = 0, ret = 0;
-    for (const r of fin) { const s = r.ev.sel; for (const x of [{ inv: s.inv, ret: s.ret }, s.san_res, s.tan_res]) if (x) { inv += x.inv; ret += x.ret; } }
-    const d = ret - inv;
-    h += `<div class="ev-day"><div><span class="l">この日の収支（結果が出た${fin.length}R）</span><span class="v ${d >= 0 ? 'plus' : 'minus'}">${d >= 0 ? '+' : '−'}${yen(Math.abs(d))}円</span></div><div class="s">購入 ${yen(inv)}円 → 払戻 ${yen(ret)}円（回収率 ${pct(ret, inv)}）</div></div>`;
-  }
-  const card = evCard;
-  for (const [k, title, sub] of [['hon', '本命レース', '旨味のある馬が1〜3番人気'], ['ana', '穴レース', '旨味のある馬が4番人気以下']]) {
-    const rs = sel.filter(r => r.ev.sel.kind === k);
-    h += `<h3 class="ev-h">${title} <small>${sub}・${rs.length}R</small></h3>` + (rs.length ? rs.map(card).join('') : `<div class="notice">${done.length ? 'この日は該当レースがありません。' : '各レースの発走15分前ごろに判定します。'}</div>`);
-  }
-  if (done.length) h += `<p class="legend">判定済み ${done.length}R（うち見送り ${done.length - sel.length}R）</p>`;
+  let h = '';
   const keys = ['hon', 'hon_san', 'hon_tan', 'ana', 'ana_san', 'ana_tan'].filter(k => rec[k]);
-  if (keys.length) h += `<div class="card"><h3>実際のオッズでの通算成績</h3><p class="legend" style="margin-top:0">的中率は「払戻があったレース」の割合です（ガミも含む）。損得は回収率と収支で見てください。</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">点数</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">収支</th></tr></thead><tbody>${keys.map(k => { const x = rec[k], d = x.ret - x.inv; return `<tr><td>${esc(x.label)}</td><td class="num">${x.races}</td><td class="num">${x.tickets}</td><td class="num">${pct(x.hit_races, x.races)}</td><td class="num ${x.ret >= x.inv ? 'ev-hi' : ''}">${pct(x.ret, x.inv)}</td><td class="num ${d >= 0 ? 'pl-plus' : 'pl-minus'}">${d >= 0 ? '+' : '−'}${yen(Math.abs(d))}円</td></tr>`; }).join('')}</tbody></table></div>`;
+  h += `<div class="card"><h3>実際のオッズでの通算成績</h3>` + (keys.length ? `<p class="legend" style="margin-top:0">的中率は「払戻があったレース」の割合です（ガミも含む）。損得は回収率と収支で見てください。</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">収支</th></tr></thead><tbody>${keys.map(k => { const x = rec[k], d = x.ret - x.inv; return `<tr><td>${esc(x.label.replace('レース', ''))}</td><td class="num">${x.races}</td><td class="num">${pct(x.hit_races, x.races)}</td><td class="num ${x.ret >= x.inv ? 'ev-hi' : ''}">${pct(x.ret, x.inv)}</td><td class="num ${d >= 0 ? 'pl-plus' : 'pl-minus'}">${d >= 0 ? '+' : '−'}${yen(Math.abs(d))}円</td></tr>`; }).join('')}</tbody></table>` : '<p class="legend">まだ記録がありません。結果が出しだい自動で集計します。</p>') + '</div>';
   if (bt) h += `<div class="card"><h3>過去データでの検証</h3><p class="legend" style="margin-top:0">${esc(bt.period)}</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${bt.rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num ${r[3] >= 100 ? 'ev-hi' : ''}">${r[3]}%</td><td class="num">${esc(r[4])}</td></tr>`).join('')}</tbody></table><p class="legend">${esc(bt.note)}</p></div>`;
+  h += `<details class="card"><summary><b>期待値AIのしくみ</b></summary><p class="legend">発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</p></details>`;
   return h;
 }
 function btTable(rows) {
