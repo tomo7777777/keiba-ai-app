@@ -64,20 +64,27 @@ def ev_race(r, date):
     except Exception: wide = {}
     if not wide: return False
     tickets = EVW.pick(hs, wide, json.load(open(EVW.PATHS[circuit])))
-    sel = EVW.select(tickets, hs)
+    sel = EVW.select(tickets, hs); skip = None
+    fav = min(h["odds"] for h in hs)
+    if sel and sel["kind"] == "ana" and fav < ANA_FAV:   # 1番人気が強いレースの穴は過去検証で回収率が低いため見送り
+        skip = f"1番人気が{fav}倍と強いため穴は見送り"; sel = None
     if sel:
         ax = next(h for h in hs if h["umaban"] == sel["axis"]); sel.update({"name": ax["name"], "jockey": ax["jockey"]})
         nm = {h["umaban"]: h["name"] for h in hs}
         for t in sel["tickets"]: t.append(" / ".join(nm.get(int(u), "") for u in t[1].split("-")))
-        if NAR: sel["tan"] = EVW.pick_tan(hs, sel["axis"], sel["kind"])   # 地方のみ：3連単 軸1着固定
+        if NAR and (sel["kind"] == "hon" or len(hs) >= ANA_TAN_N): sel["tan"] = EVW.pick_tan(hs, sel["axis"], sel["kind"])   # 地方のみ：3連単 軸1着固定（穴は12頭以上）
         if not (NAR and sel["kind"] == "ana"):   # 地方の穴レースは3連複をやめ、3連単1着固定に置き換え
             try:
                 so = nk.get_combo_odds(r["race_id"], "三連複", nar=NAR, jiku=sel["axis"]) or {}
                 sel["san"] = EVW.pick_san(hs, so, sel["axis"], json.load(open(EVW.SAN_PATHS[circuit])))
             except Exception as e:
                 print("3連複エラー", r["race_id"], type(e).__name__, e); sel["san"] = []
-    r["ev"] = {"at": now().strftime("%H:%M"), "tickets": tickets, "sel": sel}
+    r["ev"] = {"at": now().strftime("%H:%M"), "tickets": tickets, "sel": sel, "fav": fav}
+    if skip: r["ev"]["skip"] = skip
     return True
+
+# 穴レースの条件（research/ev/ana_filter.md）：1番人気が2.5倍以上の混戦のみ。3連単は12頭以上のみ
+ANA_FAV, ANA_TAN_N = 2.5, 12
 
 def lock_race(r, date):
     card = nk.parse_card(r["race_id"], nar=NAR)
