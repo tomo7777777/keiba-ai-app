@@ -204,8 +204,8 @@ async function viewMyomi() {
   const cur = ['hon', 'ana', 'done', 'rec', 'myomi'].includes(state.sub) ? state.sub : 'hon';
   const none = k => `<div class="notice">発走前の${k}レースはありません。<br>${nextW ? `各レースの発走15分前ごろに判定します（次は ${esc(nextW.place)}${nextW.r}R ${esc(nextW.start)}発走）。` : 'この日の判定は終わりました。'}<br>終わったレースは「終了」タブにあります。</div>`;
   let main = '';
-  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気のレース（発走が近い順）</p>` + (hon.length ? hon.map(evCard).join('') : none('本命'));
-  if (cur === 'ana') main = `<p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴'));
+  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気で、期待値の条件を満たしたレースだけ（発走が近い順）。${c === 'nar' ? '地方の本命レースは全体の約6%で、1日に0〜3レースほどです。出ない日もあります。' : ''}</p>` + (hon.length ? hon.map(evCard).join('') : none('本命'));
+  if (cur === 'ana') main = `<div class="notice"><b>穴は参考・記録用です。</b>${c === 'nar' ? '穴はレースを絞っておらず、ほぼ全レースに出ます。過去約9,200レースで検証したところ、回収率はほぼ100%で、もうけは出ていません。期待値の基準を厳しくしても、安定して上がりませんでした。' : '中央の穴は、過去の検証で結果が大きくぶれています。'}買うなら本命レースを優先し、穴はデータを集めて検証を続けるための記録としてご覧ください。</div><p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴'));
   if (cur === 'done') {
     const fh = [...fin].reverse().filter(r => r.ev.sel.kind === 'hon'), fa = [...fin].reverse().filter(r => r.ev.sel.kind === 'ana');
     main = evDaySummary(fin) + (fin.length ? `<h3 class="ev-h">本命レース <small>${fh.length}R</small></h3>${fh.map(evCard).join('') || '<p class="legend">なし</p>'}<h3 class="ev-h">穴レース <small>${fa.length}R</small></h3>${fa.map(evCard).join('') || '<p class="legend">なし</p>'}` : '<div class="notice">まだ終わったレースはありません。</div>')
