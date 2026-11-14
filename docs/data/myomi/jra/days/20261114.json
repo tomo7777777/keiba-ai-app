@@ -1339,7 +1339,7 @@
    "surface": "ダ",
    "distance": 1150,
    "n": 16,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202603030312",
@@ -1350,7 +1350,7 @@
    "surface": "芝",
    "distance": 1200,
    "n": 16,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202605050301",
@@ -1828,7 +1828,7 @@
    "surface": "芝",
    "distance": 1400,
    "n": 17,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202605050311",
@@ -1839,7 +1839,7 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 16,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202605050312",
@@ -1850,7 +1850,7 @@
    "surface": "芝",
    "distance": 1600,
    "n": 12,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202608050301",
@@ -2411,7 +2411,7 @@
    "surface": "ダ",
    "distance": 1800,
    "n": 10,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202608050310",
@@ -2422,7 +2422,7 @@
    "surface": "芝",
    "distance": 2000,
    "n": 14,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202608050311",
@@ -2433,7 +2433,7 @@
    "surface": "芝",
    "distance": 1600,
    "n": 13,
-   "status": "wait"
+   "status": "missed"
   },
   {
    "race_id": "202608050312",
@@ -2444,8 +2444,8 @@
    "surface": "芝",
    "distance": 1400,
    "n": 17,
-   "status": "wait"
+   "status": "missed"
   }
  ],
- "updated": "2026-11-14T14:15+09:00"
+ "updated": "2026-11-14T17:07+09:00"
 }
