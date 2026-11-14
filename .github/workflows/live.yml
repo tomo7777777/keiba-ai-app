@@ -1,7 +1,9 @@
 name: 発走前の自動更新（常駐）
 on:
   schedule:
-    # 日本時間 8:00 までに起動（GitHubの定期実行は遅れたり抜けたりするため、7:30/7:45 に早めに起動し予備も用意）
+    # 日本時間 5:00 から何度か起動を試みる（GitHubの定期実行は遅れたり抜けたりするため）。6時前に起動したら6時まで待機
+    - cron: "0 20 * * *"
+    - cron: "0 21 * * *"
     - cron: "30 22 * * *"
     - cron: "45 22 * * *"
     - cron: "30 23 * * *"
@@ -31,8 +33,9 @@ jobs:
           START=$(date +%s)
           while :; do
             H=$((10#$(date +%H%M))); D=$(date +%Y%m%d)
-            if [ $H -gt 2150 ] || [ $H -lt 600 ]; then echo "本日の更新終了"; break; fi
+            if [ $H -gt 2150 ]; then echo "本日の更新終了"; break; fi
             if [ $(( $(date +%s) - START )) -gt 19800 ]; then echo "5.5時間たったので引き継ぎ"; gh workflow run live.yml; break; fi
+            if [ $H -lt 600 ]; then echo "6時まで待機"; sleep 240; continue; fi
             python scripts/myomi_live.py jra || true
             KEIBA_DATA=data/nar python scripts/myomi_live.py nar || true
             if [ $H -lt 1800 ]; then
