@@ -217,44 +217,61 @@ function myomiCard(r) {
     <p class="legend">相手（AIの3着内確率順）：${p.partners.map(u => `${u} ${esc(name(u))}`).join('、')}</p>
     <div class="bets">${bets}</div></div></details>`;
 }
-function sanBlock(r) {
-  const s = r.ev.sel, sn = s.san;
-  if (!sn) return '';
-  if (!sn.length) return `<div class="bet myomi"><h4><span>3連複</span></h4><div class="res">期待値1.0以上の組がないため見送り</div></div>`;
-  const tks = sn.map(t => { const w = r.result && isWin(t[0], t[1], r.result.payout); return `<span class="${w ? 'win' : ''}">${t[1]}<small> ${t[3]}倍 期待値${t[4]}</small></span>`; }).join('');
-  const sr = s.san_res;
-  const res = sr ? `<div class="res">${yen(sr.inv)}円 → <b>${yen(sr.ret)}円</b></div>` : `<div class="res">3連複${sn.length}点・${yen(sn.length * 100)}円</div>`;
-  return `<div class="bet myomi"><h4><span>3連複 軸1頭（期待値1.0以上から来やすい順）</span></h4><div class="tk">${tks}</div>${res}</div>`;
+// 期待値AI：券種ごとの1行（投資→払戻→収支と、的中／ガミ／ハズレ）
+function evStat(inv, ret, settled) {
+  if (!settled) return { cls: 'wait', label: '発走前', pl: '' };
+  const d = ret - inv;
+  const label = ret === 0 ? 'ハズレ' : d < 0 ? 'ガミ' : '的中';
+  const cls = ret === 0 ? 'lose' : d < 0 ? 'gami' : 'win';
+  return { cls, label, pl: (d > 0 ? '+' : d < 0 ? '−' : '±') + yen(Math.abs(d)) + '円' };
 }
-function tanBlock(r) {
-  const s = r.ev.sel, tn = s.tan;
-  if (!tn || !tn.length) return '';
-  const tks = tn.map(t => { const w = r.result && isWin(t[0], t[1], r.result.payout); return `<span class="${w ? 'win' : ''}">${t[1]}</span>`; }).join('');
-  const tr = s.tan_res;
-  const res = tr ? `<div class="res">${yen(tr.inv)}円 → <b>${yen(tr.ret)}円</b></div>` : `<div class="res">3連単${tn.length}点・${yen(tn.length * 100)}円</div>`;
-  const k = s.kind === 'hon' ? 4 : 3;
-  return `<div class="bet myomi"><h4><span>3連単 ${s.axis}番1着固定（2・3着はAI上位${k}頭）</span></h4><div class="tk">${tks}</div>${res}</div>`;
+function evLine(r, name, tks, chips, res) {
+  const settled = !!res, inv = res ? res.inv : tks.length * 100, ret = res ? res.ret : 0, st = evStat(inv, ret, settled);
+  return `<div class="evl ${st.cls}"><div class="evl-h"><b>${name}</b><span class="evb ${st.cls}">${st.label}</span>
+    <span class="evl-m">${settled ? `${yen(inv)} → <b>${yen(ret)}円</b>` : `${tks.length}点 ${yen(inv)}円`}</span>
+    ${settled ? `<span class="evl-pl">${st.pl}</span>` : ''}</div><div class="evl-t">${chips}</div></div>`;
+}
+function evCard(r) {
+  const s = r.ev.sel, pay = r.result && r.result.payout, win = t => pay && isWin(t[0], t[1], pay);
+  const lines = [];
+  lines.push(evLine(r, 'ワイド', s.tickets, s.tickets.map(t => `<span class="${win(t) ? 'win' : ''}">${t[1]}<small>${t[3]}倍</small></span>`).join(''), s.inv !== undefined ? { inv: s.inv, ret: s.ret } : null));
+  if (s.san && s.san.length) lines.push(evLine(r, '3連複', s.san, s.san.map(t => `<span class="${win(t) ? 'win' : ''}">${t[1]}<small>${t[3]}倍</small></span>`).join(''), s.san_res));
+  else if (s.san) lines.push(`<div class="evl skip"><div class="evl-h"><b>3連複</b><span class="evl-m">期待値のある組がなく見送り</span></div></div>`);
+  if (s.tan && s.tan.length) {
+    const second = [...new Set(s.tan.map(t => t[1].split('-')[1]))];
+    const hit = s.tan.find(win);
+    lines.push(evLine(r, '3連単 1着固定', s.tan, `<span class="form">1着 <b>${s.axis}</b> → 2・3着 ${second.join('・')}</span>${hit ? `<span class="win">${hit[1]}</span>` : ''}`, s.tan_res));
+  }
+  const parts = [[s.inv !== undefined, s.inv, s.ret, s.tickets.length], [!!s.san_res, s.san_res && s.san_res.inv, s.san_res && s.san_res.ret, (s.san || []).length], [!!s.tan_res, s.tan_res && s.tan_res.inv, s.tan_res && s.tan_res.ret, (s.tan || []).length]];
+  const settled = !!r.result && s.inv !== undefined;
+  const inv = parts.reduce((a, p) => a + (settled ? (p[1] || 0) : p[3] * 100), 0), ret = settled ? parts.reduce((a, p) => a + (p[2] || 0), 0) : 0;
+  const st = evStat(inv, ret, settled);
+  return `<div class="card ev-card ${st.cls}">
+    <div class="evc-h"><b class="evc-r">${esc(r.place)} ${r.r}R</b><span class="evc-t">${esc(r.start)}発走</span>${r.result ? `<span class="evc-res">結果 <b>${r.result.order.join('-')}</b></span>` : ''}</div>
+    <div class="evc-ax"><span class="uma">${s.axis}</span><div><b>${esc(s.name || '')}</b> <span class="hs">${s.pop}番人気・単勝${s.odds}倍・${esc(s.jockey || '')}</span>
+      <div class="hs">3着内の確率 AI <b>${Math.round(s.p3 * 100)}%</b>（人気から見ると${Math.round(s.m3 * 100)}%）</div></div></div>
+    ${lines.join('')}
+    <div class="evc-sum ${st.cls}"><span>合計</span>${settled ? `<span class="evb ${st.cls}">${ret > 0 && ret < inv ? 'ガミ（損）' : ret >= inv ? 'プラス' : 'ハズレ'}</span>` : ''}<span>${settled ? `${yen(inv)} → <b>${yen(ret)}円</b>` : `購入 ${yen(inv)}円`}</span>${settled ? `<b class="evc-pl">${st.pl}</b>` : `<span class="hs">${esc(r.ev.at)}判定</span>`}</div></div>`;
 }
 function evSection(c, races) {
   const rec = (MY.rec[c] || {}).ev || {}, bt = ((MY.bt || {})[c] || {}).ev;
   const done = races.filter(r => r.ev), sel = done.filter(r => r.ev.sel);
-  let h = `<h2 class="sec">期待値AI（試験記録）</h2><div class="demo myomi-note">発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}実際のオッズで通用するかを確かめるための記録です。</div>`;
-  const card = r => {
-    const s = r.ev.sel, hit = (s.inv !== undefined && s.ret > 0) || (s.san_res && s.san_res.ret > 0) || (s.tan_res && s.tan_res.ret > 0);
-    const tks = s.tickets.map(t => { const w = r.result && isWin(t[0], t[1], r.result.payout); return `<span class="${w ? 'win' : ''}">${t[1]}<small> ${t[3]}倍〜 期待値${t[4]}</small></span>`; }).join('');
-    const res = s.inv !== undefined ? `<div class="res">${yen(s.inv)}円 → <b>${yen(s.ret)}円</b></div>` : `<div class="res">ワイド${s.tickets.length}点・${yen(s.tickets.length * 100)}円（${esc(r.ev.at)}判定）</div>`;
-    return `<div class="card ev-card"><div class="rsub"><b>${esc(r.place)}${r.r}R</b> ${esc(r.start)}発走${r.result ? `　結果 <b>${r.result.order.join('-')}</b>` : ''}${hit ? ' <span class="b hit">的中</span>' : ''}</div>
-      <div class="axis"><span class="uma">${s.axis}</span><div><div class="hn">${esc(s.name || '')}</div><div class="hs">${esc(s.jockey || '')}・単勝 ${s.odds}倍（${s.pop}番人気）</div>
-      <div class="hs">3着以内の確率：AI <b>${Math.round(s.p3 * 100)}%</b> ／ 人気から見ると ${Math.round(s.m3 * 100)}%</div></div></div>
-      <div class="bet myomi"><h4><span>ワイド 軸から期待値${s.kind === 'hon' ? '1.2' : '1.0'}以上の組</span></h4><div class="tk">${tks}</div>${res}</div>${sanBlock(r)}${tanBlock(r)}</div>`;
-  };
+  let h = `<h2 class="sec">期待値AI（試験記録）</h2><details class="demo myomi-note"><summary>しくみ（タップで表示）</summary>発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}<br>「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</details>`;
+  const fin = sel.filter(r => r.result && r.ev.sel.inv !== undefined);
+  if (fin.length) {
+    let inv = 0, ret = 0;
+    for (const r of fin) { const s = r.ev.sel; for (const x of [{ inv: s.inv, ret: s.ret }, s.san_res, s.tan_res]) if (x) { inv += x.inv; ret += x.ret; } }
+    const d = ret - inv;
+    h += `<div class="ev-day"><div><span class="l">この日の収支（結果が出た${fin.length}R）</span><span class="v ${d >= 0 ? 'plus' : 'minus'}">${d >= 0 ? '+' : '−'}${yen(Math.abs(d))}円</span></div><div class="s">購入 ${yen(inv)}円 → 払戻 ${yen(ret)}円（回収率 ${pct(ret, inv)}）</div></div>`;
+  }
+  const card = evCard;
   for (const [k, title, sub] of [['hon', '本命レース', '旨味のある馬が1〜3番人気'], ['ana', '穴レース', '旨味のある馬が4番人気以下']]) {
     const rs = sel.filter(r => r.ev.sel.kind === k);
     h += `<h3 class="ev-h">${title} <small>${sub}・${rs.length}R</small></h3>` + (rs.length ? rs.map(card).join('') : `<div class="notice">${done.length ? 'この日は該当レースがありません。' : '各レースの発走15分前ごろに判定します。'}</div>`);
   }
   if (done.length) h += `<p class="legend">判定済み ${done.length}R（うち見送り ${done.length - sel.length}R）</p>`;
   const keys = ['hon', 'hon_san', 'hon_tan', 'ana', 'ana_san', 'ana_tan'].filter(k => rec[k]);
-  if (keys.length) h += `<div class="card"><h3>実際のオッズでの成績</h3><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">点数</th><th class="num">的中率</th><th class="num">回収率</th></tr></thead><tbody>${keys.map(k => { const x = rec[k]; return `<tr><td>${esc(x.label)}</td><td class="num">${x.races}</td><td class="num">${x.tickets}</td><td class="num">${pct(x.hit_races, x.races)}</td><td class="num ${x.ret >= x.inv ? 'ev-hi' : ''}">${pct(x.ret, x.inv)}</td></tr>`; }).join('')}</tbody></table></div>`;
+  if (keys.length) h += `<div class="card"><h3>実際のオッズでの通算成績</h3><p class="legend" style="margin-top:0">的中率は「払戻があったレース」の割合です（ガミも含む）。損得は回収率と収支で見てください。</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">点数</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">収支</th></tr></thead><tbody>${keys.map(k => { const x = rec[k], d = x.ret - x.inv; return `<tr><td>${esc(x.label)}</td><td class="num">${x.races}</td><td class="num">${x.tickets}</td><td class="num">${pct(x.hit_races, x.races)}</td><td class="num ${x.ret >= x.inv ? 'ev-hi' : ''}">${pct(x.ret, x.inv)}</td><td class="num ${d >= 0 ? 'pl-plus' : 'pl-minus'}">${d >= 0 ? '+' : '−'}${yen(Math.abs(d))}円</td></tr>`; }).join('')}</tbody></table></div>`;
   if (bt) h += `<div class="card"><h3>過去データでの検証</h3><p class="legend" style="margin-top:0">${esc(bt.period)}</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${bt.rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num ${r[3] >= 100 ? 'ev-hi' : ''}">${r[3]}%</td><td class="num">${esc(r[4])}</td></tr>`).join('')}</tbody></table><p class="legend">${esc(bt.note)}</p></div>`;
   return h;
 }

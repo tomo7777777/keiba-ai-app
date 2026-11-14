@@ -86,3 +86,43 @@ h2.sec{font-size:16px;margin:18px 2px 10px}
 .axis .uma{flex:none}
 .ev-h{font-size:15px;margin:16px 0 8px}.ev-h small{font-weight:400;color:var(--muted);font-size:12px}
 .ev-card .axis{margin:4px 0 8px}
+/* 期待値AI カード（見やすさ改善） */
+.ev-card{padding:12px 14px;border-left:5px solid var(--line)}
+.ev-card.win{border-left-color:var(--good)}.ev-card.gami{border-left-color:#d08a1c}.ev-card.lose{border-left-color:#b9b4a6}
+.evc-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.evc-r{font-size:16px}.evc-t{font-size:12px;color:var(--muted)}
+.evc-res{margin-left:auto;font-size:13px}.evc-res b{font-family:var(--mono);font-size:15px}
+.evc-ax{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;background:#fbf6e6;border:1px solid #e8dcb4;border-radius:10px;margin-bottom:8px;font-size:14px}
+.evc-ax .uma{flex:none;width:28px;height:28px;font-size:14px;background:var(--turf);color:#fff}
+.evl{padding:8px 0;border-top:1px solid var(--line)}
+.evl-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px}
+.evl-h>b{min-width:96px}
+.evl-n{font-size:12px;color:var(--muted)}
+.evl-m{font-family:var(--mono);font-size:13px;color:var(--muted);margin-left:auto}.evl-m b{color:var(--ink)}
+.evl-pl{font-family:var(--mono);font-weight:700;font-size:14px;min-width:70px;text-align:right}
+.evl.win .evl-pl{color:var(--good)}.evl.gami .evl-pl,.evl.lose .evl-pl{color:var(--hit)}
+.evl.skip .evl-m{font-family:inherit;font-size:12px}
+.evb{font-size:11px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.evb.win{background:var(--good);color:#fff}.evb.gami{background:#f3d9a8;color:#6b4300}.evb.lose{background:var(--surface2);color:var(--muted)}.evb.wait{background:var(--surface2);color:var(--ink)}
+.evl-t{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.evl-t span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:13px;font-family:var(--mono)}
+.evl-t span small{font-size:10px;color:var(--muted);margin-left:4px}
+.evl-t span.win{background:var(--hit);color:#fff;border-color:var(--hit)}.evl-t span.win small{color:#fff}
+.evl-t span.form{font-family:inherit}.evl-t span.form b{font-family:var(--mono)}
+.evc-sum{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px;padding:9px 10px;border-radius:10px;background:var(--surface2);font-size:13px}
+.evc-sum>span:nth-child(2){font-family:var(--mono);margin-left:auto}
+.evc-pl{font-family:var(--mono);font-size:17px;min-width:80px;text-align:right}
+.evc-sum.win{background:#e3f1e8}.evc-sum.win .evc-pl{color:var(--good)}
+.evc-sum.gami,.evc-sum.lose{background:#f7e9e6}.evc-sum.gami .evc-pl,.evc-sum.lose .evc-pl{color:var(--hit)}
+.ev-day{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin:6px 0 4px}
+.ev-day>div:first-child{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.ev-day .l{font-size:12px;color:var(--muted)}.ev-day .v{font-family:var(--mono);font-size:24px;font-weight:700}
+.ev-day .s{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.pl-plus{color:var(--good);font-weight:700}.pl-minus{color:var(--hit)}
+details.myomi-note summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.evl-h>b{min-width:0}
+.evc-sum{flex-wrap:nowrap;gap:8px}.evc-sum .evb{flex:none}
+.evc-sum>span:nth-child(3),.evc-sum>span:nth-child(2):not(.evb){font-family:var(--mono);margin-left:auto;white-space:nowrap}
+.evc-pl{min-width:0;white-space:nowrap}
+.evc-sum>.evb{margin-left:0!important;font-family:inherit!important}
+.evc-sum>span:first-child{white-space:nowrap}.evc-sum>span:nth-child(2):not(.evb){margin-left:auto}
