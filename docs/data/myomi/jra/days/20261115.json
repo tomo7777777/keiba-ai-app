@@ -148,7 +148,16 @@
    "surface": "芝",
    "distance": 1800,
    "n": 17,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:20",
+    "kind": "ana",
+    "fav": 3.4,
+    "axis": 7,
+    "name": "パッションノーヴァ",
+    "pop": 8,
+    "odds": 24.0
+   }
   },
   {
    "race_id": "202605050403",
@@ -398,5 +407,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T06:08+09:00"
+ "updated": "2026-11-15T06:19+09:00"
 }
