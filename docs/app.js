@@ -131,7 +131,7 @@ async function viewRecord() {
   const k = (name, s, sub) => s && s.races ? `<div class="kpi"><div class="l">${name} 回収率</div><div class="v ${s.ret >= s.inv ? 'plus' : 'minus'}">${pct(s.ret, s.inv)}</div><div class="s">${sub} ${s.hit_races}/${s.races}R的中</div></div>` :
     `<div class="kpi"><div class="l">${name} 回収率</div><div class="v">-</div><div class="s">記録待ち</div></div>`;
   const m = rec?.marks || {};
-  let html = `<h2 class="sec">実際の成績（公開後）</h2><div class="kpis">${k('本命', st.honmei, '')}${k('狙い', st.nerai, '')}
+  let html = `<div class="notice" style="text-align:left">このページは「勝負」タブ（中央AIの本命・狙い）の成績です。地方・中央の期待値AI（本命・穴）の成績は、<a href="#/nar/rec">地方の成績</a>・<a href="#/jra/rec">中央の成績</a>にあります。${st.honmei && st.honmei.races ? '' : '<br>実際の記録はまだありません。中央の開催日（土日）に予想が出ると、そのレースから記録が始まります。'}</div><h2 class="sec">勝負（中央AI）の実際の成績</h2><div class="kpis">${k('本命', st.honmei, '')}${k('狙い', st.nerai, '')}
     <div class="kpi"><div class="l">◎の勝率</div><div class="v">${m.races ? pct(m.honmei_win, m.races) : '-'}</div><div class="s">${m.races || 0}レース</div></div>
     <div class="kpi"><div class="l">◎の3着内率</div><div class="v">${m.races ? pct(m.honmei_top3, m.races) : '-'}</div><div class="s"></div></div></div>`;
   if (rec?.days?.length) {
