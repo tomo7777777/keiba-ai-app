@@ -200,12 +200,18 @@ async function viewMyomi() {
   }
   const evs = races.filter(r => r.ev && r.ev.sel), fin = evs.filter(r => r.result), up = evs.filter(r => !r.result);
   const hon = up.filter(r => r.ev.sel.kind === 'hon'), ana = up.filter(r => r.ev.sel.kind === 'ana');
-  const judged = races.filter(r => r.ev).length, nextW = races.find(r => !r.ev && !r.result);
+  const cands = races.filter(r => !r.ev && !r.result && r.cand && r.cand.kind && !evStarted(r)).sort((a, b) => (a.start || '').localeCompare(b.start || ''));
+  const chon = cands.filter(r => r.cand.kind === 'hon'), cana = cands.filter(r => r.cand.kind === 'ana');
+  const unchecked = races.filter(r => !r.ev && !r.result && !r.cand && !evStarted(r)).length;
+  const candBlock = (list, k) => `<h3 class="ev-h">${k}の候補 <small>${list.length}R・予想は発走15分前ごろに確定して通知</small></h3>`
+    + (list.length ? list.map(candCard).join('') : `<p class="legend">今のオッズでは${k}の候補はありません。</p>`)
+    + (unchecked ? `<p class="legend">まだオッズを見ていないレース ${unchecked}R（発走4時間前から順に確認します）</p>` : '');
+  const judged = races.filter(r => r.ev).length, nextW = races.filter(r => !r.ev && !r.result && !evStarted(r)).sort((a, b) => (a.start || '').localeCompare(b.start || ''))[0];
   const cur = ['hon', 'ana', 'done', 'rec', 'myomi'].includes(state.sub) ? state.sub : 'hon';
   const none = k => `<div class="notice">発走前の${k}レースはありません。<br>${nextW ? `各レースの発走15分前ごろに判定します（次は ${esc(nextW.place)}${nextW.r}R ${esc(nextW.start)}発走）。` : 'この日の判定は終わりました。'}<br>終わったレースは「終了」タブにあります。</div>`;
   let main = '';
-  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気で、期待値の条件を満たしたレースだけ（発走が近い順）。${c === 'nar' ? '地方の本命レースは全体の約6%で、1日に0〜3レースほどです。出ない日もあります。' : ''}</p>` + (hon.length ? hon.map(evCard).join('') : none('本命'));
-  if (cur === 'ana') main = `<div class="notice"><b>穴は「混戦レース」だけに絞っています。</b>1番人気が2.5倍以上で、AIが人気より高く見ている4番人気以下の馬がいるレースだけを出します。過去の検証では、1番人気が強いレースの穴は回収率81〜89%と低く、混戦に絞ると${c === 'nar' ? '約3,200レースでワイド116%（4期すべて100%以上）でした。3連単は12頭以上のときだけ出します（131%）' : 'ワイド139%でした。ただし中央は期間によるぶれが大きいです'}。条件はいくつも試した中から選んだので、実際は少し下がる前提で記録を見ていきます。</div><p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴'));
+  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気で、期待値の条件を満たしたレースだけ（発走が近い順）。${c === 'nar' ? '地方の本命レースは全体の約6%で、1日に0〜3レースほどです。出ない日もあります。' : ''}</p>` + (hon.length ? hon.map(evCard).join('') : none('本命')) + candBlock(chon, '本命');
+  if (cur === 'ana') main = `<div class="notice"><b>穴は「混戦レース」だけに絞っています。</b>1番人気が2.5倍以上で、AIが人気より高く見ている4番人気以下の馬がいるレースだけを出します。過去の検証では、1番人気が強いレースの穴は回収率81〜89%と低く、混戦に絞ると${c === 'nar' ? '約3,200レースでワイド116%（4期すべて100%以上）でした。3連単は12頭以上のときだけ出します（131%）' : 'ワイド139%でした。ただし中央は期間によるぶれが大きいです'}。条件はいくつも試した中から選んだので、実際は少し下がる前提で記録を見ていきます。</div><p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴')) + candBlock(cana, '穴');
   if (cur === 'done') {
     const fh = [...fin].reverse().filter(r => r.ev.sel.kind === 'hon'), fa = [...fin].reverse().filter(r => r.ev.sel.kind === 'ana');
     main = evDaySummary(fin) + (fin.length ? `<h3 class="ev-h">本命レース <small>${fh.length}R</small></h3>${fh.map(evCard).join('') || '<p class="legend">なし</p>'}<h3 class="ev-h">穴レース <small>${fa.length}R</small></h3>${fa.map(evCard).join('') || '<p class="legend">なし</p>'}` : '<div class="notice">まだ終わったレースはありません。</div>')
@@ -213,7 +219,7 @@ async function viewMyomi() {
   }
   if (cur === 'rec') main = evRecord(c);
   if (cur === 'myomi') main = myNote + body + myomiRecord(c);
-  app.innerHTML = head + subTabs(c, [['hon', '本命', hon.length], ['ana', '穴', ana.length], ['done', '終了', fin.length], ['rec', '成績'], ['myomi', '妙味軸']], cur) + main;
+  app.innerHTML = head + subTabs(c, [['hon', '本命', hon.length + chon.length], ['ana', '穴', ana.length + cana.length], ['done', '終了', fin.length], ['rec', '成績'], ['myomi', '妙味軸']], cur) + main;
   const ms = app.querySelector('.msel'); if (ms) ms.onchange = () => { MY.date[c] = ms.value; viewMyomi(); };
 }
 function myomiCard(r) {
@@ -259,6 +265,13 @@ function evStarted(r) {
   const d = String(MY.date[MY.circuit] || MY.day.date), [hh, mm] = r.start.split(':').map(Number);
   const t = new Date(`${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}T${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:00+09:00`);
   return Date.now() > t.getTime();
+}
+function candCard(r) {
+  const c = r.cand, sd = (r.start || '').split(':').map(Number);
+  const due = sd.length === 2 ? (() => { const m = sd[0] * 60 + sd[1] - 15; return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`; })() : '';
+  return `<div class="card cand"><div class="cand-h"><span class="tag cand-tag">候補</span><b>${esc(r.place)}${r.r}R</b><span class="rsub">${esc(r.start || '')}発走${due ? `・${due}ごろ確定` : ''}</span></div>
+    <p class="cand-b">今のオッズなら軸 <b>${c.axis}番 ${esc(c.name || '')}</b>（${c.pop}番人気 ${c.odds}倍）</p>
+    <p class="legend">${esc(c.at)}時点のオッズで計算。オッズが動くと、確定時に見送りや本命・穴の入れ替わりになることがあります。</p></div>`;
 }
 function evCard(r) {
   const s = r.ev.sel, pay = r.result && r.result.payout, win = t => pay && isWin(t[0], t[1], pay);

@@ -14,6 +14,9 @@ if NAR: assert "nar" in F.BASE, "地方は KEIBA_DATA=data/nar を指定"
 JST = dt.timezone(dt.timedelta(hours=9))
 LOCK_MIN = 40      # 発走何分前から固定するか
 RESULT_MIN = 15    # 発走何分後から結果を取りに行くか
+CAND_MAX = 8       # 候補の計算：1回の実行で最大何レースまで
+CAND_EVERY = (8, 20)  # 候補の更新間隔（分）：発走60分前以内／それより前
+CAND_AHEAD = 240   # 発走何分前から候補を計算するか
 EV_MIN = 16        # 期待値ワイド（試験記録）：発走何分前から最新オッズで判定するか
 OUT = os.path.join(MY.ROOT, "docs", "data", "myomi", circuit)
 DAYS = os.path.join(OUT, "days"); os.makedirs(DAYS, exist_ok=True)
@@ -45,9 +48,10 @@ def model_state(date):
         _STATE["M"] = pickle.load(open(MY.model_path(circuit), "rb"))
     return _STATE["s"], _STATE["M"]
 
-def ev_race(r, date):
+def ev_race(r, date, cand=False):
     """期待値ワイド（試験記録）：発走直前の最新オッズで期待値1.0以上のワイドを計算し、
-    旨味のある馬を軸に本命レース／穴レースに分けて記録"""
+    旨味のある馬を軸に本命レース／穴レースに分けて記録。
+    cand=True のときは「今のオッズならどうなるか」（候補）だけを r["cand"] に記録し、確定はしない"""
     card = nk.parse_card(r["race_id"], nar=NAR)
     if not card or not card.get("horses") or any(h["umaban"] is None for h in card["horses"]): return False
     odds, st = nk.get_odds_nar(r["race_id"]) if NAR else nk.get_odds(r["race_id"])
@@ -68,6 +72,13 @@ def ev_race(r, date):
     fav = min(h["odds"] for h in hs)
     if sel and sel["kind"] == "ana" and fav < ANA_FAV:   # 1番人気が強いレースの穴は過去検証で回収率が低いため見送り
         skip = f"1番人気が{fav}倍と強いため穴は見送り"; sel = None
+    if cand:
+        c = {"at": now().strftime("%H:%M"), "kind": sel["kind"] if sel else None, "fav": fav}
+        if sel:
+            ax = next(h for h in hs if h["umaban"] == sel["axis"])
+            c.update({"axis": sel["axis"], "name": ax["name"], "pop": sel["pop"], "odds": sel["odds"]})
+        if skip: c["skip"] = skip
+        r["cand"] = c; return True
     if sel:
         ax = next(h for h in hs if h["umaban"] == sel["axis"]); sel.update({"name": ax["name"], "jockey": ax["jockey"]})
         nm = {h["umaban"]: h["name"] for h in hs}
@@ -185,8 +196,8 @@ def main():
     day = json.load(open(path)) if os.path.exists(path) else new_day(date)
     if not day:
         print("開催なし", circuit, date); return
-    t = now(); changed = not os.path.exists(path)
-    for r in day["races"]:
+    t = now(); changed = not os.path.exists(path); n_cand = 0
+    for r in sorted(day["races"], key=lambda x: x.get("start") or ""):
         sd = start_dt(date, r.get("start") or "")
         if not sd: continue
         mins = (sd - t).total_seconds() / 60
@@ -204,6 +215,15 @@ def main():
                     if r["ev"].get("sel") and NT.ev_pick(circuit, r, r["ev"]["sel"]): r["ev"]["notified"] = True
             except Exception as e:
                 print("期待値エラー", r["race_id"], type(e).__name__, e)
+        if not r.get("ev") and mins > EV_MIN and n_cand < CAND_MAX:   # 候補：今のオッズなら本命／穴になるか（確定は発走15分前ごろ）
+            last = start_dt(date, (r.get("cand") or {}).get("at") or "")
+            gap = CAND_EVERY[0] if mins <= 60 else CAND_EVERY[1]
+            if (not last or (t - last).total_seconds() / 60 >= gap) and mins <= CAND_AHEAD:
+                n_cand += 1
+                try:
+                    if ev_race(r, date, cand=True): changed = True; print("候補", r["race_id"], r["cand"].get("kind") or "なし")
+                except Exception as e:
+                    print("候補エラー", r["race_id"], type(e).__name__, e)
         if r["status"] in ("locked", "missed") and not r.get("result") and mins < -RESULT_MIN:
             if settle_race(r): changed = True; print("結果", r["race_id"])
     day["updated"] = t.isoformat(timespec="minutes")
