@@ -24,7 +24,7 @@ jobs:
         with: { python-version: "3.11", cache: pip }
       - run: pip install -r requirements.txt
       - name: 4分ごとに予想・オッズ・結果を更新（21:50まで）
-        env: { TZ: Asia/Tokyo, GH_TOKEN: "${{ github.token }}" }
+        env: { TZ: Asia/Tokyo, GH_TOKEN: "${{ github.token }}", NTFY_TOPIC: "${{ secrets.NTFY_TOPIC }}" }
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

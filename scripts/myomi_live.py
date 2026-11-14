@@ -6,7 +6,7 @@
 import os, sys, json, glob, pickle, datetime as dt
 import numpy as np, pandas as pd
 sys.path.insert(0, os.path.dirname(__file__))
-import netkeiba as nk, features as F, strategy as S, myomi as MY, evwide as EVW
+import netkeiba as nk, features as F, strategy as S, myomi as MY, evwide as EVW, notify as NT
 
 circuit = sys.argv[1] if len(sys.argv) > 1 else "jra"
 NAR = circuit == "nar"
@@ -199,7 +199,9 @@ def main():
                     print("固定エラー", r["race_id"], type(e).__name__, e)
         if not r.get("ev") and r["status"] != "wait" and 0 < mins <= EV_MIN:
             try:
-                if ev_race(r, date): changed = True; print("期待値ワイド", r["race_id"], (r["ev"]["sel"] or {}).get("kind", "見送り"))
+                if ev_race(r, date):
+                    changed = True; print("期待値ワイド", r["race_id"], (r["ev"]["sel"] or {}).get("kind", "見送り"))
+                    if r["ev"].get("sel") and NT.ev_pick(circuit, r, r["ev"]["sel"]): r["ev"]["notified"] = True
             except Exception as e:
                 print("期待値エラー", r["race_id"], type(e).__name__, e)
         if r["status"] in ("locked", "missed") and not r.get("result") and mins < -RESULT_MIN:
