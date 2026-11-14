@@ -126,3 +126,8 @@ details.myomi-note summary{cursor:pointer;font-weight:700;color:var(--ink)}
 .evc-pl{min-width:0;white-space:nowrap}
 .evc-sum>.evb{margin-left:0!important;font-family:inherit!important}
 .evc-sum>span:first-child{white-space:nowrap}.evc-sum>span:nth-child(2):not(.evb){margin-left:auto}
+.circ-band{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:var(--r);padding:12px 14px;margin-bottom:12px;color:#fff}
+.circ-band.nar{background:#7a4a1c}.circ-band.jra{background:var(--turf2)}
+.circ-t{font-size:20px;font-weight:800;line-height:1.2}.circ-s{font-size:11px;opacity:.85}
+.circ-band .msel{margin-left:0;border-color:#fff6;background:#ffffff1f;color:#fff}
+.circ-band .msel option{color:#000}

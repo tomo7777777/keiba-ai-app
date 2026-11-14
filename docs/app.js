@@ -23,10 +23,12 @@ async function loadDay(d) {
 window.addEventListener('hashchange', route);
 
 function route() {
-  const h = location.hash.replace('#/', '') || 'today';
+  let h = location.hash.replace('#/', '') || 'today';
+  if (h === 'myomi') h = MY.circuit;
+  if (h === 'nar' || h === 'jra') MY.circuit = h;
   document.querySelectorAll('.tabs a').forEach(a => a.classList.toggle('on', a.dataset.tab === h));
   sel.style.visibility = (h === 'today' || h === 'pick') ? 'visible' : 'hidden';
-  ({ today: viewToday, pick: viewPick, myomi: viewMyomi, record: viewRecord, about: viewAbout }[h] || viewToday)();
+  ({ today: viewToday, pick: viewPick, nar: viewMyomi, jra: viewMyomi, record: viewRecord, about: viewAbout }[h] || viewToday)();
   window.scrollTo(0, 0);
 }
 
@@ -174,12 +176,9 @@ async function viewMyomi() {
   const wait = races.filter(r => r.status === 'wait');
   let inv = 0, ret = 0, settled = 0;
   picks.forEach(r => Object.values(r.pick.bets).forEach(b => { if (b.inv !== undefined) { inv += b.inv; ret += b.ret; settled++; } }));
-  const head = `<div class="place-chips">
-      <button class="chip ${c === 'nar' ? 'on' : ''}" data-c="nar">地方</button>
-      <button class="chip ${c === 'jra' ? 'on' : ''}" data-c="jra">中央</button>
-      ${days.length ? `<select class="msel" aria-label="日付">${days.map(x => `<option value="${x}" ${x === d ? 'selected' : ''}>${fmtDate(x)}</option>`).join('')}</select>` : ''}
-    </div>
-    <div class="demo myomi-note">試験運用中：1番人気以外から、人気より実力が上とAIが見た馬を軸にします。最近のデータでは100%超えでしたが、古い期間では届かず（地方の複勝で97%）、まだ儲かる方法とは言えません。記録用として続けています。</div>`;
+  const head = `<div class="circ-band ${c}"><div><div class="circ-t">${c === 'nar' ? '地方競馬' : '中央競馬'}</div><div class="circ-s">${c === 'nar' ? '高知・佐賀・大井など（NAR）' : '東京・京都・中山など（JRA）'}</div></div>
+      ${days.length ? `<select class="msel" aria-label="日付">${days.map(x => `<option value="${x}" ${x === d ? 'selected' : ''}>${fmtDate(x)}</option>`).join('')}</select>` : ''}</div>`;
+  const myNote = `<h2 class="sec">妙味軸（試験記録）</h2><div class="demo myomi-note">1番人気以外から、人気より実力が上とAIが見た馬を軸にします。古い期間では100%に届かず（地方の複勝で97%）、記録用として続けています。</div>`;
   let body = '';
   if (!day) body = `<div class="notice">${c === 'nar' ? '地方競馬' : '中央競馬'}の妙味軸はまだありません。<br>開催日に、各レースの発走40分前ごろ自動で判定します。</div>`;
   else {
@@ -190,8 +189,7 @@ async function viewMyomi() {
       ${wait.length ? `<p class="legend">判定待ち ${wait.length}R（次は ${esc(wait[0].place)}${wait[0].r}R ${esc(wait[0].start)}発走）</p>` : ''}
       ${skip.length ? `<details class="race"><summary><span class="rname">見送り ${skip.length}R</span><span class="rsub">条件（単勝3〜10倍・ズレ1.3倍以上）に合う馬なし</span></summary><div class="body"><p class="legend">${skip.map(r => `${esc(r.place)}${r.r}R`).join('・')}</p></div></details>` : ''}`;
   }
-  app.innerHTML = head + body + evSection(c, races) + myomiRecord(c);
-  app.querySelectorAll('.chip[data-c]').forEach(b => b.onclick = () => { MY.circuit = b.dataset.c; viewMyomi(); });
+  app.innerHTML = head + evSection(c, races) + myNote + body + myomiRecord(c);
   const ms = app.querySelector('.msel'); if (ms) ms.onchange = () => { MY.date[c] = ms.value; viewMyomi(); };
 }
 function myomiCard(r) {
@@ -256,7 +254,7 @@ function evCard(r) {
 function evSection(c, races) {
   const rec = (MY.rec[c] || {}).ev || {}, bt = ((MY.bt || {})[c] || {}).ev;
   const done = races.filter(r => r.ev), sel = done.filter(r => r.ev.sel);
-  let h = `<h2 class="sec">期待値AI（試験記録）</h2><details class="demo myomi-note"><summary>しくみ（タップで表示）</summary>発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}<br>「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</details>`;
+  let h = `<h2 class="sec">${c === 'nar' ? '地方' : '中央'}の期待値AI（試験記録）</h2><details class="demo myomi-note"><summary>しくみ（タップで表示）</summary>発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}<br>「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</details>`;
   const fin = sel.filter(r => r.result && r.ev.sel.inv !== undefined);
   if (fin.length) {
     let inv = 0, ret = 0;
