@@ -1,0 +1,17 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -q requests beautifulsoup4 lxml pandas numpy || true
+      - run: |
+          cd scripts && python - <<'P'
+          import netkeiba as nk
+          for rid in ['202505050811','202305021011','202210020612']:
+              for k in ['馬連','ワイド']:
+                  o=nk.get_combo_odds(rid,k); print(rid,k,len(o),list(o.items())[:3])
+          P
