@@ -226,25 +226,34 @@ function sanBlock(r) {
   const res = sr ? `<div class="res">${yen(sr.inv)}円 → <b>${yen(sr.ret)}円</b></div>` : `<div class="res">3連複${sn.length}点・${yen(sn.length * 100)}円</div>`;
   return `<div class="bet myomi"><h4><span>3連複 軸1頭（期待値1.0以上から来やすい順）</span></h4><div class="tk">${tks}</div>${res}</div>`;
 }
+function tanBlock(r) {
+  const s = r.ev.sel, tn = s.tan;
+  if (!tn || !tn.length) return '';
+  const tks = tn.map(t => { const w = r.result && isWin(t[0], t[1], r.result.payout); return `<span class="${w ? 'win' : ''}">${t[1]}</span>`; }).join('');
+  const tr = s.tan_res;
+  const res = tr ? `<div class="res">${yen(tr.inv)}円 → <b>${yen(tr.ret)}円</b></div>` : `<div class="res">3連単${tn.length}点・${yen(tn.length * 100)}円</div>`;
+  const k = s.kind === 'hon' ? 4 : 3;
+  return `<div class="bet myomi"><h4><span>3連単 ${s.axis}番1着固定（2・3着はAI上位${k}頭）</span></h4><div class="tk">${tks}</div>${res}</div>`;
+}
 function evSection(c, races) {
   const rec = (MY.rec[c] || {}).ev || {}, bt = ((MY.bt || {})[c] || {}).ev;
   const done = races.filter(r => r.ev), sel = done.filter(r => r.ev.sel);
   let h = `<h2 class="sec">期待値AI（試験記録）</h2><div class="demo myomi-note">発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}実際のオッズで通用するかを確かめるための記録です。</div>`;
   const card = r => {
-    const s = r.ev.sel, hit = (s.inv !== undefined && s.ret > 0) || (s.san_res && s.san_res.ret > 0);
+    const s = r.ev.sel, hit = (s.inv !== undefined && s.ret > 0) || (s.san_res && s.san_res.ret > 0) || (s.tan_res && s.tan_res.ret > 0);
     const tks = s.tickets.map(t => { const w = r.result && isWin(t[0], t[1], r.result.payout); return `<span class="${w ? 'win' : ''}">${t[1]}<small> ${t[3]}倍〜 期待値${t[4]}</small></span>`; }).join('');
     const res = s.inv !== undefined ? `<div class="res">${yen(s.inv)}円 → <b>${yen(s.ret)}円</b></div>` : `<div class="res">ワイド${s.tickets.length}点・${yen(s.tickets.length * 100)}円（${esc(r.ev.at)}判定）</div>`;
     return `<div class="card ev-card"><div class="rsub"><b>${esc(r.place)}${r.r}R</b> ${esc(r.start)}発走${r.result ? `　結果 <b>${r.result.order.join('-')}</b>` : ''}${hit ? ' <span class="b hit">的中</span>' : ''}</div>
       <div class="axis"><span class="uma">${s.axis}</span><div><div class="hn">${esc(s.name || '')}</div><div class="hs">${esc(s.jockey || '')}・単勝 ${s.odds}倍（${s.pop}番人気）</div>
       <div class="hs">3着以内の確率：AI <b>${Math.round(s.p3 * 100)}%</b> ／ 人気から見ると ${Math.round(s.m3 * 100)}%</div></div></div>
-      <div class="bet myomi"><h4><span>ワイド 軸から期待値${s.kind === 'hon' ? '1.2' : '1.0'}以上の組</span></h4><div class="tk">${tks}</div>${res}</div>${sanBlock(r)}</div>`;
+      <div class="bet myomi"><h4><span>ワイド 軸から期待値${s.kind === 'hon' ? '1.2' : '1.0'}以上の組</span></h4><div class="tk">${tks}</div>${res}</div>${sanBlock(r)}${tanBlock(r)}</div>`;
   };
   for (const [k, title, sub] of [['hon', '本命レース', '旨味のある馬が1〜3番人気'], ['ana', '穴レース', '旨味のある馬が4番人気以下']]) {
     const rs = sel.filter(r => r.ev.sel.kind === k);
     h += `<h3 class="ev-h">${title} <small>${sub}・${rs.length}R</small></h3>` + (rs.length ? rs.map(card).join('') : `<div class="notice">${done.length ? 'この日は該当レースがありません。' : '各レースの発走15分前ごろに判定します。'}</div>`);
   }
   if (done.length) h += `<p class="legend">判定済み ${done.length}R（うち見送り ${done.length - sel.length}R）</p>`;
-  const keys = ['hon', 'hon_san', 'ana', 'ana_san'].filter(k => rec[k]);
+  const keys = ['hon', 'hon_san', 'hon_tan', 'ana', 'ana_san', 'ana_tan'].filter(k => rec[k]);
   if (keys.length) h += `<div class="card"><h3>実際のオッズでの成績</h3><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">点数</th><th class="num">的中率</th><th class="num">回収率</th></tr></thead><tbody>${keys.map(k => { const x = rec[k]; return `<tr><td>${esc(x.label)}</td><td class="num">${x.races}</td><td class="num">${x.tickets}</td><td class="num">${pct(x.hit_races, x.races)}</td><td class="num ${x.ret >= x.inv ? 'ev-hi' : ''}">${pct(x.ret, x.inv)}</td></tr>`; }).join('')}</tbody></table></div>`;
   if (bt) h += `<div class="card"><h3>過去データでの検証</h3><p class="legend" style="margin-top:0">${esc(bt.period)}</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${bt.rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num ${r[3] >= 100 ? 'ev-hi' : ''}">${r[3]}%</td><td class="num">${esc(r[4])}</td></tr>`).join('')}</tbody></table><p class="legend">${esc(bt.note)}</p></div>`;
   return h;

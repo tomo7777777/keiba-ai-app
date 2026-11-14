@@ -10,6 +10,7 @@ PATH = PATHS["nar"]
 SAN_PATHS = {"nar": os.path.join(ROOT, "nar", "ev_san.json"), "jra": os.path.join(ROOT, "ev_san_jra.json")}
 SAN_TH = 1.0     # 3連複：軸を含む組のうち期待値1.0以上から
 SAN_PTS = 3      # 来る確率の高い順に最大3点
+TAN_K = {"hon": 4, "ana": 3}   # 3連単 軸1着固定：2・3着はAIの3着内確率上位（本命4頭=12点、穴3頭=6点）
 # レースの分け方（過去検証で決めた値。変えるときは検証し直す）
 HON_POP = 3      # 軸が何番人気までなら「本命レース」
 HON_TH = 1.2     # 本命レースで買う組の期待値
@@ -98,3 +99,10 @@ def pick_san(horses, san_odds, axis, M):
         p = 1 / (1 + np.exp(-(M["intercept"] + coef @ f)))
         if p * o >= SAN_TH: out.append(["三連複", k, 100, o, round(float(p * o), 2), round(float(p), 4)])
     return sorted(out, key=lambda t: -t[5])[:SAN_PTS]
+
+def pick_tan(horses, axis, kind):
+    """3連単 軸1着固定：2・3着をAIの3着内確率上位の馬で（本命レース4頭12点、穴レース3頭6点）"""
+    k = TAN_K[kind]; nm = {h["umaban"]: h.get("name", "") for h in horses}
+    ai = [h["umaban"] for h in sorted(horses, key=lambda h: -h["p3"]) if h["umaban"] != axis][:k]
+    if len(ai) < k: return []
+    return [["三連単", f"{axis}-{a}-{b}", 100, f"{nm.get(a, '')} / {nm.get(b, '')}"] for a, b in itertools.permutations(ai, 2)]
