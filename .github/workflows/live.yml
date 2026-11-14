@@ -1,0 +1,46 @@
+name: 発走前の自動更新（常駐）
+on:
+  schedule:
+    # 日本時間 8:30 に起動（GitHubの定期実行は遅れたり抜けたりするため、予備も用意）
+    - cron: "30 23 * * *"
+    - cron: "10 1 * * *"
+    - cron: "40 3 * * *"
+    - cron: "10 6 * * *"
+    - cron: "40 8 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency: { group: live, cancel-in-progress: false }
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: 4分ごとに予想・オッズ・結果を更新（21:50まで）
+        env: { TZ: Asia/Tokyo, GH_TOKEN: "${{ github.token }}" }
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          START=$(date +%s)
+          while :; do
+            H=$((10#$(date +%H%M))); D=$(date +%Y%m%d)
+            if [ $H -gt 2150 ] || [ $H -lt 600 ]; then echo "本日の更新終了"; break; fi
+            if [ $(( $(date +%s) - START )) -gt 19800 ]; then echo "5.5時間たったので引き継ぎ"; gh workflow run live.yml; break; fi
+            python scripts/myomi_live.py jra || true
+            KEIBA_DATA=data/nar python scripts/myomi_live.py nar || true
+            if [ $H -lt 1800 ]; then
+              python scripts/predict.py $D || true
+              if [ -f docs/data/days/$D.json ]; then python scripts/predict.py $D --odds-only || true; python scripts/results.py $D || true; fi
+            fi
+            git add -A docs data
+            if ! git diff --cached --quiet; then
+              git commit -qm "live $(date +%m/%d\ %H:%M)"
+              for i in 1 2 3 4; do git pull -q --rebase -X theirs && git push -q && break; sleep 7; done
+            fi
+            sleep 240
+          done

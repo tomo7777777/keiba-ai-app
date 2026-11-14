@@ -1,9 +1,6 @@
 name: 予想と結果の更新
 on:
-  schedule:
-    # 日本時間 6:40〜17:40 の間 20分ごと（開催がない日はすぐ終了）
-    - cron: "40,0,20 21-23 * * *"
-    - cron: "0,20,40 0-8 * * *"
+  # 定期実行は live.yml（常駐）に統合
   workflow_dispatch:
     inputs:
       date: { description: "対象日 YYYYMMDD（空欄で今日）", required: false }

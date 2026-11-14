@@ -67,6 +67,12 @@ def main():
     if not ids:
         print("no JRA races", date); return
     cards = [nk.parse_card(i) for i in ids]
+    if date == now().strftime("%Y%m%d") and "--force" not in sys.argv:
+        # 当日は「発走10分以上前のレース」だけを予想する（終わったレースを後から予想しない）
+        lim = (now() + dt.timedelta(minutes=10)).strftime("%H:%M")
+        cards = [c for c in cards if c and c.get("start") and c["start"].zfill(5) > lim]
+        if not cards:
+            print("本日の残りレースなし", date); return
     if any(c and c["horses"] and c["horses"][0]["umaban"] is None for c in cards):
         print("枠順未確定のため保留", date); return
     odds_map = {}

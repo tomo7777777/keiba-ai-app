@@ -1,8 +1,6 @@
 name: 妙味軸の更新
 on:
-  schedule:
-    # 日本時間 9:00〜21:45 の間 15分ごと（発走40分前に予想を固定）
-    - cron: "0,15,30,45 0-12 * * *"
+  # 定期実行は live.yml（常駐）に統合
   workflow_dispatch:
 permissions:
   contents: write
