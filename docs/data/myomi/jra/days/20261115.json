@@ -159,13 +159,13 @@
    "n": 17,
    "status": "wait",
    "cand": {
-    "at": "06:41",
+    "at": "07:02",
     "kind": "ana",
     "fav": 3.4,
     "axis": 7,
     "name": "パッションノーヴァ",
     "pop": 8,
-    "odds": 24.3
+    "odds": 24.7
    }
   },
   {
@@ -177,7 +177,16 @@
    "surface": "芝",
    "distance": 1400,
    "n": 16,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "07:02",
+    "kind": "ana",
+    "fav": 2.8,
+    "axis": 13,
+    "name": "ドナミモザ",
+    "pop": 12,
+    "odds": 47.5
+   }
   },
   {
    "race_id": "202605050404",
@@ -425,5 +434,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T06:56+09:00"
+ "updated": "2026-11-15T07:02+09:00"
 }
