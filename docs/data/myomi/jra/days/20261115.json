@@ -44,7 +44,16 @@
    "surface": "ダ",
    "distance": 1700,
    "n": 15,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:36",
+    "kind": "ana",
+    "fav": 2.8,
+    "axis": 15,
+    "name": "ニーナバイリッカ",
+    "pop": 9,
+    "odds": 22.4
+   }
   },
   {
    "race_id": "202603030406",
@@ -295,7 +304,16 @@
    "surface": "芝",
    "distance": 1600,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:36",
+    "kind": "ana",
+    "fav": 3.1,
+    "axis": 10,
+    "name": "シャトンダンス",
+    "pop": 4,
+    "odds": 7.2
+   }
   },
   {
    "race_id": "202608050403",
@@ -408,5 +426,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T06:30+09:00"
+ "updated": "2026-11-15T06:35+09:00"
 }
