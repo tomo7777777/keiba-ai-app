@@ -48,6 +48,14 @@ def model_state(date):
         _STATE["M"] = pickle.load(open(MY.model_path(circuit), "rb"))
     return _STATE["s"], _STATE["M"]
 
+SNAP = os.path.join(F.BASE, "snap"); os.makedirs(SNAP, exist_ok=True)
+def snap(r, tag, win, wide):
+    """オッズの記録（判定時と確定後）。発走前オッズと確定オッズのずれを検証するため"""
+    try:
+        with open(os.path.join(SNAP, now().strftime("%Y%m%d") + ".jsonl"), "a") as f:
+            f.write(json.dumps({"race_id": r["race_id"], "tag": tag, "at": now().strftime("%H:%M"), "win": {str(k): v for k, v in win.items()}, "wide": wide}, ensure_ascii=False) + "\n")
+    except Exception as e: print("記録エラー", type(e).__name__, e)
+
 def ev_race(r, date, cand=False):
     """期待値ワイド（試験記録）：発走直前の最新オッズで期待値1.0以上のワイドを計算し、
     旨味のある馬を軸に本命レース／穴レースに分けて記録。
@@ -67,6 +75,7 @@ def ev_race(r, date, cand=False):
     try: wide = nk.get_combo_odds(r["race_id"], "ワイド", nar=NAR) or {}
     except Exception: wide = {}
     if not wide: return False
+    if not cand: snap(r, "ev", odds, wide)
     tickets = EVW.pick(hs, wide, json.load(open(EVW.PATHS[circuit])))
     sel = EVW.select(tickets, hs); skip = None
     fav = min(h["odds"] for h in hs)
@@ -145,6 +154,10 @@ def settle_race(r):
         try: res = nk.parse_result_live(r["race_id"], nar=NAR)
         except Exception as e: print("結果ページエラー", r["race_id"], type(e).__name__, e); res = None
         if not res: return False
+    try:   # 確定オッズも記録（判定時のオッズとの比較用）
+        fo_, _ = nk.get_odds_nar(r["race_id"]) if NAR else nk.get_odds(r["race_id"])
+        snap(r, "final", fo_, nk.get_combo_odds(r["race_id"], "ワイド", nar=NAR) or {})
+    except Exception as e: print("確定オッズ記録エラー", r["race_id"], type(e).__name__, e)
     rk = {h["umaban"]: h["rank"] for h in res["horses"]}; fo = {h["umaban"]: h["odds"] for h in res["horses"]}
     for h in r.get("horses", []): h["rank"] = rk.get(h["umaban"]); h["final_odds"] = fo.get(h["umaban"])
     order = sorted([h for h in res["horses"] if h["rank"]], key=lambda h: h["rank"])

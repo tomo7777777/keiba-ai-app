@@ -16,7 +16,7 @@ def send(title, message, click=None, tags=None, priority=4):
 def ev_pick(circuit, r, sel):
     """期待値AIの本命／穴が決まったときの通知"""
     nar = circuit == "nar"; kind = "本命" if sel["kind"] == "hon" else "穴"
-    title = f"{'地方' if nar else '中央'}{kind} {r['place']}{r['r']}R {r.get('start', '')}発走"
+    title = f"【検証中】{'地方' if nar else '中央'}{kind} {r['place']}{r['r']}R {r.get('start', '')}発走"
     lines = [f"軸 {sel['axis']}番 {sel.get('name', '')}（{sel.get('pop')}番人気 {sel.get('odds')}倍）"]
     tk = sel.get("tickets") or []
     if tk: lines.append("ワイド " + " ".join(t[1] for t in tk) + f"（{len(tk)}点）")

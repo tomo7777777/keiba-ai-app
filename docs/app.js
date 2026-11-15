@@ -219,7 +219,8 @@ async function viewMyomi() {
   }
   if (cur === 'rec') main = evRecord(c);
   if (cur === 'myomi') main = myNote + body + myomiRecord(c);
-  app.innerHTML = head + subTabs(c, [['hon', '本命', hon.length + chon.length], ['ana', '穴', ana.length + cana.length], ['done', '終了', fin.length], ['rec', '成績'], ['myomi', '妙味軸']], cur) + main;
+  const warn = `<div class="demo"><b>検証中です。今は実際の購入をおすすめしません。</b>過去の検証は「確定オッズ」で計算していましたが、本番は発走15分前のオッズで判定しています。11/15の地方で確かめると、本番で本命になった7レースは、確定オッズで計算し直すと1つも本命になりませんでした。発走前と確定でオッズがずれる分を、いま記録して調べています。</div>`;
+  app.innerHTML = head + warn + subTabs(c, [['hon', '本命', hon.length + chon.length], ['ana', '穴', ana.length + cana.length], ['done', '終了', fin.length], ['rec', '成績'], ['myomi', '妙味軸']], cur) + main;
   const ms = app.querySelector('.msel'); if (ms) ms.onchange = () => { MY.date[c] = ms.value; viewMyomi(); };
 }
 function myomiCard(r) {
