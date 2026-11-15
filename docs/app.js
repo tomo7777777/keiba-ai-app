@@ -269,7 +269,7 @@ function evStarted(r) {
 }
 function candCard(r) {
   const c = r.cand, sd = (r.start || '').split(':').map(Number);
-  const due = sd.length === 2 ? (() => { const m = sd[0] * 60 + sd[1] - 15; return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`; })() : '';
+  const due = sd.length === 2 ? (() => { const m = sd[0] * 60 + sd[1] - 10; return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`; })() : '';
   return `<div class="card cand"><div class="cand-h"><span class="tag cand-tag">候補</span><b>${esc(r.place)}${r.r}R</b><span class="rsub">${esc(r.start || '')}発走${due ? `・${due}ごろ確定` : ''}</span></div>
     <p class="cand-b">今のオッズなら軸 <b>${c.axis}番 ${esc(c.name || '')}</b>（${c.pop}番人気 ${c.odds}倍）</p>
     <p class="legend">${esc(c.at)}時点のオッズで計算。オッズが動くと、確定時に見送りや本命・穴の入れ替わりになることがあります。</p></div>`;
