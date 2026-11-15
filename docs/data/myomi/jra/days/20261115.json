@@ -3847,7 +3847,13 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 16,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:23",
+    "kind": null,
+    "fav": 2.3,
+    "skip": "1番人気が2.3倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202605050407",
@@ -5503,7 +5509,16 @@
    "surface": "ダ",
    "distance": 1800,
    "n": 16,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:23",
+    "kind": "ana",
+    "fav": 3.5,
+    "axis": 7,
+    "name": "レザーアンドレース",
+    "pop": 6,
+    "odds": 10.9
+   }
   },
   {
    "race_id": "202608050407",
@@ -5572,5 +5587,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T11:17+09:00"
+ "updated": "2026-11-15T11:23+09:00"
 }
