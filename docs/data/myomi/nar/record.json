@@ -89,24 +89,24 @@
    }
   }
  ],
- "races": 52,
+ "races": 53,
  "axis_top3": 1,
  "axis_n": 6,
  "ev": {
   "ana": {
    "label": "穴レース ワイド",
-   "races": 14,
+   "races": 15,
    "hit_races": 1,
-   "tickets": 48,
-   "inv": 4800,
+   "tickets": 49,
+   "inv": 4900,
    "ret": 1450
   },
   "ana_tan": {
    "label": "穴レース 3連単1着固定",
-   "races": 9,
+   "races": 10,
    "hit_races": 0,
-   "tickets": 54,
-   "inv": 5400,
+   "tickets": 60,
+   "inv": 6000,
    "ret": 0
   },
   "hon": {
@@ -134,5 +134,5 @@
    "ret": 0
   }
  },
- "updated": "2026-11-15T18:18+09:00"
+ "updated": "2026-11-15T18:22+09:00"
 }
