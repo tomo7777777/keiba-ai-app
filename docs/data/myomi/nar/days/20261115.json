@@ -13,9 +13,9 @@
    "n": 5,
    "status": "wait",
    "cand": {
-    "at": "10:31",
+    "at": "10:48",
     "kind": null,
-    "fav": 1.6
+    "fav": 1.8
    }
   },
   {
@@ -29,9 +29,10 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "10:25",
+    "at": "10:48",
     "kind": null,
-    "fav": 1.5
+    "fav": 1.5,
+    "skip": "1番人気が1.5倍と強いため穴は見送り"
    }
   },
   {
@@ -45,13 +46,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "10:25",
+    "at": "10:48",
     "kind": "hon",
-    "fav": 1.4,
+    "fav": 3.8,
     "axis": 2,
     "name": "クレバー",
     "pop": 1,
-    "odds": 1.4
+    "odds": 3.8
    }
   },
   {
@@ -103,7 +104,16 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 7,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:48",
+    "kind": "hon",
+    "fav": 3.2,
+    "axis": 6,
+    "name": "ニムロッド",
+    "pop": 1,
+    "odds": 3.2
+   }
   },
   {
    "race_id": "202636111507",
@@ -524,5 +534,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T10:31+09:00"
+ "updated": "2026-11-15T10:48+09:00"
 }
