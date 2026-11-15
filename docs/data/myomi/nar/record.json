@@ -89,7 +89,7 @@
    }
   }
  ],
- "races": 50,
+ "races": 51,
  "axis_top3": 1,
  "axis_n": 6,
  "ev": {
@@ -111,28 +111,28 @@
   },
   "hon": {
    "label": "本命レース ワイド",
-   "races": 7,
+   "races": 8,
    "hit_races": 1,
-   "tickets": 22,
-   "inv": 2200,
+   "tickets": 24,
+   "inv": 2400,
    "ret": 960
   },
   "hon_san": {
    "label": "本命レース 3連複",
-   "races": 7,
+   "races": 8,
    "hit_races": 0,
-   "tickets": 21,
-   "inv": 2100,
+   "tickets": 23,
+   "inv": 2300,
    "ret": 0
   },
   "hon_tan": {
    "label": "本命レース 3連単1着固定",
-   "races": 7,
+   "races": 8,
    "hit_races": 0,
-   "tickets": 84,
-   "inv": 8400,
+   "tickets": 96,
+   "inv": 9600,
    "ret": 0
   }
  },
- "updated": "2026-11-15T17:54+09:00"
+ "updated": "2026-11-15T17:59+09:00"
 }
