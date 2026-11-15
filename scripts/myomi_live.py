@@ -17,7 +17,8 @@ RESULT_MIN = 15    # 発走何分後から結果を取りに行くか
 CAND_MAX = 8       # 候補の計算：1回の実行で最大何レースまで
 CAND_EVERY = (8, 20)  # 候補の更新間隔（分）：発走60分前以内／それより前
 CAND_AHEAD = 240   # 発走何分前から候補を計算するか
-EV_MIN = 16        # 期待値ワイド（試験記録）：発走何分前から最新オッズで判定するか
+EV_MIN = 10        # 期待値ワイド：発走何分前から最新オッズで判定するか（確定オッズとのずれを減らすため15分前→10分前に変更）
+EXTRA_BETS = False  # 3連単・3連複：発走前オッズのずれを再現した検証で100%を下回ったため停止（ワイドのみ）
 OUT = os.path.join(MY.ROOT, "docs", "data", "myomi", circuit)
 DAYS = os.path.join(OUT, "days"); os.makedirs(DAYS, exist_ok=True)
 RACES = os.path.join(F.BASE, "races"); os.makedirs(RACES, exist_ok=True)
@@ -49,14 +50,15 @@ def model_state(date):
     return _STATE["s"], _STATE["M"]
 
 SNAP = os.path.join(F.BASE, "snap"); os.makedirs(SNAP, exist_ok=True)
-def snap(r, tag, win, wide):
-    """オッズの記録（判定時と確定後）。発走前オッズと確定オッズのずれを検証するため"""
+def snap(r, tag, win, wide, mins=None):
+    """オッズの記録（候補・判定時・直前・確定後）。発走前オッズと確定オッズのずれを検証するため"""
     try:
         with open(os.path.join(SNAP, now().strftime("%Y%m%d") + ".jsonl"), "a") as f:
-            f.write(json.dumps({"race_id": r["race_id"], "tag": tag, "at": now().strftime("%H:%M"), "win": {str(k): v for k, v in win.items()}, "wide": wide}, ensure_ascii=False) + "\n")
+            f.write(json.dumps({"race_id": r["race_id"], "tag": tag, "at": now().strftime("%H:%M"), "mins": None if mins is None else round(mins, 1),
+                                "win": {str(k): v for k, v in win.items()}, "wide": wide}, ensure_ascii=False) + "\n")
     except Exception as e: print("記録エラー", type(e).__name__, e)
 
-def ev_race(r, date, cand=False):
+def ev_race(r, date, cand=False, mins=None):
     """期待値ワイド（試験記録）：発走直前の最新オッズで期待値1.0以上のワイドを計算し、
     旨味のある馬を軸に本命レース／穴レースに分けて記録。
     cand=True のときは「今のオッズならどうなるか」（候補）だけを r["cand"] に記録し、確定はしない"""
@@ -75,7 +77,7 @@ def ev_race(r, date, cand=False):
     try: wide = nk.get_combo_odds(r["race_id"], "ワイド", nar=NAR) or {}
     except Exception: wide = {}
     if not wide: return False
-    if not cand: snap(r, "ev", odds, wide)
+    snap(r, "cand" if cand else "ev", odds, wide, mins)
     tickets = EVW.pick(hs, wide, json.load(open(EVW.PATHS[circuit])))
     sel = EVW.select(tickets, hs); skip = None
     fav = min(h["odds"] for h in hs)
@@ -92,8 +94,8 @@ def ev_race(r, date, cand=False):
         ax = next(h for h in hs if h["umaban"] == sel["axis"]); sel.update({"name": ax["name"], "jockey": ax["jockey"]})
         nm = {h["umaban"]: h["name"] for h in hs}
         for t in sel["tickets"]: t.append(" / ".join(nm.get(int(u), "") for u in t[1].split("-")))
-        if NAR and (sel["kind"] == "hon" or len(hs) >= ANA_TAN_N): sel["tan"] = EVW.pick_tan(hs, sel["axis"], sel["kind"])   # 地方のみ：3連単 軸1着固定（穴は12頭以上）
-        if not (NAR and sel["kind"] == "ana"):   # 地方の穴レースは3連複をやめ、3連単1着固定に置き換え
+        if EXTRA_BETS and NAR and (sel["kind"] == "hon" or len(hs) >= ANA_TAN_N): sel["tan"] = EVW.pick_tan(hs, sel["axis"], sel["kind"])   # 地方のみ：3連単 軸1着固定（穴は12頭以上）
+        if EXTRA_BETS and not (NAR and sel["kind"] == "ana"):   # 地方の穴レースは3連複をやめ、3連単1着固定に置き換え
             try:
                 so = nk.get_combo_odds(r["race_id"], "三連複", nar=NAR, jiku=sel["axis"]) or {}
                 sel["san"] = EVW.pick_san(hs, so, sel["axis"], json.load(open(EVW.SAN_PATHS[circuit])))
@@ -103,8 +105,8 @@ def ev_race(r, date, cand=False):
     if skip: r["ev"]["skip"] = skip
     return True
 
-# 穴レースの条件（research/ev/ana_filter.md）：1番人気が2.5倍以上の混戦のみ。3連単は12頭以上のみ
-ANA_FAV, ANA_TAN_N = 2.5, 12
+# 穴レースの条件：1番人気が3.0倍以上の混戦のみ（research/ev/drift.md で 2.5→3.0 に変更）。3連単は12頭以上のみ（現在停止中）
+ANA_FAV, ANA_TAN_N = 3.0, 12
 
 def lock_race(r, date):
     card = nk.parse_card(r["race_id"], nar=NAR)
@@ -227,18 +229,23 @@ def main():
                     print("固定エラー", r["race_id"], type(e).__name__, e)
         if not r.get("ev") and r["status"] != "wait" and 0 < mins <= EV_MIN:
             try:
-                if ev_race(r, date):
+                if ev_race(r, date, mins=mins):
                     changed = True; print("期待値ワイド", r["race_id"], (r["ev"]["sel"] or {}).get("kind", "見送り"))
                     if r["ev"].get("sel") and NT.ev_pick(circuit, r, r["ev"]["sel"]): r["ev"]["notified"] = True
             except Exception as e:
                 print("期待値エラー", r["race_id"], type(e).__name__, e)
-        if not r.get("ev") and mins > EV_MIN and n_cand < CAND_MAX:   # 候補：今のオッズなら本命／穴になるか（確定は発走15分前ごろ）
+        elif r.get("ev") and 0 < mins <= EV_MIN:   # 判定後も発走直前までオッズを記録（ずれの大きさを測る）
+            try:
+                o_, _ = nk.get_odds_nar(r["race_id"]) if NAR else nk.get_odds(r["race_id"])
+                snap(r, "late", o_, nk.get_combo_odds(r["race_id"], "ワイド", nar=NAR) or {}, mins)
+            except Exception as e: print("直前オッズ記録エラー", r["race_id"], type(e).__name__, e)
+        if not r.get("ev") and mins > EV_MIN and n_cand < CAND_MAX:   # 候補：今のオッズなら本命／穴になるか（確定は発走10分前ごろ）
             last = start_dt(date, (r.get("cand") or {}).get("at") or "")
             gap = CAND_EVERY[0] if mins <= 60 else CAND_EVERY[1]
             if (not last or (t - last).total_seconds() / 60 >= gap) and mins <= CAND_AHEAD:
                 n_cand += 1
                 try:
-                    if ev_race(r, date, cand=True): changed = True; print("候補", r["race_id"], r["cand"].get("kind") or "なし")
+                    if ev_race(r, date, cand=True, mins=mins): changed = True; print("候補", r["race_id"], r["cand"].get("kind") or "なし")
                 except Exception as e:
                     print("候補エラー", r["race_id"], type(e).__name__, e)
         if r["status"] in ("locked", "missed") and not r.get("result") and mins < -RESULT_MIN:

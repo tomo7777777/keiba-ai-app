@@ -203,15 +203,15 @@ async function viewMyomi() {
   const cands = races.filter(r => !r.ev && !r.result && r.cand && r.cand.kind && !evStarted(r)).sort((a, b) => (a.start || '').localeCompare(b.start || ''));
   const chon = cands.filter(r => r.cand.kind === 'hon'), cana = cands.filter(r => r.cand.kind === 'ana');
   const unchecked = races.filter(r => !r.ev && !r.result && !r.cand && !evStarted(r)).length;
-  const candBlock = (list, k) => `<h3 class="ev-h">${k}の候補 <small>${list.length}R・予想は発走15分前ごろに確定して通知</small></h3>`
+  const candBlock = (list, k) => `<h3 class="ev-h">${k}の候補 <small>${list.length}R・予想は発走10分前ごろに確定して通知</small></h3>`
     + (list.length ? list.map(candCard).join('') : `<p class="legend">今のオッズでは${k}の候補はありません。</p>`)
     + (unchecked ? `<p class="legend">まだオッズを見ていないレース ${unchecked}R（発走4時間前から順に確認します）</p>` : '');
   const judged = races.filter(r => r.ev).length, nextW = races.filter(r => !r.ev && !r.result && !evStarted(r)).sort((a, b) => (a.start || '').localeCompare(b.start || ''))[0];
   const cur = ['hon', 'ana', 'done', 'rec', 'myomi'].includes(state.sub) ? state.sub : 'hon';
-  const none = k => `<div class="notice">発走前の${k}レースはありません。<br>${nextW ? `各レースの発走15分前ごろに判定します（次は ${esc(nextW.place)}${nextW.r}R ${esc(nextW.start)}発走）。` : 'この日の判定は終わりました。'}<br>終わったレースは「終了」タブにあります。</div>`;
+  const none = k => `<div class="notice">発走前の${k}レースはありません。<br>${nextW ? `各レースの発走10分前ごろに判定します（次は ${esc(nextW.place)}${nextW.r}R ${esc(nextW.start)}発走）。` : 'この日の判定は終わりました。'}<br>終わったレースは「終了」タブにあります。</div>`;
   let main = '';
-  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気で、期待値の条件を満たしたレースだけ（発走が近い順）。${c === 'nar' ? '地方の本命レースは全体の約6%で、1日に0〜3レースほどです。出ない日もあります。' : ''}</p>` + (hon.length ? hon.map(evCard).join('') : none('本命')) + candBlock(chon, '本命');
-  if (cur === 'ana') main = `<div class="notice"><b>穴は「混戦レース」だけに絞っています。</b>1番人気が2.5倍以上で、AIが人気より高く見ている4番人気以下の馬がいるレースだけを出します。過去の検証では、1番人気が強いレースの穴は回収率81〜89%と低く、混戦に絞ると${c === 'nar' ? '約3,200レースでワイド116%（4期すべて100%以上）でした。3連単は12頭以上のときだけ出します（131%）' : 'ワイド139%でした。ただし中央は期間によるぶれが大きいです'}。条件はいくつも試した中から選んだので、実際は少し下がる前提で記録を見ていきます。</div><p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴')) + candBlock(cana, '穴');
+  if (cur === 'hon') main = `<p class="legend sub-note">旨味のある馬が1〜3番人気で、期待値の条件を満たしたレースだけ（発走が近い順）。期待値1.5以上の組がある場合だけ出します。出ない日もあります。</p>` + (hon.length ? hon.map(evCard).join('') : none('本命')) + candBlock(chon, '本命');
+  if (cur === 'ana') main = `<div class="notice"><b>穴は「混戦レース」だけに絞っています。</b>1番人気が3.0倍以上で、AIが人気より高く見ている4番人気以下の馬がいて、期待値1.5以上の組があるレースだけを出します。買い目はワイドだけです（3連単は停止中）。</div><p class="legend sub-note">旨味のある馬が4番人気以下のレース（発走が近い順）</p>` + (ana.length ? ana.map(evCard).join('') : none('穴')) + candBlock(cana, '穴');
   if (cur === 'done') {
     const fh = [...fin].reverse().filter(r => r.ev.sel.kind === 'hon'), fa = [...fin].reverse().filter(r => r.ev.sel.kind === 'ana');
     main = evDaySummary(fin) + (fin.length ? `<h3 class="ev-h">本命レース <small>${fh.length}R</small></h3>${fh.map(evCard).join('') || '<p class="legend">なし</p>'}<h3 class="ev-h">穴レース <small>${fa.length}R</small></h3>${fa.map(evCard).join('') || '<p class="legend">なし</p>'}` : '<div class="notice">まだ終わったレースはありません。</div>')
@@ -219,7 +219,7 @@ async function viewMyomi() {
   }
   if (cur === 'rec') main = evRecord(c);
   if (cur === 'myomi') main = myNote + body + myomiRecord(c);
-  const warn = `<div class="demo"><b>検証中です。今は実際の購入をおすすめしません。</b>過去の検証は「確定オッズ」で計算していましたが、本番は発走15分前のオッズで判定しています。11/15の地方で確かめると、本番で本命になった7レースは、確定オッズで計算し直すと1つも本命になりませんでした。発走前と確定でオッズがずれる分を、いま記録して調べています。</div>`;
+  const warn = `<div class="demo"><b>検証中です。実際の購入はおすすめしません。</b>以前の検証は、レース後に決まる確定オッズで計算していました。発走前のオッズのずれを入れて計算し直すと、旧設定の回収率は91〜94%でした。11/15に設定を見直し、期待値1.5以上・ワイドのみ・発走10分前の判定にしました。それでも勝てると確かめられたわけではないので、記録して確かめている段階です。</div>`;
   app.innerHTML = head + warn + subTabs(c, [['hon', '本命', hon.length + chon.length], ['ana', '穴', ana.length + cana.length], ['done', '終了', fin.length], ['rec', '成績'], ['myomi', '妙味軸']], cur) + main;
   const ms = app.querySelector('.msel'); if (ms) ms.onchange = () => { MY.date[c] = ms.value; viewMyomi(); };
 }
@@ -308,7 +308,7 @@ function evRecord(c) {
   const keys = ['hon', 'hon_san', 'hon_tan', 'ana', 'ana_san', 'ana_tan'].filter(k => rec[k]);
   h += `<div class="card"><h3>実際のオッズでの通算成績</h3>` + (keys.length ? `<p class="legend" style="margin-top:0">的中率は「払戻があったレース」の割合です（ガミも含む）。損得は回収率と収支で見てください。</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">収支</th></tr></thead><tbody>${keys.map(k => { const x = rec[k], d = x.ret - x.inv; return `<tr><td>${esc(x.label.replace('レース', ''))}</td><td class="num">${x.races}</td><td class="num">${pct(x.hit_races, x.races)}</td><td class="num ${x.ret >= x.inv ? 'ev-hi' : ''}">${pct(x.ret, x.inv)}</td><td class="num ${d >= 0 ? 'pl-plus' : 'pl-minus'}">${d >= 0 ? '+' : '−'}${yen(Math.abs(d))}円</td></tr>`; }).join('')}</tbody></table>` : '<p class="legend">まだ記録がありません。結果が出しだい自動で集計します。</p>') + '</div>';
   if (bt) h += `<div class="card"><h3>過去データでの検証</h3><p class="legend" style="margin-top:0">${esc(bt.period)}</p><table class="tbl"><thead><tr><th>種類</th><th class="num">R</th><th class="num">的中率</th><th class="num">回収率</th><th class="num">期間別</th></tr></thead><tbody>${bt.rows.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}%</td><td class="num ${r[3] >= 100 ? 'ev-hi' : ''}">${r[3]}%</td><td class="num">${esc(r[4])}</td></tr>`).join('')}</tbody></table><p class="legend">${esc(bt.note)}</p></div>`;
-  h += `<details class="card"><summary><b>期待値AIのしくみ</b></summary><p class="legend">発走15分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</p></details>`;
+  h += `<details class="card"><summary><b>期待値AIのしくみ</b></summary><p class="legend">発走10分前ごろの最新オッズで、ワイドの全組み合わせの「来る確率×オッズ」を計算します。AIの評価が人気より高い馬のうち、期待値のある組に一番多く絡む馬を「旨味のある馬」として軸にし、軸が1〜3番人気なら本命レース、4番人気以下なら穴レースに分けます。${c === 'jra' ? '中央は過去検証で結果が大きくぶれたため、地方より信頼度は低めです。' : ''}「ガミ」は当たったのに払戻が購入額より少ない（損した）ことです。</p></details>`;
   return h;
 }
 function btTable(rows) {
