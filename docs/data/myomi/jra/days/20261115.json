@@ -4476,7 +4476,16 @@
    "surface": "芝",
    "distance": 2000,
    "n": 16,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "15:10",
+    "kind": "ana",
+    "fav": 5.9,
+    "axis": 4,
+    "name": "ウインファヴォリ",
+    "pop": 9,
+    "odds": 13.9
+   }
   },
   {
    "race_id": "202605050401",
@@ -13505,13 +13514,13 @@
    "n": 18,
    "status": "locked",
    "cand": {
-    "at": "14:53",
+    "at": "15:10",
     "kind": "ana",
     "fav": 4.5,
     "axis": 9,
     "name": "クイーンズウォーク",
     "pop": 4,
-    "odds": 8.0
+    "odds": 7.8
    },
    "horses": [
     {
@@ -14039,5 +14048,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T15:04+09:00"
+ "updated": "2026-11-15T15:09+09:00"
 }
