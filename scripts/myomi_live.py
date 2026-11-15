@@ -18,6 +18,7 @@ CAND_MAX = 8       # 候補の計算：1回の実行で最大何レースまで
 CAND_EVERY = (8, 20)  # 候補の更新間隔（分）：発走60分前以内／それより前
 CAND_AHEAD = 240   # 発走何分前から候補を計算するか
 EV_MIN = 10        # 期待値ワイド：発走何分前から最新オッズで判定するか（確定オッズとのずれを減らすため15分前→10分前に変更）
+EV_VER = 2          # 設定の版。成績は新設定（2）から数え直し、それより前は「旧設定」として別に集計
 EXTRA_BETS = False  # 3連単・3連複：発走前オッズのずれを再現した検証で100%を下回ったため停止（ワイドのみ）
 OUT = os.path.join(MY.ROOT, "docs", "data", "myomi", circuit)
 DAYS = os.path.join(OUT, "days"); os.makedirs(DAYS, exist_ok=True)
@@ -101,7 +102,7 @@ def ev_race(r, date, cand=False, mins=None):
                 sel["san"] = EVW.pick_san(hs, so, sel["axis"], json.load(open(EVW.SAN_PATHS[circuit])))
             except Exception as e:
                 print("3連複エラー", r["race_id"], type(e).__name__, e); sel["san"] = []
-    r["ev"] = {"at": now().strftime("%H:%M"), "tickets": tickets, "sel": sel, "fav": fav}
+    r["ev"] = {"at": now().strftime("%H:%M"), "tickets": tickets, "sel": sel, "fav": fav, "v": EV_VER}
     if skip: r["ev"]["skip"] = skip
     return True
 
@@ -187,13 +188,14 @@ def summarize():
             if not r.get("result"): continue
             rec["races"] += 1
             b = (r.get("ev") or {}).get("sel")
+            evk = "ev" if (r.get("ev") or {}).get("v") == EV_VER else "ev_old"
             if b and b.get("inv"):
-                tgt = rec.setdefault("ev", {}).setdefault(b["kind"], {"label": ("本命レース" if b["kind"] == "hon" else "穴レース") + " ワイド", "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
+                tgt = rec.setdefault(evk, {}).setdefault(b["kind"], {"label": ("本命レース" if b["kind"] == "hon" else "穴レース") + " ワイド", "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
                 tgt["races"] += 1; tgt["hit_races"] += int(b["ret"] > 0); tgt["tickets"] += b["inv"] // 100; tgt["inv"] += b["inv"]; tgt["ret"] += b["ret"]
                 for key, lb in (("san", " 3連複"), ("tan", " 3連単1着固定")):
                     sr = b.get(key + "_res")
                     if sr and sr["inv"]:
-                        t2 = rec["ev"].setdefault(b["kind"] + "_" + key, {"label": ("本命レース" if b["kind"] == "hon" else "穴レース") + lb, "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
+                        t2 = rec[evk].setdefault(b["kind"] + "_" + key, {"label": ("本命レース" if b["kind"] == "hon" else "穴レース") + lb, "races": 0, "hit_races": 0, "tickets": 0, "inv": 0, "ret": 0})
                         t2["races"] += 1; t2["hit_races"] += int(sr["ret"] > 0); t2["tickets"] += sr["inv"] // 100; t2["inv"] += sr["inv"]; t2["ret"] += sr["ret"]
             p = r.get("pick")
             if not p: continue

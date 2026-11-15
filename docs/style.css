@@ -142,3 +142,4 @@ details.myomi-note summary{cursor:pointer;font-weight:700;color:var(--ink)}
 .b.pl-b.lose{background:var(--surface2);color:var(--muted)}.b.pl-b.gami{background:#f3d9a8;color:#6b4300}
 
 .card.cand{border-style:dashed}.cand-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.cand-tag{background:var(--surface);border:1px solid var(--line);color:var(--muted);font-size:11px;padding:1px 8px;border-radius:999px}.cand-b{margin:8px 0 4px}
+.old-tag { background: #e8e4dc; color: #6b6458; font-size: 11px; margin-left: 6px; }
