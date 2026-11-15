@@ -1,7 +1,7 @@
 {
  "bets": {},
  "days": [],
- "races": 38,
+ "races": 39,
  "axis_top3": 0,
  "axis_n": 0,
  "ev": {
@@ -12,7 +12,23 @@
    "tickets": 1,
    "inv": 100,
    "ret": 0
+  },
+  "hon": {
+   "label": "本命レース ワイド",
+   "races": 1,
+   "hit_races": 1,
+   "tickets": 5,
+   "inv": 500,
+   "ret": 1310
+  },
+  "hon_san": {
+   "label": "本命レース 3連複",
+   "races": 1,
+   "hit_races": 0,
+   "tickets": 3,
+   "inv": 300,
+   "ret": 0
   }
  },
- "updated": "2026-11-15T10:19+09:00"
+ "updated": "2026-11-15T10:25+09:00"
 }

@@ -27,7 +27,12 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:25",
+    "kind": null,
+    "fav": 1.5
+   }
   },
   {
    "race_id": "202636111503",
@@ -38,7 +43,16 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:25",
+    "kind": "hon",
+    "fav": 1.4,
+    "axis": 2,
+    "name": "クレバー",
+    "pop": 1,
+    "odds": 1.4
+   }
   },
   {
    "race_id": "202636111504",
@@ -492,5 +506,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T10:08+09:00"
+ "updated": "2026-11-15T10:25+09:00"
 }
