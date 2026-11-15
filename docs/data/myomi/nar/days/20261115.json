@@ -470,7 +470,16 @@
    "surface": "ダ",
    "distance": 850,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:54",
+    "kind": "ana",
+    "fav": 2.9,
+    "axis": 1,
+    "name": "スカイルーク",
+    "pop": 5,
+    "odds": 7.8
+   }
   },
   {
    "race_id": "202636111509",
@@ -527,7 +536,7 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "11:30",
+    "at": "11:54",
     "kind": null,
     "fav": 1.9,
     "skip": "1番人気が1.9倍と強いため穴は見送り"
@@ -564,13 +573,13 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "11:30",
+    "at": "11:54",
     "kind": "ana",
-    "fav": 2.8,
+    "fav": 3.3,
     "axis": 3,
     "name": "ウマデスカイ",
-    "pop": 5,
-    "odds": 9.2
+    "pop": 4,
+    "odds": 6.2
    }
   },
   {
@@ -659,7 +668,7 @@
    "n": 6,
    "status": "wait",
    "cand": {
-    "at": "11:30",
+    "at": "11:54",
     "kind": null,
     "fav": 2.1
    }
@@ -913,5 +922,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-15T11:47+09:00"
+ "updated": "2026-11-15T11:53+09:00"
 }
