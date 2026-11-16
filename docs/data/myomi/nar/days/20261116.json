@@ -3037,13 +3037,13 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "15:47",
+    "at": "15:56",
     "kind": "hon",
-    "fav": 1.6,
+    "fav": 1.8,
     "axis": 2,
     "name": "マルケイフォルテ",
     "pop": 1,
-    "odds": 1.6
+    "odds": 1.8
    },
    "horses": [
     {
@@ -4463,9 +4463,9 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "15:47",
+    "at": "15:56",
     "kind": null,
-    "fav": 2.2
+    "fav": 1.8
    },
    "horses": [
     {
@@ -4771,9 +4771,13 @@
    "n": 14,
    "status": "wait",
    "cand": {
-    "at": "15:33",
-    "kind": null,
-    "fav": 1.9
+    "at": "15:56",
+    "kind": "hon",
+    "fav": 2.1,
+    "axis": 5,
+    "name": "トーセンディーン",
+    "pop": 3,
+    "odds": 7.4
    }
   },
   {
@@ -4803,7 +4807,7 @@
    "n": 14,
    "status": "wait",
    "cand": {
-    "at": "15:33",
+    "at": "15:56",
     "kind": null,
     "fav": 2.1
    }
@@ -6998,9 +7002,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "15:38",
+    "at": "15:56",
     "kind": null,
-    "fav": 1.9
+    "fav": 2.1
    }
   },
   {
@@ -7047,11 +7051,11 @@
    "n": 5,
    "status": "wait",
    "cand": {
-    "at": "15:33",
+    "at": "15:56",
     "kind": null,
     "fav": 1.6
    }
   }
  ],
- "updated": "2026-11-16T15:51+09:00"
+ "updated": "2026-11-16T15:56+09:00"
 }
