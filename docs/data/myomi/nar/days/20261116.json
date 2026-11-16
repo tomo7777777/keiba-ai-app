@@ -311,7 +311,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:19",
+    "kind": null,
+    "fav": 2.4
+   }
   },
   {
    "race_id": "202636111608",
@@ -511,9 +516,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:01",
+    "at": "11:19",
     "kind": null,
-    "fav": 1.6
+    "fav": 1.7
    }
   },
   {
@@ -590,7 +595,16 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:19",
+    "kind": "hon",
+    "fav": 2.6,
+    "axis": 3,
+    "name": "アドバンスドリーム",
+    "pop": 2,
+    "odds": 3.8
+   }
   },
   {
    "race_id": "202646111607",
@@ -659,5 +673,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T11:14+09:00"
+ "updated": "2026-11-16T11:18+09:00"
 }
