@@ -943,7 +943,7 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "12:51",
+    "at": "13:00",
     "kind": null,
     "fav": 1.4
    },
@@ -1256,13 +1256,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:37",
-    "kind": "hon",
-    "fav": 5.3,
-    "axis": 6,
-    "name": "インセプション",
-    "pop": 3,
-    "odds": 6.0
+    "at": "13:00",
+    "kind": "ana",
+    "fav": 3.9,
+    "axis": 5,
+    "name": "グランジュール",
+    "pop": 6,
+    "odds": 9.3
    }
   },
   {
@@ -1294,7 +1294,16 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:00",
+    "kind": "ana",
+    "fav": 4.3,
+    "axis": 3,
+    "name": "サンエントジアスタ",
+    "pop": 4,
+    "odds": 7.3
+   }
   },
   {
    "race_id": "202636111611",
@@ -2021,10 +2030,9 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "12:51",
+    "at": "13:00",
     "kind": null,
-    "fav": 1.6,
-    "skip": "1番人気が1.6倍と強いため穴は見送り"
+    "fav": 2.0
    },
    "horses": [
     {
@@ -2218,9 +2226,9 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "12:46",
+    "at": "13:00",
     "kind": null,
-    "fav": 1.3
+    "fav": 1.0
    }
   },
   {
@@ -2343,5 +2351,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T12:55+09:00"
+ "updated": "2026-11-16T13:00+09:00"
 }
