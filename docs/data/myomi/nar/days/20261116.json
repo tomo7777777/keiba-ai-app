@@ -890,13 +890,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:05",
+    "at": "12:28",
     "kind": "hon",
-    "fav": 4.1,
+    "fav": 3.9,
     "axis": 10,
     "name": "テンマ",
-    "pop": 2,
-    "odds": 4.8
+    "pop": 1,
+    "odds": 3.9
    }
   },
   {
@@ -928,7 +928,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:28",
+    "kind": null,
+    "fav": 4.0
+   }
   },
   {
    "race_id": "202636111610",
@@ -989,7 +994,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:28",
+    "kind": null,
+    "fav": 1.1,
+    "skip": "1番人気が1.1倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202644111603",
@@ -1002,9 +1013,9 @@
    "n": 7,
    "status": "wait",
    "cand": {
-    "at": "12:05",
+    "at": "12:28",
     "kind": null,
-    "fav": 1.2
+    "fav": 2.1
    }
   },
   {
@@ -1016,7 +1027,12 @@
    "surface": "ダ",
    "distance": 1200,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:28",
+    "kind": null,
+    "fav": 2.4
+   }
   },
   {
    "race_id": "202644111605",
@@ -1328,9 +1344,9 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "12:18",
+    "at": "12:28",
     "kind": null,
-    "fav": 2.6
+    "fav": 2.3
    },
    "horses": [
     {
@@ -1601,9 +1617,9 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "12:05",
+    "at": "12:28",
     "kind": null,
-    "fav": 2.2
+    "fav": 2.5
    }
   },
   {
@@ -1684,5 +1700,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T12:23+09:00"
+ "updated": "2026-11-16T12:27+09:00"
 }
