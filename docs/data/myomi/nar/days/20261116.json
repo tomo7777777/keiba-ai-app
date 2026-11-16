@@ -13,7 +13,7 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "11:23",
+    "at": "11:32",
     "kind": null,
     "fav": 1.6
    },
@@ -238,13 +238,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:23",
+    "at": "11:32",
     "kind": "hon",
-    "fav": 1.9,
+    "fav": 2.0,
     "axis": 8,
     "name": "ダズルオーロラ",
     "pop": 3,
-    "odds": 7.4
+    "odds": 5.8
    }
   },
   {
@@ -300,7 +300,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:32",
+    "kind": null,
+    "fav": 2.8
+   }
   },
   {
    "race_id": "202636111607",
@@ -532,10 +537,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:10",
+    "at": "11:32",
     "kind": null,
-    "fav": 1.6,
-    "skip": "1番人気が1.6倍と強いため穴は見送り"
+    "fav": 2.0
    }
   },
   {
@@ -673,5 +677,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T11:27+09:00"
+ "updated": "2026-11-16T11:32+09:00"
 }
