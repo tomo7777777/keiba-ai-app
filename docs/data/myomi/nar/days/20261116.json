@@ -1388,13 +1388,9 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "13:37",
-    "kind": "hon",
-    "fav": 2.3,
-    "axis": 5,
-    "name": "トモエナゲ",
-    "pop": 1,
-    "odds": 2.3
+    "at": "13:46",
+    "kind": null,
+    "fav": 2.8
    },
    "horses": [
     {
@@ -1685,10 +1681,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "13:23",
+    "at": "13:46",
     "kind": null,
-    "fav": 2.9,
-    "skip": "1番人気が2.9倍と強いため穴は見送り"
+    "fav": 2.1
    }
   },
   {
@@ -1718,13 +1713,13 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "13:23",
-    "kind": "hon",
-    "fav": 3.9,
+    "at": "13:46",
+    "kind": "ana",
+    "fav": 3.7,
     "axis": 9,
     "name": "モズハッピーロード",
-    "pop": 3,
-    "odds": 7.8
+    "pop": 4,
+    "odds": 8.9
    }
   },
   {
@@ -1860,7 +1855,12 @@
    "surface": "ダ",
    "distance": 1200,
    "n": 14,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:46",
+    "kind": null,
+    "fav": 3.1
+   }
   },
   {
    "race_id": "202644111608",
@@ -2849,9 +2849,9 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "13:37",
+    "at": "13:46",
     "kind": null,
-    "fav": 1.2
+    "fav": 1.0
    },
    "horses": [
     {
@@ -3045,7 +3045,7 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "13:37",
+    "at": "13:46",
     "kind": null,
     "fav": 1.1,
     "skip": "1番人気が1.1倍と強いため穴は見送り"
@@ -3158,5 +3158,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T13:41+09:00"
+ "updated": "2026-11-16T13:46+09:00"
 }
