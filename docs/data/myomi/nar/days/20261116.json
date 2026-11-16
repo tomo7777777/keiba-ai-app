@@ -1763,9 +1763,9 @@
    "n": 16,
    "status": "wait",
    "cand": {
-    "at": "13:18",
+    "at": "13:32",
     "kind": null,
-    "fav": 2.2
+    "fav": 2.1
    }
   },
   {
@@ -3003,13 +3003,9 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "13:09",
-    "kind": "ana",
-    "fav": 3.4,
-    "axis": 7,
-    "name": "ピースマッチング",
-    "pop": 7,
-    "odds": 13.8
+    "at": "13:32",
+    "kind": null,
+    "fav": 2.0
    }
   },
   {
@@ -3038,7 +3034,12 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:32",
+    "kind": null,
+    "fav": 1.9
+   }
   },
   {
    "race_id": "202646111611",
@@ -3063,5 +3064,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T13:27+09:00"
+ "updated": "2026-11-16T13:32+09:00"
 }
