@@ -28,7 +28,16 @@
    "surface": "ダ",
    "distance": 850,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:25",
+    "kind": "hon",
+    "fav": 1.5,
+    "axis": 8,
+    "name": "ダズルオーロラ",
+    "pop": 2,
+    "odds": 5.0
+   }
   },
   {
    "race_id": "202636111603",
@@ -298,7 +307,12 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:25",
+    "kind": null,
+    "fav": 2.6
+   }
   },
   {
    "race_id": "202646111603",
@@ -411,5 +425,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T10:16+09:00"
+ "updated": "2026-11-16T10:25+09:00"
 }
