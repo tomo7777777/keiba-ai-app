@@ -245,13 +245,13 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "11:41",
+    "at": "11:50",
     "kind": "hon",
-    "fav": 2.0,
-    "axis": 8,
-    "name": "ダズルオーロラ",
+    "fav": 2.4,
+    "axis": 6,
+    "name": "ノアシルヴィ",
     "pop": 3,
-    "odds": 5.8
+    "odds": 5.7
    },
    "horses": [
     {
@@ -547,7 +547,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:50",
+    "kind": "hon",
+    "fav": 4.0,
+    "axis": 6,
+    "name": "インセプション",
+    "pop": 1,
+    "odds": 4.0
+   }
   },
   {
    "race_id": "202636111609",
@@ -932,7 +941,7 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:32",
+    "at": "11:50",
     "kind": null,
     "fav": 2.0
    }
@@ -1074,5 +1083,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-16T11:46+09:00"
+ "updated": "2026-11-16T11:50+09:00"
 }
