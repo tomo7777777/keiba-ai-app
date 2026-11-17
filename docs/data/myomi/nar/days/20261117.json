@@ -11,7 +11,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:08",
+    "kind": "ana",
+    "fav": 5.0,
+    "axis": 7,
+    "name": "ヤマニンバルトロ",
+    "pop": 4,
+    "odds": 10.4
+   }
   },
   {
    "race_id": "202636111702",
@@ -399,5 +408,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-17T06:04+09:00"
+ "updated": "2026-11-17T10:07+09:00"
 }
