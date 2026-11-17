@@ -1120,7 +1120,7 @@
    "n": 12,
    "status": "locked",
    "cand": {
-    "at": "12:43",
+    "at": "12:52",
     "kind": null,
     "fav": 1.0
    },
@@ -1477,9 +1477,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:29",
+    "at": "12:52",
     "kind": null,
-    "fav": 3.9
+    "fav": 3.8
    }
   },
   {
@@ -1707,7 +1707,13 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:52",
+    "kind": null,
+    "fav": 1.2,
+    "skip": "1番人気が1.2倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202646111703",
@@ -1720,13 +1726,10 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "12:29",
-    "kind": "hon",
-    "fav": 2.6,
-    "axis": 6,
-    "name": "セキレイ",
-    "pop": 2,
-    "odds": 4.0
+    "at": "12:52",
+    "kind": null,
+    "fav": 2.8,
+    "skip": "1番人気が2.8倍と強いため穴は見送り"
    }
   },
   {
@@ -1738,7 +1741,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:52",
+    "kind": null,
+    "fav": 1.1,
+    "skip": "1番人気が1.1倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202646111705",
@@ -1829,5 +1838,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-17T12:47+09:00"
+ "updated": "2026-11-17T12:52+09:00"
 }
