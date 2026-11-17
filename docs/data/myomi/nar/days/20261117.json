@@ -2644,9 +2644,9 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "15:25",
+    "at": "15:34",
     "kind": null,
-    "fav": 1.9
+    "fav": 3.1
    },
    "horses": [
     {
@@ -4421,9 +4421,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "15:11",
+    "at": "15:34",
     "kind": null,
-    "fav": 1.5
+    "fav": 1.8
    }
   },
   {
@@ -4457,7 +4457,7 @@
    "n": 14,
    "status": "wait",
    "cand": {
-    "at": "15:11",
+    "at": "15:34",
     "kind": null,
     "fav": 2.6
    }
@@ -4488,7 +4488,12 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 13,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "15:34",
+    "kind": null,
+    "fav": 2.8
+   }
   },
   {
    "race_id": "202644111711",
@@ -5366,9 +5371,9 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "15:25",
+    "at": "15:34",
     "kind": null,
-    "fav": 1.4
+    "fav": 1.6
    },
    "horses": [
     {
@@ -5562,9 +5567,9 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "15:20",
+    "at": "15:34",
     "kind": null,
-    "fav": 1.1
+    "fav": 1.2
    }
   },
   {
@@ -5673,5 +5678,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-17T15:29+09:00"
+ "updated": "2026-11-17T15:34+09:00"
 }
