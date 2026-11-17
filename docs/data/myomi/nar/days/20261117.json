@@ -1034,13 +1034,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "11:47",
+    "at": "12:10",
     "kind": "hon",
-    "fav": 1.9,
+    "fav": 2.1,
     "axis": 1,
     "name": "リュウノソイジャー",
     "pop": 2,
-    "odds": 5.7
+    "odds": 5.6
    }
   },
   {
@@ -1136,7 +1136,12 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 14,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:10",
+    "kind": null,
+    "fav": 1.2
+   }
   },
   {
    "race_id": "202644111702",
@@ -1268,7 +1273,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:10",
+    "kind": "hon",
+    "fav": 1.2,
+    "axis": 10,
+    "name": "キーチキング",
+    "pop": 1,
+    "odds": 1.2
+   }
   },
   {
    "race_id": "202646111702",
@@ -1392,5 +1406,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-17T12:05+09:00"
+ "updated": "2026-11-17T12:10+09:00"
 }
