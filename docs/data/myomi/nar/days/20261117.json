@@ -745,10 +745,9 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "12:15",
+    "at": "12:24",
     "kind": null,
-    "fav": 2.3,
-    "skip": "1番人気が2.3倍と強いため穴は見送り"
+    "fav": 2.8
    },
    "horses": [
     {
@@ -1002,9 +1001,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:06",
+    "at": "12:24",
     "kind": null,
-    "fav": 1.0
+    "fav": 1.1
    }
   },
   {
@@ -1054,13 +1053,9 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "12:01",
-    "kind": "hon",
-    "fav": 3.2,
-    "axis": 6,
-    "name": "イキザマ",
-    "pop": 3,
-    "odds": 4.7
+    "at": "12:24",
+    "kind": null,
+    "fav": 2.2
    }
   },
   {
@@ -1152,7 +1147,16 @@
    "surface": "ダ",
    "distance": 1200,
    "n": 15,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:24",
+    "kind": "hon",
+    "fav": 2.9,
+    "axis": 5,
+    "name": "イッツバッド",
+    "pop": 3,
+    "odds": 5.9
+   }
   },
   {
    "race_id": "202644111703",
@@ -1163,7 +1167,12 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:24",
+    "kind": null,
+    "fav": 2.5
+   }
   },
   {
    "race_id": "202644111704",
@@ -1415,5 +1424,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-17T12:19+09:00"
+ "updated": "2026-11-17T12:24+09:00"
 }
