@@ -721,13 +721,13 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "10:45",
+    "at": "10:54",
     "kind": "hon",
-    "fav": 2.0,
+    "fav": 2.2,
     "axis": 6,
     "name": "ウィッシュリスト",
-    "pop": 3,
-    "odds": 6.4
+    "pop": 2,
+    "odds": 3.4
    },
    "horses": [
     {
@@ -1356,9 +1356,9 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "10:45",
+    "at": "10:54",
     "kind": null,
-    "fav": 1.7
+    "fav": 1.6
    },
    "horses": [
     {
@@ -1697,5 +1697,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-18T10:49+09:00"
+ "updated": "2026-11-18T10:54+09:00"
 }
