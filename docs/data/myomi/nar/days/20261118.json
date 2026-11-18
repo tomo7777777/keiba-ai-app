@@ -576,9 +576,13 @@
     }
    },
    "cand": {
-    "at": "10:17",
-    "kind": null,
-    "fav": 2.2
+    "at": "10:26",
+    "kind": "hon",
+    "fav": 2.6,
+    "axis": 3,
+    "name": "シンプウミホノ",
+    "pop": 2,
+    "odds": 3.2
    }
   },
   {
@@ -590,7 +594,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:26",
+    "kind": "hon",
+    "fav": 1.8,
+    "axis": 6,
+    "name": "ウィッシュリスト",
+    "pop": 3,
+    "odds": 5.1
+   }
   },
   {
    "race_id": "202647111804",
@@ -668,7 +681,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:26",
+    "kind": "hon",
+    "fav": 2.8,
+    "axis": 5,
+    "name": "シュプリームアロー",
+    "pop": 1,
+    "odds": 2.8
+   }
   },
   {
    "race_id": "202647111809",
@@ -923,9 +945,9 @@
     }
    },
    "cand": {
-    "at": "10:17",
+    "at": "10:26",
     "kind": null,
-    "fav": 1.6
+    "fav": 1.2
    }
   },
   {
@@ -937,7 +959,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:26",
+    "kind": null,
+    "fav": 1.5,
+    "skip": "1番人気が1.5倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202650111803",
@@ -1036,7 +1064,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:26",
+    "kind": null,
+    "fav": 2.2,
+    "skip": "1番人気が2.2倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202650111809",
@@ -1083,5 +1117,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-18T10:21+09:00"
+ "updated": "2026-11-18T10:26+09:00"
 }
