@@ -733,7 +733,16 @@
    "surface": "ダ",
    "distance": 1230,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:12",
+    "kind": "hon",
+    "fav": 3.6,
+    "axis": 2,
+    "name": "ニシノグラシアス",
+    "pop": 1,
+    "odds": 3.6
+   }
   },
   {
    "race_id": "202650111805",
@@ -744,7 +753,16 @@
    "surface": "ダ",
    "distance": 1230,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:12",
+    "kind": "ana",
+    "fav": 3.2,
+    "axis": 9,
+    "name": "キラキラリ",
+    "pop": 6,
+    "odds": 10.9
+   }
   },
   {
    "race_id": "202650111806",
@@ -824,5 +842,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-18T10:07+09:00"
+ "updated": "2026-11-18T10:12+09:00"
 }
