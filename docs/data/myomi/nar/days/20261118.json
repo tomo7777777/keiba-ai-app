@@ -11,7 +11,16 @@
    "surface": "ダ",
    "distance": 1200,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:08",
+    "kind": "hon",
+    "fav": 1.4,
+    "axis": 12,
+    "name": "シンティラガール",
+    "pop": 2,
+    "odds": 3.2
+   }
   },
   {
    "race_id": "202644111802",
@@ -44,7 +53,16 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 13,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:09",
+    "kind": "hon",
+    "fav": 1.4,
+    "axis": 4,
+    "name": "ストライドスター",
+    "pop": 1,
+    "odds": 1.4
+   }
   },
   {
    "race_id": "202644111805",
@@ -1462,9 +1480,9 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "11:59",
+    "at": "12:08",
     "kind": null,
-    "fav": 2.5
+    "fav": 2.6
    },
    "horses": [
     {
@@ -1711,13 +1729,10 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "11:45",
-    "kind": "hon",
-    "fav": 1.7,
-    "axis": 12,
-    "name": "シジミノヒナコ",
-    "pop": 3,
-    "odds": 15.6
+    "at": "12:08",
+    "kind": null,
+    "fav": 1.8,
+    "skip": "1番人気が1.8倍と強いため穴は見送り"
    }
   },
   {
@@ -3015,13 +3030,10 @@
    "n": 12,
    "status": "locked",
    "cand": {
-    "at": "11:59",
-    "kind": "hon",
-    "fav": 1.6,
-    "axis": 7,
-    "name": "スティールソニック",
-    "pop": 3,
-    "odds": 7.9
+    "at": "12:08",
+    "kind": null,
+    "fav": 1.5,
+    "skip": "1番人気が1.5倍と強いため穴は見送り"
    },
    "horses": [
     {
@@ -3376,13 +3388,13 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "11:45",
+    "at": "12:09",
     "kind": "hon",
     "fav": 2.7,
-    "axis": 7,
-    "name": "カクシンゴールド",
-    "pop": 2,
-    "odds": 3.6
+    "axis": 6,
+    "name": "ベラジオパルーザ",
+    "pop": 3,
+    "odds": 6.2
    }
   },
   {
@@ -3414,5 +3426,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-18T12:03+09:00"
+ "updated": "2026-11-18T12:08+09:00"
 }
