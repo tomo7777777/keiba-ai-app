@@ -2150,13 +2150,13 @@
    "n": 14,
    "status": "locked",
    "cand": {
-    "at": "16:41",
+    "at": "16:50",
     "kind": "hon",
-    "fav": 1.2,
+    "fav": 1.7,
     "axis": 4,
     "name": "ザレインソング",
     "pop": 1,
-    "odds": 1.2
+    "odds": 1.7
    },
    "horses": [
     {
@@ -2593,7 +2593,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 13,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "16:50",
+    "kind": null,
+    "fav": 1.8
+   }
   },
   {
    "race_id": "202647111801",
@@ -11612,5 +11617,5 @@
    }
   }
  ],
- "updated": "2026-11-18T16:45+09:00"
+ "updated": "2026-11-18T16:50+09:00"
 }
