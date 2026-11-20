@@ -46,9 +46,9 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "12:10",
+    "at": "12:38",
     "kind": null,
-    "fav": 1.2
+    "fav": 3.1
    }
   },
   {
@@ -1813,13 +1813,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:29",
-    "kind": "hon",
-    "fav": 2.4,
-    "axis": 9,
-    "name": "ジョリーメモリー",
-    "pop": 2,
-    "odds": 4.7
+    "at": "12:38",
+    "kind": null,
+    "fav": 1.6
    }
   },
   {
@@ -1887,13 +1883,10 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:15",
-    "kind": "hon",
-    "fav": 2.4,
-    "axis": 12,
-    "name": "スザンナ",
-    "pop": 3,
-    "odds": 7.5
+    "at": "12:38",
+    "kind": null,
+    "fav": 2.9,
+    "skip": "1番人気が2.9倍と強いため穴は見送り"
    }
   },
   {
@@ -3975,7 +3968,7 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "12:15",
+    "at": "12:38",
     "kind": null,
     "fav": 1.5
    }
@@ -4042,8 +4035,13 @@
    "surface": "ダ",
    "distance": 1230,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:38",
+    "kind": null,
+    "fav": 1.7
+   }
   }
  ],
- "updated": "2026-11-20T12:33+09:00"
+ "updated": "2026-11-20T12:38+09:00"
 }
