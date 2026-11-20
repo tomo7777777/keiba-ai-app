@@ -505,13 +505,13 @@
     }
    },
    "cand": {
-    "at": "10:27",
+    "at": "10:37",
     "kind": "hon",
-    "fav": 1.2,
+    "fav": 1.1,
     "axis": 6,
     "name": "サクラトップグッド",
     "pop": 3,
-    "odds": 9.2
+    "odds": 12.2
    }
   },
   {
@@ -525,9 +525,13 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "10:27",
-    "kind": null,
-    "fav": 2.0
+    "at": "10:37",
+    "kind": "hon",
+    "fav": 2.0,
+    "axis": 4,
+    "name": "エルジェム",
+    "pop": 2,
+    "odds": 3.3
    }
   },
   {
@@ -624,7 +628,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:37",
+    "kind": "hon",
+    "fav": 1.6,
+    "axis": 1,
+    "name": "アンナモエ",
+    "pop": 3,
+    "odds": 7.2
+   }
   },
   {
    "race_id": "202647112010",
@@ -957,9 +970,9 @@
    "n": 6,
    "status": "locked",
    "cand": {
-    "at": "10:27",
+    "at": "10:37",
     "kind": null,
-    "fav": 1.4
+    "fav": 1.5
    },
    "horses": [
     {
@@ -1148,7 +1161,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 7,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:37",
+    "kind": null,
+    "fav": 2.4,
+    "skip": "1番人気が2.4倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202650112008",
@@ -1206,5 +1225,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-20T10:31+09:00"
+ "updated": "2026-11-20T10:36+09:00"
 }
