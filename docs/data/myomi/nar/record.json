@@ -205,7 +205,7 @@
    }
   }
  ],
- "races": 231,
+ "races": 232,
  "axis_top3": 2,
  "axis_n": 16,
  "ev_old": {
@@ -258,7 +258,15 @@
    "tickets": 6,
    "inv": 600,
    "ret": 1630
+  },
+  "hon": {
+   "label": "本命レース ワイド",
+   "races": 1,
+   "hit_races": 0,
+   "tickets": 1,
+   "inv": 100,
+   "ret": 0
   }
  },
- "updated": "2026-11-20T15:33+09:00"
+ "updated": "2026-11-20T15:38+09:00"
 }
