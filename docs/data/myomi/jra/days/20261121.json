@@ -3812,9 +3812,9 @@
    "n": 15,
    "status": "locked",
    "cand": {
-    "at": "14:30",
+    "at": "14:46",
     "kind": null,
-    "fav": 3.3
+    "fav": 3.2
    },
    "horses": [
     {
@@ -8158,9 +8158,9 @@
    "n": 15,
    "status": "locked",
    "cand": {
-    "at": "14:36",
+    "at": "14:46",
     "kind": null,
-    "fav": 3.4
+    "fav": 3.6
    },
    "horses": [
     {
@@ -8699,5 +8699,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T14:40+09:00"
+ "updated": "2026-11-21T14:46+09:00"
 }
