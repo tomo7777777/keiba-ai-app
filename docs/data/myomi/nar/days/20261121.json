@@ -13,7 +13,7 @@
    "n": 8,
    "status": "locked",
    "cand": {
-    "at": "14:31",
+    "at": "14:41",
     "kind": null,
     "fav": 1.0
    },
@@ -182,9 +182,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "14:31",
-    "kind": null,
-    "fav": 2.3
+    "at": "14:41",
+    "kind": "hon",
+    "fav": 2.4,
+    "axis": 2,
+    "name": "ユミッチラブ",
+    "pop": 3,
+    "odds": 10.4
    }
   },
   {
@@ -230,9 +234,10 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "14:21",
+    "at": "14:41",
     "kind": null,
-    "fav": 2.8
+    "fav": 1.2,
+    "skip": "1番人気が1.2倍と強いため穴は見送り"
    }
   },
   {
@@ -335,13 +340,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "14:31",
+    "at": "14:41",
     "kind": "ana",
-    "fav": 4.7,
+    "fav": 4.8,
     "axis": 10,
     "name": "ダバイスピーディ",
-    "pop": 7,
-    "odds": 8.6
+    "pop": 8,
+    "odds": 8.8
    }
   },
   {
@@ -437,7 +442,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "14:41",
+    "kind": "hon",
+    "fav": 3.2,
+    "axis": 8,
+    "name": "ヒロニャン",
+    "pop": 2,
+    "odds": 4.0
+   }
   },
   {
    "race_id": "202655112108",
@@ -484,5 +498,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T14:36+09:00"
+ "updated": "2026-11-21T14:41+09:00"
 }
