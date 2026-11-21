@@ -29,13 +29,10 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:55",
-    "kind": "hon",
-    "fav": 2.1,
-    "axis": 2,
-    "name": "ユミッチラブ",
-    "pop": 3,
-    "odds": 6.2
+    "at": "13:17",
+    "kind": null,
+    "fav": 2.5,
+    "skip": "1番人気が2.5倍と強いため穴は見送り"
    }
   },
   {
@@ -80,7 +77,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:17",
+    "kind": null,
+    "fav": 2.2
+   }
   },
   {
    "race_id": "202654112106",
@@ -170,9 +172,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:55",
+    "at": "13:17",
     "kind": null,
-    "fav": 1.4
+    "fav": 1.6
    }
   },
   {
@@ -302,5 +304,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T13:11+09:00"
+ "updated": "2026-11-21T13:17+09:00"
 }
