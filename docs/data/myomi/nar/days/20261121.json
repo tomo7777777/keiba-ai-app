@@ -13,7 +13,7 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "13:59",
+    "at": "14:10",
     "kind": null,
     "fav": 1.0
    }
@@ -65,9 +65,9 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "13:49",
+    "at": "14:10",
     "kind": null,
-    "fav": 2.7
+    "fav": 2.8
    }
   },
   {
@@ -97,9 +97,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "13:49",
+    "at": "14:10",
     "kind": null,
-    "fav": 2.8
+    "fav": 2.9
    }
   },
   {
@@ -195,9 +195,10 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "13:48",
+    "at": "14:10",
     "kind": null,
-    "fav": 1.8
+    "fav": 2.5,
+    "skip": "1番人気が2.5倍と強いため穴は見送り"
    }
   },
   {
@@ -211,7 +212,7 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "13:49",
+    "at": "14:10",
     "kind": null,
     "fav": 2.0
    }
@@ -227,7 +228,7 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "13:49",
+    "at": "14:10",
     "kind": null,
     "fav": 2.5,
     "skip": "1番人気が2.5倍と強いため穴は見送り"
@@ -242,7 +243,12 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "14:10",
+    "kind": null,
+    "fav": 1.5
+   }
   },
   {
    "race_id": "202655112106",
@@ -253,7 +259,16 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "14:10",
+    "kind": "hon",
+    "fav": 2.5,
+    "axis": 6,
+    "name": "ノブノリオウ",
+    "pop": 2,
+    "odds": 4.8
+   }
   },
   {
    "race_id": "202655112107",
@@ -311,5 +326,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T13:59+09:00"
+ "updated": "2026-11-21T14:10+09:00"
 }
