@@ -1459,7 +1459,7 @@
    "n": 12,
    "status": "locked",
    "cand": {
-    "at": "16:34",
+    "at": "16:43",
     "kind": null,
     "fav": 1.0
    },
@@ -1833,13 +1833,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "16:20",
+    "at": "16:43",
     "kind": "hon",
-    "fav": 2.6,
+    "fav": 2.9,
     "axis": 10,
     "name": "ムサシフウジン",
     "pop": 3,
-    "odds": 8.0
+    "odds": 6.5
    }
   },
   {
@@ -3006,9 +3006,9 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "16:34",
+    "at": "16:43",
     "kind": null,
-    "fav": 2.6
+    "fav": 2.3
    },
    "horses": [
     {
@@ -3331,8 +3331,17 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 14,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "16:43",
+    "kind": "hon",
+    "fav": 1.9,
+    "axis": 14,
+    "name": "タイショウロマン",
+    "pop": 3,
+    "odds": 7.8
+   }
   }
  ],
- "updated": "2026-11-21T16:38+09:00"
+ "updated": "2026-11-21T16:43+09:00"
 }
