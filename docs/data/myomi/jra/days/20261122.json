@@ -43,7 +43,12 @@
    "surface": "芝",
    "distance": 1400,
    "n": 18,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:54",
+    "kind": null,
+    "fav": 2.0
+   }
   },
   {
    "race_id": "202605050504",
@@ -155,9 +160,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "06:33",
+    "at": "06:54",
     "kind": null,
-    "fav": 2.4
+    "fav": 2.0
    }
   },
   {
@@ -287,5 +292,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T06:43+09:00"
+ "updated": "2026-11-22T06:54+09:00"
 }
