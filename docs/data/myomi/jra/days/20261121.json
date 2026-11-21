@@ -9814,8 +9814,13 @@
    "surface": "芝",
    "distance": 2000,
    "n": 13,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "15:26",
+    "kind": null,
+    "fav": 2.8
+   }
   }
  ],
- "updated": "2026-11-21T15:21+09:00"
+ "updated": "2026-11-21T15:26+09:00"
 }
