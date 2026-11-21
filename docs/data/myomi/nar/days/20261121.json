@@ -11,7 +11,12 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:58",
+    "kind": null,
+    "fav": 1.4
+   }
   },
   {
    "race_id": "202654112102",
@@ -256,5 +261,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T06:03+09:00"
+ "updated": "2026-11-21T10:57+09:00"
 }
