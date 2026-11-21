@@ -29,13 +29,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:13",
+    "at": "12:34",
     "kind": "hon",
     "fav": 2.0,
     "axis": 2,
     "name": "ユミッチラブ",
     "pop": 3,
-    "odds": 5.4
+    "odds": 5.8
    }
   },
   {
@@ -162,7 +162,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:34",
+    "kind": null,
+    "fav": 1.1
+   }
   },
   {
    "race_id": "202655112102",
@@ -275,5 +280,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T12:28+09:00"
+ "updated": "2026-11-21T12:34+09:00"
 }
