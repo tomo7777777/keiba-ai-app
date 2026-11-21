@@ -1609,13 +1609,9 @@
    "n": 15,
    "status": "locked",
    "cand": {
-    "at": "12:12",
-    "kind": "hon",
-    "fav": 2.0,
-    "axis": 5,
-    "name": "ララエキリーブル",
-    "pop": 2,
-    "odds": 7.2
+    "at": "12:23",
+    "kind": null,
+    "fav": 2.0
    },
    "horses": [
     {
@@ -4545,9 +4541,9 @@
    "n": 7,
    "status": "locked",
    "cand": {
-    "at": "12:07",
+    "at": "12:23",
     "kind": null,
-    "fav": 2.8
+    "fav": 3.2
    },
    "horses": [
     {
@@ -4750,5 +4746,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-21T12:17+09:00"
+ "updated": "2026-11-21T12:22+09:00"
 }
