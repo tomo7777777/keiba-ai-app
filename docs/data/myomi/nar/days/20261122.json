@@ -1042,13 +1042,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:13",
+    "at": "12:36",
     "kind": "hon",
-    "fav": 2.9,
+    "fav": 2.8,
     "axis": 1,
     "name": "グレコ",
     "pop": 2,
-    "odds": 5.7
+    "odds": 4.2
    }
   },
   {
@@ -1156,7 +1156,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:36",
+    "kind": null,
+    "fav": 1.6
+   }
   },
   {
    "race_id": "202654112204",
@@ -1383,5 +1388,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T12:30+09:00"
+ "updated": "2026-11-22T12:36+09:00"
 }
