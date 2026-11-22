@@ -2,7 +2,7 @@
  "demo": false,
  "date": "20261122",
  "fixed_at": "2026-11-22T14:20+09:00",
- "updated": "2026-11-22T16:20+09:00",
+ "updated": "2026-11-22T16:25+09:00",
  "races": [
   {
    "race_id": "202605050510",
@@ -302,7 +302,7 @@
      "mark": "△"
     }
    ],
-   "odds_time": "16:20",
+   "odds_time": "16:24",
    "bets": {},
    "confidence": 0.23
   },
@@ -623,7 +623,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:20",
+   "odds_time": "16:24",
    "bets": {},
    "confidence": 0.16
   },
@@ -944,7 +944,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:20",
+   "odds_time": "16:25",
    "bets": {},
    "confidence": 0.17
   },
@@ -1227,7 +1227,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:20",
+   "odds_time": "16:25",
    "bets": {},
    "confidence": 0.375
   },
@@ -1586,7 +1586,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:20",
+   "odds_time": "16:25",
    "bets": {},
    "confidence": 0.233
   },
@@ -1850,7 +1850,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:20",
+   "odds_time": "16:25",
    "bets": {},
    "confidence": 0.106
   }
