@@ -3739,9 +3739,9 @@
    "n": 15,
    "status": "locked",
    "cand": {
-    "at": "14:24",
+    "at": "14:35",
     "kind": null,
-    "fav": 3.3
+    "fav": 2.8
    },
    "horses": [
     {
@@ -7450,7 +7450,12 @@
    "surface": "芝",
    "distance": 1600,
    "n": 18,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "14:35",
+    "kind": null,
+    "fav": 4.8
+   }
   },
   {
    "race_id": "202608050612",
@@ -7464,5 +7469,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T14:29+09:00"
+ "updated": "2026-11-22T14:34+09:00"
 }
