@@ -1818,7 +1818,13 @@
    "surface": "ダ",
    "distance": 850,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:52",
+    "kind": null,
+    "fav": 2.3,
+    "skip": "1番人気が2.3倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202636112212",
@@ -1858,9 +1864,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "13:30",
-    "kind": null,
-    "fav": 4.2
+    "at": "13:52",
+    "kind": "ana",
+    "fav": 3.4,
+    "axis": 3,
+    "name": "マジックステラ",
+    "pop": 10,
+    "odds": 19.6
    }
   },
   {
@@ -2009,13 +2019,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "13:30",
-    "kind": "hon",
-    "fav": 3.2,
-    "axis": 6,
-    "name": "アイルフィレール",
-    "pop": 1,
-    "odds": 3.2
+    "at": "13:52",
+    "kind": null,
+    "fav": 2.9
    }
   },
   {
@@ -2043,7 +2049,16 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:52",
+    "kind": "hon",
+    "fav": 4.1,
+    "axis": 4,
+    "name": "ゴイゴイスー",
+    "pop": 2,
+    "odds": 5.0
+   }
   },
   {
    "race_id": "202655112205",
@@ -2132,5 +2147,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T13:46+09:00"
+ "updated": "2026-11-22T13:52+09:00"
 }
