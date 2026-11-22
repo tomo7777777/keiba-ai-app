@@ -1,0 +1,270 @@
+{
+ "circuit": "jra",
+ "date": "20261123",
+ "races": [
+  {
+   "race_id": "202603030601",
+   "place": "福島",
+   "r": 1,
+   "name": "2歳未勝利",
+   "start": "09:45",
+   "surface": "ダ",
+   "distance": 1150,
+   "n": 16,
+   "status": "wait",
+   "cand": {
+    "at": "06:02",
+    "kind": null,
+    "fav": 2.0
+   }
+  },
+  {
+   "race_id": "202603030602",
+   "place": "福島",
+   "r": 2,
+   "name": "3歳以上1勝クラス",
+   "start": "10:15",
+   "surface": "ダ",
+   "distance": 1700,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030603",
+   "place": "福島",
+   "r": 3,
+   "name": "3歳以上1勝クラス",
+   "start": "10:45",
+   "surface": "ダ",
+   "distance": 1700,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030605",
+   "place": "福島",
+   "r": 5,
+   "name": "2歳新馬",
+   "start": "12:05",
+   "surface": "芝",
+   "distance": 1800,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030606",
+   "place": "福島",
+   "r": 6,
+   "name": "2歳未勝利",
+   "start": "12:35",
+   "surface": "芝",
+   "distance": 1200,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030607",
+   "place": "福島",
+   "r": 7,
+   "name": "3歳以上1勝クラス",
+   "start": "13:05",
+   "surface": "ダ",
+   "distance": 1150,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030608",
+   "place": "福島",
+   "r": 8,
+   "name": "3歳以上1勝クラス",
+   "start": "13:35",
+   "surface": "芝",
+   "distance": 1200,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030609",
+   "place": "福島",
+   "r": 9,
+   "name": "磐梯山特別",
+   "start": "14:05",
+   "surface": "芝",
+   "distance": 2600,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030610",
+   "place": "福島",
+   "r": 10,
+   "name": "五色沼特別",
+   "start": "14:40",
+   "surface": "芝",
+   "distance": 2000,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030611",
+   "place": "福島",
+   "r": 11,
+   "name": "奥羽S",
+   "start": "15:15",
+   "surface": "ダ",
+   "distance": 1700,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202603030612",
+   "place": "福島",
+   "r": 12,
+   "name": "3歳以上1勝クラス",
+   "start": "15:55",
+   "surface": "芝",
+   "distance": 2000,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050601",
+   "place": "東京",
+   "r": 1,
+   "name": "2歳未勝利",
+   "start": "10:00",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 13,
+   "status": "wait",
+   "cand": {
+    "at": "06:02",
+    "kind": null,
+    "fav": 2.4
+   }
+  },
+  {
+   "race_id": "202605050602",
+   "place": "東京",
+   "r": 2,
+   "name": "2歳未勝利",
+   "start": "10:30",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 17,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050603",
+   "place": "東京",
+   "r": 3,
+   "name": "2歳未勝利",
+   "start": "11:00",
+   "surface": "芝",
+   "distance": 2000,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050604",
+   "place": "東京",
+   "r": 4,
+   "name": "2歳未勝利",
+   "start": "11:30",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 14,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050605",
+   "place": "東京",
+   "r": 5,
+   "name": "2歳新馬",
+   "start": "12:20",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 14,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050606",
+   "place": "東京",
+   "r": 6,
+   "name": "2歳新馬",
+   "start": "12:50",
+   "surface": "芝",
+   "distance": 1400,
+   "n": 13,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050607",
+   "place": "東京",
+   "r": 7,
+   "name": "3歳以上1勝クラス",
+   "start": "13:20",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050608",
+   "place": "東京",
+   "r": 8,
+   "name": "3歳以上2勝クラス",
+   "start": "13:50",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050609",
+   "place": "東京",
+   "r": 9,
+   "name": "レジェンドジョッキーC",
+   "start": "14:20",
+   "surface": "芝",
+   "distance": 2400,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050610",
+   "place": "東京",
+   "r": 10,
+   "name": "レジェンドトレーナーC",
+   "start": "14:55",
+   "surface": "ダ",
+   "distance": 2100,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050611",
+   "place": "東京",
+   "r": 11,
+   "name": "東スポ2歳S",
+   "start": "15:30",
+   "surface": "芝",
+   "distance": 1800,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050612",
+   "place": "東京",
+   "r": 12,
+   "name": "3歳以上1勝クラス",
+   "start": "16:05",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 18,
+   "status": "wait"
+  }
+ ],
+ "updated": "2026-11-23T06:01+09:00"
+}
