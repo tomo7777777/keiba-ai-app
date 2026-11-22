@@ -1872,13 +1872,13 @@
    "n": 16,
    "status": "wait",
    "cand": {
-    "at": "11:45",
+    "at": "11:56",
     "kind": "hon",
-    "fav": 3.3,
+    "fav": 3.5,
     "axis": 9,
     "name": "コスモパリジェンヌ",
     "pop": 1,
-    "odds": 3.3
+    "odds": 3.5
    }
   },
   {
@@ -3452,7 +3452,12 @@
    "surface": "ダ",
    "distance": 1200,
    "n": 16,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:56",
+    "kind": null,
+    "fav": 3.3
+   }
   },
   {
    "race_id": "202608050607",
@@ -3521,5 +3526,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T11:50+09:00"
+ "updated": "2026-11-22T11:56+09:00"
 }
