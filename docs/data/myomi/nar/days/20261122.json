@@ -730,13 +730,9 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "12:30",
-    "kind": "hon",
-    "fav": 3.5,
-    "axis": 11,
-    "name": "ハラマキ",
-    "pop": 2,
-    "odds": 5.2
+    "at": "12:41",
+    "kind": null,
+    "fav": 3.9
    },
    "horses": [
     {
@@ -1026,9 +1022,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:19",
-    "kind": null,
-    "fav": 3.1
+    "at": "12:41",
+    "kind": "ana",
+    "fav": 3.3,
+    "axis": 7,
+    "name": "セイブロッケン",
+    "pop": 6,
+    "odds": 11.3
    }
   },
   {
@@ -1080,7 +1080,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:41",
+    "kind": null,
+    "fav": 3.7
+   }
   },
   {
    "race_id": "202636112210",
@@ -1126,9 +1131,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:19",
+    "at": "12:41",
     "kind": null,
-    "fav": 1.1
+    "fav": 1.0
    }
   },
   {
@@ -1388,5 +1393,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T12:36+09:00"
+ "updated": "2026-11-22T12:41+09:00"
 }
