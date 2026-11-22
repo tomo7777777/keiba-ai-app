@@ -234,7 +234,7 @@
    }
   }
  ],
- "races": 279,
+ "races": 280,
  "axis_top3": 4,
  "axis_n": 19,
  "ev_old": {
@@ -282,10 +282,10 @@
  "ev": {
   "ana": {
    "label": "穴レース ワイド",
-   "races": 4,
+   "races": 5,
    "hit_races": 1,
-   "tickets": 6,
-   "inv": 600,
+   "tickets": 8,
+   "inv": 800,
    "ret": 1630
   },
   "hon": {
@@ -297,5 +297,5 @@
    "ret": 0
   }
  },
- "updated": "2026-11-22T16:10+09:00"
+ "updated": "2026-11-22T16:15+09:00"
 }
