@@ -314,13 +314,13 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "11:51",
+    "at": "12:02",
     "kind": "hon",
     "fav": 2.4,
     "axis": 1,
     "name": "イケイケルノワール",
-    "pop": 2,
-    "odds": 4.6
+    "pop": 3,
+    "odds": 6.3
    },
    "horses": [
     {
@@ -736,7 +736,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:02",
+    "kind": null,
+    "fav": 6.0
+   }
   },
   {
    "race_id": "202654112203",
@@ -959,5 +964,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T11:56+09:00"
+ "updated": "2026-11-22T12:02+09:00"
 }
