@@ -1163,9 +1163,9 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "13:08",
+    "at": "13:19",
     "kind": null,
-    "fav": 1.1
+    "fav": 1.0
    },
    "horses": [
     {
@@ -1459,13 +1459,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:58",
+    "at": "13:19",
     "kind": "hon",
     "fav": 2.7,
     "axis": 1,
     "name": "グレコ",
     "pop": 2,
-    "odds": 4.5
+    "odds": 4.3
    }
   },
   {
@@ -1514,7 +1514,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "13:20",
+    "kind": "hon",
+    "fav": 5.1,
+    "axis": 1,
+    "name": "インマイブラッド",
+    "pop": 2,
+    "odds": 5.6
+   }
   },
   {
    "race_id": "202636112211",
@@ -1582,9 +1591,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:58",
+    "at": "13:19",
     "kind": null,
-    "fav": 1.7
+    "fav": 1.8
    }
   },
   {
@@ -1818,5 +1827,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-22T13:14+09:00"
+ "updated": "2026-11-22T13:19+09:00"
 }
