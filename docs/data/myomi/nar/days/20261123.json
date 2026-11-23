@@ -13,13 +13,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "10:11",
-    "kind": "hon",
-    "fav": 1.7,
-    "axis": 5,
-    "name": "クリノブリーゼ",
-    "pop": 3,
-    "odds": 4.6
+    "at": "10:32",
+    "kind": null,
+    "fav": 1.0
    }
   },
   {
@@ -172,7 +168,12 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:32",
+    "kind": null,
+    "fav": 2.0
+   }
   },
   {
    "race_id": "202646112302",
@@ -194,7 +195,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:32",
+    "kind": null,
+    "fav": 2.0
+   }
   },
   {
    "race_id": "202646112304",
@@ -395,5 +401,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-23T10:21+09:00"
+ "updated": "2026-11-23T10:32+09:00"
 }
