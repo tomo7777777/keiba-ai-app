@@ -267,13 +267,9 @@
    "n": 9,
    "status": "locked",
    "cand": {
-    "at": "11:38",
-    "kind": "hon",
-    "fav": 2.9,
-    "axis": 3,
-    "name": "エメラルドテソーロ",
-    "pop": 1,
-    "odds": 2.9
+    "at": "11:48",
+    "kind": null,
+    "fav": 3.9
    },
    "horses": [
     {
@@ -467,9 +463,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:27",
+    "at": "11:48",
     "kind": null,
-    "fav": 1.0
+    "fav": 1.1
    }
   },
   {
@@ -483,10 +479,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:27",
+    "at": "11:48",
     "kind": null,
-    "fav": 1.2,
-    "skip": "1番人気が1.2倍と強いため穴は見送り"
+    "fav": 1.2
    }
   },
   {
@@ -500,7 +495,7 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "11:27",
+    "at": "11:49",
     "kind": null,
     "fav": 1.0
    }
@@ -546,7 +541,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:49",
+    "kind": "ana",
+    "fav": 4.0,
+    "axis": 7,
+    "name": "ヤマショウシャイン",
+    "pop": 4,
+    "odds": 6.0
+   }
   },
   {
    "race_id": "202636112309",
@@ -652,9 +656,13 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "11:27",
-    "kind": null,
-    "fav": 2.9
+    "at": "11:49",
+    "kind": "ana",
+    "fav": 3.0,
+    "axis": 8,
+    "name": "ピタカゲ",
+    "pop": 6,
+    "odds": 10.8
    }
   },
   {
@@ -845,5 +853,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-23T11:43+09:00"
+ "updated": "2026-11-23T11:48+09:00"
 }
