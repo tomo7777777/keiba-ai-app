@@ -585,9 +585,13 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "12:10",
-    "kind": null,
-    "fav": 1.1
+    "at": "12:21",
+    "kind": "hon",
+    "fav": 1.1,
+    "axis": 2,
+    "name": "ジーティーウブラブ",
+    "pop": 3,
+    "odds": 14.0
    },
    "horses": [
     {
@@ -889,7 +893,12 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:22",
+    "kind": null,
+    "fav": 3.0
+   }
   },
   {
    "race_id": "202636112310",
@@ -968,13 +977,13 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "12:00",
+    "at": "12:21",
     "kind": "hon",
     "fav": 1.6,
     "axis": 5,
     "name": "アンフォーギヴン",
     "pop": 3,
-    "odds": 9.0
+    "odds": 9.2
    }
   },
   {
@@ -1005,9 +1014,9 @@
    "n": 8,
    "status": "wait",
    "cand": {
-    "at": "12:00",
+    "at": "12:22",
     "kind": null,
-    "fav": 2.5
+    "fav": 2.9
    }
   },
   {
@@ -1074,7 +1083,13 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:21",
+    "kind": null,
+    "fav": 1.0,
+    "skip": "1番人気が1.0倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202655112302",
@@ -1187,5 +1202,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-23T12:16+09:00"
+ "updated": "2026-11-23T12:21+09:00"
 }
