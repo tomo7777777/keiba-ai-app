@@ -11,7 +11,16 @@
    "surface": "ダ",
    "distance": 850,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:11",
+    "kind": "hon",
+    "fav": 1.7,
+    "axis": 5,
+    "name": "クリノブリーゼ",
+    "pop": 3,
+    "odds": 4.6
+   }
   },
   {
    "race_id": "202636112302",
@@ -366,5 +375,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-23T06:02+09:00"
+ "updated": "2026-11-23T10:11+09:00"
 }
