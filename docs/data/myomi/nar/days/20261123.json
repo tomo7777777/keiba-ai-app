@@ -676,13 +676,9 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "12:21",
-    "kind": "hon",
-    "fav": 1.1,
-    "axis": 2,
-    "name": "ジーティーウブラブ",
-    "pop": 3,
-    "odds": 14.0
+    "at": "12:32",
+    "kind": null,
+    "fav": 1.2
    },
    "horses": [
     {
@@ -921,9 +917,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:11",
+    "at": "12:32",
     "kind": null,
-    "fav": 1.0
+    "fav": 1.1
    }
   },
   {
@@ -969,10 +965,13 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:11",
-    "kind": null,
-    "fav": 2.9,
-    "skip": "1番人気が2.9倍と強いため穴は見送り"
+    "at": "12:33",
+    "kind": "ana",
+    "fav": 3.3,
+    "axis": 7,
+    "name": "ヤマショウシャイン",
+    "pop": 5,
+    "odds": 8.8
    }
   },
   {
@@ -1088,10 +1087,10 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "12:11",
+    "at": "12:32",
     "kind": null,
-    "fav": 2.8,
-    "skip": "1番人気が2.8倍と強いため穴は見送り"
+    "fav": 2.3,
+    "skip": "1番人気が2.3倍と強いため穴は見送り"
    }
   },
   {
@@ -1119,7 +1118,12 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:33",
+    "kind": null,
+    "fav": 3.0
+   }
   },
   {
    "race_id": "202646112307",
@@ -1191,7 +1195,12 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:33",
+    "kind": null,
+    "fav": 2.7
+   }
   },
   {
    "race_id": "202655112303",
@@ -1293,5 +1302,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-23T12:27+09:00"
+ "updated": "2026-11-23T12:32+09:00"
 }
