@@ -43,7 +43,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:29",
+    "kind": null,
+    "fav": 2.2
+   }
   },
   {
    "race_id": "202636112404",
@@ -54,7 +59,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:29",
+    "kind": "hon",
+    "fav": 2.4,
+    "axis": 4,
+    "name": "エスカルチャ",
+    "pop": 3,
+    "odds": 5.9
+   }
   },
   {
    "race_id": "202636112405",
@@ -186,7 +200,12 @@
    "surface": "ダ",
    "distance": 800,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:29",
+    "kind": null,
+    "fav": 1.4
+   }
   },
   {
    "race_id": "202642112404",
@@ -197,7 +216,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 6,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:29",
+    "kind": null,
+    "fav": 2.0
+   }
   },
   {
    "race_id": "202642112405",
@@ -420,5 +444,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-24T10:24+09:00"
+ "updated": "2026-11-24T10:29+09:00"
 }
