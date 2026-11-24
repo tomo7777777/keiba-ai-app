@@ -209,13 +209,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "10:47",
+    "at": "11:10",
     "kind": "hon",
-    "fav": 1.6,
+    "fav": 1.7,
     "axis": 5,
     "name": "エールヴァーゲ",
     "pop": 3,
-    "odds": 7.7
+    "odds": 5.4
    }
   },
   {
@@ -293,7 +293,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "11:10",
+    "kind": null,
+    "fav": 1.9
+   }
   },
   {
    "race_id": "202636112408",
@@ -381,9 +386,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "10:47",
+    "at": "11:10",
     "kind": null,
-    "fav": 1.5
+    "fav": 1.4
    }
   },
   {
@@ -672,5 +677,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-24T11:05+09:00"
+ "updated": "2026-11-24T11:10+09:00"
 }
