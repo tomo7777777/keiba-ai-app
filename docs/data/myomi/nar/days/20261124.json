@@ -1135,13 +1135,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:34",
+    "at": "12:57",
     "kind": "hon",
-    "fav": 1.1,
+    "fav": 1.2,
     "axis": 7,
     "name": "ピンクノバラ",
     "pop": 3,
-    "odds": 13.1
+    "odds": 11.2
    }
   },
   {
@@ -1175,10 +1175,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:34",
-    "kind": null,
-    "fav": 2.9,
-    "skip": "1番人気が2.9倍と強いため穴は見送り"
+    "at": "12:57",
+    "kind": "hon",
+    "fav": 3.4,
+    "axis": 4,
+    "name": "コスモパンドラ",
+    "pop": 1,
+    "odds": 3.4
    }
   },
   {
@@ -1210,7 +1213,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:57",
+    "kind": null,
+    "fav": 1.0
+   }
   },
   {
    "race_id": "202636112411",
@@ -2001,7 +2009,7 @@
    "n": 6,
    "status": "wait",
    "cand": {
-    "at": "12:48",
+    "at": "12:57",
     "kind": null,
     "fav": 1.0
    }
@@ -2157,13 +2165,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:34",
-    "kind": "hon",
-    "fav": 3.4,
-    "axis": 8,
-    "name": "サンライズハリー",
-    "pop": 1,
-    "odds": 3.4
+    "at": "12:57",
+    "kind": null,
+    "fav": 2.9
    }
   },
   {
@@ -2194,13 +2198,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:34",
-    "kind": "hon",
-    "fav": 3.7,
-    "axis": 10,
-    "name": "ウォーブレイク",
-    "pop": 1,
-    "odds": 3.7
+    "at": "12:57",
+    "kind": null,
+    "fav": 4.4
    }
   },
   {
@@ -2301,5 +2301,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-24T12:52+09:00"
+ "updated": "2026-11-24T12:57+09:00"
 }
