@@ -1140,9 +1140,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "12:30",
+    "at": "12:53",
     "kind": null,
-    "fav": 2.2
+    "fav": 2.6
    }
   },
   {
@@ -3164,13 +3164,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:30",
-    "kind": "hon",
-    "fav": 2.5,
-    "axis": 2,
-    "name": "トーラスキング",
-    "pop": 3,
-    "odds": 5.4
+    "at": "12:53",
+    "kind": null,
+    "fav": 3.2
    }
   },
   {
@@ -3239,8 +3235,14 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:53",
+    "kind": null,
+    "fav": 2.6,
+    "skip": "1番人気が2.6倍と強いため穴は見送り"
+   }
   }
  ],
- "updated": "2026-11-25T12:48+09:00"
+ "updated": "2026-11-25T12:53+09:00"
 }
