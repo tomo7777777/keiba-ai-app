@@ -47,7 +47,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:29",
+    "kind": null,
+    "fav": 1.5
+   }
   },
   {
    "race_id": "202642112504",
@@ -58,7 +63,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:30",
+    "kind": null,
+    "fav": 1.2,
+    "skip": "1番人気が1.2倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202642112505",
@@ -69,7 +80,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 13,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:30",
+    "kind": null,
+    "fav": 1.9
+   }
   },
   {
    "race_id": "202642112506",
@@ -516,13 +532,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "10:20",
+    "at": "10:29",
     "kind": "hon",
-    "fav": 2.1,
-    "axis": 4,
-    "name": "シンプウコエド",
+    "fav": 2.2,
+    "axis": 3,
+    "name": "シャッタースピード",
     "pop": 2,
-    "odds": 2.2
+    "odds": 2.5
    }
   },
   {
@@ -655,5 +671,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-25T10:25+09:00"
+ "updated": "2026-11-25T10:29+09:00"
 }
