@@ -29,9 +29,10 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "10:16",
+    "at": "10:39",
     "kind": null,
-    "fav": 2.2
+    "fav": 2.4,
+    "skip": "1番人気が2.4倍と強いため穴は見送り"
    }
   },
   {
@@ -535,13 +536,13 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "10:29",
+    "at": "10:39",
     "kind": "hon",
     "fav": 2.2,
     "axis": 3,
     "name": "シャッタースピード",
     "pop": 2,
-    "odds": 2.5
+    "odds": 2.8
    },
    "horses": [
     {
@@ -817,9 +818,9 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "10:16",
+    "at": "10:39",
     "kind": null,
-    "fav": 1.2
+    "fav": 1.9
    }
   },
   {
@@ -831,7 +832,12 @@
    "surface": "ダ",
    "distance": 1700,
    "n": 7,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:39",
+    "kind": null,
+    "fav": 1.7
+   }
   },
   {
    "race_id": "202650112508",
@@ -894,5 +900,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-25T10:34+09:00"
+ "updated": "2026-11-25T10:39+09:00"
 }
