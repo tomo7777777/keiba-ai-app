@@ -11,7 +11,16 @@
    "surface": "ダ",
    "distance": 800,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:11",
+    "kind": "hon",
+    "fav": 1.7,
+    "axis": 12,
+    "name": "キサラフラッシュ",
+    "pop": 3,
+    "odds": 9.4
+   }
   },
   {
    "race_id": "202642112502",
@@ -500,7 +509,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:11",
+    "kind": null,
+    "fav": 1.0
+   }
   },
   {
    "race_id": "202650112503",
@@ -511,7 +525,12 @@
    "surface": "ダ",
    "distance": 1230,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:11",
+    "kind": null,
+    "fav": 1.0
+   }
   },
   {
    "race_id": "202650112504",
@@ -522,7 +541,16 @@
    "surface": "ダ",
    "distance": 1230,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:11",
+    "kind": "hon",
+    "fav": 1.9,
+    "axis": 7,
+    "name": "ステップアイ",
+    "pop": 2,
+    "odds": 2.3
+   }
   },
   {
    "race_id": "202650112505",
@@ -613,5 +641,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-25T10:06+09:00"
+ "updated": "2026-11-25T10:11+09:00"
 }
