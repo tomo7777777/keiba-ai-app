@@ -957,7 +957,7 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:11",
+    "at": "12:34",
     "kind": null,
     "fav": 1.0
    }
@@ -1035,7 +1035,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:34",
+    "kind": null,
+    "fav": 2.4,
+    "skip": "1番人気が2.4倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202646112603",
@@ -1062,7 +1068,12 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:34",
+    "kind": null,
+    "fav": 3.2
+   }
   },
   {
    "race_id": "202646112605",
@@ -1073,7 +1084,13 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:34",
+    "kind": null,
+    "fav": 2.8,
+    "skip": "1番人気が2.8倍と強いため穴は見送り"
+   }
   },
   {
    "race_id": "202646112606",
@@ -1217,7 +1234,16 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:34",
+    "kind": "ana",
+    "fav": 4.4,
+    "axis": 10,
+    "name": "ウインモアナ",
+    "pop": 4,
+    "odds": 6.6
+   }
   },
   {
    "race_id": "202648112605",
@@ -2750,13 +2776,9 @@
    "n": 12,
    "status": "locked",
    "cand": {
-    "at": "12:25",
-    "kind": "hon",
-    "fav": 3.2,
-    "axis": 3,
-    "name": "クリノコウテイ",
-    "pop": 2,
-    "odds": 3.7
+    "at": "12:34",
+    "kind": null,
+    "fav": 3.2
    },
    "horses": [
     {
@@ -3043,9 +3065,10 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "12:25",
+    "at": "12:34",
     "kind": null,
-    "fav": 1.1
+    "fav": 1.2,
+    "skip": "1番人気が1.2倍と強いため穴は見送り"
    }
   },
   {
@@ -3111,13 +3134,9 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "12:06",
-    "kind": "ana",
-    "fav": 3.4,
-    "axis": 3,
-    "name": "タマモマスラオ",
-    "pop": 8,
-    "odds": 14.3
+    "at": "12:34",
+    "kind": null,
+    "fav": 3.2
    }
   },
   {
@@ -3148,5 +3167,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-26T12:29+09:00"
+ "updated": "2026-11-26T12:34+09:00"
 }
