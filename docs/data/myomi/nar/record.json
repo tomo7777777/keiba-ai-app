@@ -2,30 +2,30 @@
  "bets": {
   "fuku": {
    "label": "複勝 軸",
-   "races": 24,
+   "races": 25,
    "hit_races": 4,
-   "inv": 2400,
+   "inv": 2500,
    "ret": 870
   },
   "wide": {
    "label": "ワイド 軸-相手3頭",
-   "races": 24,
+   "races": 25,
    "hit_races": 4,
-   "inv": 7200,
+   "inv": 7500,
    "ret": 3340
   },
   "umaren": {
    "label": "馬連 軸-相手5頭",
-   "races": 24,
+   "races": 25,
    "hit_races": 1,
-   "inv": 12000,
+   "inv": 12500,
    "ret": 780
   },
   "sanfuku": {
    "label": "3連複 軸1頭-相手4頭",
-   "races": 24,
+   "races": 25,
    "hit_races": 1,
-   "inv": 14400,
+   "inv": 15000,
    "ret": 1880
   }
  },
@@ -319,11 +319,40 @@
      "ret": 0
     }
    }
+  },
+  {
+   "date": "20261126",
+   "bets": {
+    "fuku": {
+     "races": 1,
+     "hit_races": 0,
+     "inv": 100,
+     "ret": 0
+    },
+    "wide": {
+     "races": 1,
+     "hit_races": 0,
+     "inv": 300,
+     "ret": 0
+    },
+    "umaren": {
+     "races": 1,
+     "hit_races": 0,
+     "inv": 500,
+     "ret": 0
+    },
+    "sanfuku": {
+     "races": 1,
+     "hit_races": 0,
+     "inv": 600,
+     "ret": 0
+    }
+   }
   }
  ],
- "races": 414,
+ "races": 415,
  "axis_top3": 5,
- "axis_n": 24,
+ "axis_n": 25,
  "ev_old": {
   "ana": {
    "label": "穴レース ワイド",
@@ -384,5 +413,5 @@
    "ret": 0
   }
  },
- "updated": "2026-11-26T13:02+09:00"
+ "updated": "2026-11-26T13:07+09:00"
 }
