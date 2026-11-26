@@ -1154,9 +1154,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "11:52",
+    "at": "12:15",
     "kind": null,
-    "fav": 1.5
+    "fav": 1.0
    }
   },
   {
@@ -2644,9 +2644,9 @@
    "n": 12,
    "status": "locked",
    "cand": {
-    "at": "12:06",
+    "at": "12:15",
     "kind": null,
-    "fav": 3.2
+    "fav": 2.8
    },
    "horses": [
     {
@@ -2933,9 +2933,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "11:52",
+    "at": "12:15",
     "kind": null,
-    "fav": 1.6
+    "fav": 1.1
    }
   },
   {
@@ -2985,13 +2985,9 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "11:52",
-    "kind": "hon",
-    "fav": 2.5,
-    "axis": 4,
-    "name": "シャナオウ",
-    "pop": 3,
-    "odds": 4.9
+    "at": "12:15",
+    "kind": null,
+    "fav": 1.7
    }
   },
   {
@@ -3023,7 +3019,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:15",
+    "kind": null,
+    "fav": 1.7
+   }
   },
   {
    "race_id": "202650112612",
@@ -3037,5 +3038,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-26T12:10+09:00"
+ "updated": "2026-11-26T12:15+09:00"
 }
