@@ -13,9 +13,9 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "06:27",
+    "at": "06:51",
     "kind": null,
-    "fav": 2.6
+    "fav": 2.7
    }
   },
   {
@@ -43,7 +43,16 @@
    "surface": "芝",
    "distance": 1800,
    "n": 18,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "06:51",
+    "kind": "ana",
+    "fav": 4.2,
+    "axis": 3,
+    "name": "ルーチェルナーレ",
+    "pop": 9,
+    "odds": 18.5
+   }
   },
   {
    "race_id": "202605050704",
@@ -276,5 +285,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-28T06:46+09:00"
+ "updated": "2026-11-28T06:51+09:00"
 }
