@@ -511,7 +511,12 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:16",
+    "kind": null,
+    "fav": 2.5
+   }
   },
   {
    "race_id": "202650112703",
@@ -560,7 +565,12 @@
    "surface": "ダ",
    "distance": 820,
    "n": 12,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:16",
+    "kind": null,
+    "fav": 1.9
+   }
   },
   {
    "race_id": "202650112707",
@@ -571,7 +581,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:16",
+    "kind": "hon",
+    "fav": 2.4,
+    "axis": 3,
+    "name": "フェンリル",
+    "pop": 2,
+    "odds": 2.6
+   }
   },
   {
    "race_id": "202650112708",
@@ -629,5 +648,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-27T10:11+09:00"
+ "updated": "2026-11-27T10:16+09:00"
 }
