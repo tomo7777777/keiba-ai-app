@@ -178,7 +178,12 @@
    "surface": "ダ",
    "distance": 1500,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "10:44",
+    "kind": null,
+    "fav": 4.4
+   }
   },
   {
    "race_id": "202648112702",
@@ -552,13 +557,13 @@
    "n": 10,
    "status": "locked",
    "cand": {
-    "at": "10:35",
+    "at": "10:44",
     "kind": "hon",
-    "fav": 1.1,
-    "axis": 2,
-    "name": "スタンダールロマン",
+    "fav": 1.2,
+    "axis": 3,
+    "name": "スーパークール",
     "pop": 3,
-    "odds": 20.5
+    "odds": 15.8
    },
    "horses": [
     {
@@ -781,13 +786,13 @@
    "n": 12,
    "status": "wait",
    "cand": {
-    "at": "10:30",
+    "at": "10:44",
     "kind": "hon",
     "fav": 1.2,
     "axis": 2,
     "name": "エムティイロハ",
     "pop": 3,
-    "odds": 16.9
+    "odds": 17.2
    }
   },
   {
@@ -924,5 +929,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-27T10:39+09:00"
+ "updated": "2026-11-27T10:43+09:00"
 }
