@@ -1,0 +1,265 @@
+{
+ "circuit": "jra",
+ "date": "20261128",
+ "races": [
+  {
+   "race_id": "202605050701",
+   "place": "東京",
+   "r": 1,
+   "name": "2歳未勝利",
+   "start": "09:50",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 12,
+   "status": "wait",
+   "cand": {
+    "at": "06:02",
+    "kind": null,
+    "fav": 2.6
+   }
+  },
+  {
+   "race_id": "202605050702",
+   "place": "東京",
+   "r": 2,
+   "name": "2歳未勝利",
+   "start": "10:20",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050703",
+   "place": "東京",
+   "r": 3,
+   "name": "2歳未勝利",
+   "start": "10:50",
+   "surface": "芝",
+   "distance": 1800,
+   "n": 18,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050704",
+   "place": "東京",
+   "r": 4,
+   "name": "2歳新馬",
+   "start": "11:20",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 10,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050705",
+   "place": "東京",
+   "r": 5,
+   "name": "2歳新馬",
+   "start": "12:10",
+   "surface": "芝",
+   "distance": 1400,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050706",
+   "place": "東京",
+   "r": 6,
+   "name": "2歳新馬",
+   "start": "12:40",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 8,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050707",
+   "place": "東京",
+   "r": 7,
+   "name": "3歳以上1勝クラス",
+   "start": "13:10",
+   "surface": "ダ",
+   "distance": 2100,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050708",
+   "place": "東京",
+   "r": 8,
+   "name": "3歳以上2勝クラス",
+   "start": "13:40",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050709",
+   "place": "東京",
+   "r": 9,
+   "name": "セレブレイション賞",
+   "start": "14:15",
+   "surface": "ダ",
+   "distance": 2100,
+   "n": 14,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050710",
+   "place": "東京",
+   "r": 10,
+   "name": "シャングリラS",
+   "start": "14:50",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050711",
+   "place": "東京",
+   "r": 11,
+   "name": "キャピタルS",
+   "start": "15:25",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 18,
+   "status": "wait"
+  },
+  {
+   "race_id": "202605050712",
+   "place": "東京",
+   "r": 12,
+   "name": "3歳以上1勝クラス",
+   "start": "16:00",
+   "surface": "芝",
+   "distance": 2400,
+   "n": 18,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050701",
+   "place": "京都",
+   "r": 1,
+   "name": "2歳未勝利",
+   "start": "10:05",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050702",
+   "place": "京都",
+   "r": 2,
+   "name": "2歳未勝利",
+   "start": "10:35",
+   "surface": "ダ",
+   "distance": 1800,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050703",
+   "place": "京都",
+   "r": 3,
+   "name": "2歳未勝利",
+   "start": "11:05",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050705",
+   "place": "京都",
+   "r": 5,
+   "name": "2歳新馬",
+   "start": "12:25",
+   "surface": "芝",
+   "distance": 1600,
+   "n": 13,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050706",
+   "place": "京都",
+   "r": 6,
+   "name": "2歳新馬",
+   "start": "12:55",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 16,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050707",
+   "place": "京都",
+   "r": 7,
+   "name": "3歳以上1勝クラス",
+   "start": "13:25",
+   "surface": "芝",
+   "distance": 1800,
+   "n": 18,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050708",
+   "place": "京都",
+   "r": 8,
+   "name": "3歳以上2勝クラス",
+   "start": "13:55",
+   "surface": "ダ",
+   "distance": 1200,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050709",
+   "place": "京都",
+   "r": 9,
+   "name": "栂尾特別",
+   "start": "14:30",
+   "surface": "ダ",
+   "distance": 1800,
+   "n": 13,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050710",
+   "place": "京都",
+   "r": 10,
+   "name": "東山S",
+   "start": "15:05",
+   "surface": "芝",
+   "distance": 1400,
+   "n": 15,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050711",
+   "place": "京都",
+   "r": 11,
+   "name": "京都2歳S",
+   "start": "15:40",
+   "surface": "芝",
+   "distance": 2000,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202608050712",
+   "place": "京都",
+   "r": 12,
+   "name": "3歳以上2勝クラス",
+   "start": "16:15",
+   "surface": "芝",
+   "distance": 1200,
+   "n": 18,
+   "status": "wait"
+  }
+ ],
+ "updated": "2026-11-28T06:02+09:00"
+}

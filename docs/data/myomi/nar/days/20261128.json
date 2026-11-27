@@ -1,0 +1,271 @@
+{
+ "circuit": "nar",
+ "date": "20261128",
+ "races": [
+  {
+   "race_id": "202654112801",
+   "place": "高知",
+   "r": 1,
+   "name": "2歳ー3",
+   "start": "14:55",
+   "surface": "ダ",
+   "distance": 1300,
+   "n": 10,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112802",
+   "place": "高知",
+   "r": 2,
+   "name": "2歳ー2",
+   "start": "15:30",
+   "surface": "ダ",
+   "distance": 1300,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112803",
+   "place": "高知",
+   "r": 3,
+   "name": "岡山県吉備の温羅特別(C1C2)",
+   "start": "16:05",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 10,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112804",
+   "place": "高知",
+   "r": 4,
+   "name": "C3ー5",
+   "start": "16:35",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 8,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112805",
+   "place": "高知",
+   "r": 5,
+   "name": "C3ー4",
+   "start": "17:10",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 10,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112806",
+   "place": "高知",
+   "r": 6,
+   "name": "C1ー6",
+   "start": "17:45",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 9,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112807",
+   "place": "高知",
+   "r": 7,
+   "name": "C1ー5",
+   "start": "18:15",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 9,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112808",
+   "place": "高知",
+   "r": 8,
+   "name": "C1ー4",
+   "start": "18:45",
+   "surface": "ダ",
+   "distance": 1600,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112809",
+   "place": "高知",
+   "r": 9,
+   "name": "C2ー3",
+   "start": "19:15",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112810",
+   "place": "高知",
+   "r": 10,
+   "name": "C2ー2",
+   "start": "19:45",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112811",
+   "place": "高知",
+   "r": 11,
+   "name": "小雪特別(C2)",
+   "start": "20:20",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202654112812",
+   "place": "高知",
+   "r": 12,
+   "name": "ファイナルレース(C2)",
+   "start": "20:50",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112801",
+   "place": "佐賀",
+   "r": 1,
+   "name": "2歳ー7組",
+   "start": "14:45",
+   "surface": "ダ",
+   "distance": 900,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112802",
+   "place": "佐賀",
+   "r": 2,
+   "name": "2歳ー5組",
+   "start": "15:20",
+   "surface": "ダ",
+   "distance": 1300,
+   "n": 9,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112803",
+   "place": "佐賀",
+   "r": 3,
+   "name": "C1ー9組",
+   "start": "15:55",
+   "surface": "ダ",
+   "distance": 1300,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112804",
+   "place": "佐賀",
+   "r": 4,
+   "name": "C2ー6組",
+   "start": "16:30",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112805",
+   "place": "佐賀",
+   "r": 5,
+   "name": "嘉瀬川賞(A1)",
+   "start": "17:00",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 7,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112806",
+   "place": "佐賀",
+   "r": 6,
+   "name": "C2ー5組",
+   "start": "17:35",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112807",
+   "place": "佐賀",
+   "r": 7,
+   "name": "C2ー4組",
+   "start": "18:05",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 10,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112808",
+   "place": "佐賀",
+   "r": 8,
+   "name": "C2ー3組",
+   "start": "18:35",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112809",
+   "place": "佐賀",
+   "r": 9,
+   "name": "エゾギク賞(B)",
+   "start": "19:05",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 11,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112810",
+   "place": "佐賀",
+   "r": 10,
+   "name": "ムーンライト特選(C2)",
+   "start": "19:35",
+   "surface": "ダ",
+   "distance": 1750,
+   "n": 12,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112811",
+   "place": "佐賀",
+   "r": 11,
+   "name": "SAGAリベンジャーズジョッキーズ",
+   "start": "20:10",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 8,
+   "status": "wait"
+  },
+  {
+   "race_id": "202655112812",
+   "place": "佐賀",
+   "r": 12,
+   "name": "SAGAリベFEVER14(C1)",
+   "start": "20:40",
+   "surface": "ダ",
+   "distance": 1400,
+   "n": 13,
+   "status": "wait"
+  }
+ ],
+ "updated": "2026-11-28T06:02+09:00"
+}
