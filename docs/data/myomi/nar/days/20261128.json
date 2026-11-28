@@ -238,9 +238,13 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "14:11",
-    "kind": null,
-    "fav": 1.2
+    "at": "14:34",
+    "kind": "hon",
+    "fav": 1.6,
+    "axis": 5,
+    "name": "ロイヤルクォーク",
+    "pop": 2,
+    "odds": 7.6
    }
   },
   {
@@ -306,13 +310,13 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "14:11",
+    "at": "14:34",
     "kind": "hon",
     "fav": 1.9,
     "axis": 4,
     "name": "テソリーノ",
     "pop": 3,
-    "odds": 7.5
+    "odds": 6.7
    }
   },
   {
@@ -398,7 +402,7 @@
    "n": 11,
    "status": "locked",
    "cand": {
-    "at": "14:22",
+    "at": "14:34",
     "kind": null,
     "fav": 1.0
    },
@@ -654,7 +658,7 @@
    "n": 9,
    "status": "wait",
    "cand": {
-    "at": "14:22",
+    "at": "14:34",
     "kind": null,
     "fav": 1.7
    }
@@ -703,7 +707,7 @@
    "n": 7,
    "status": "wait",
    "cand": {
-    "at": "14:11",
+    "at": "14:34",
     "kind": null,
     "fav": 1.5
    }
@@ -796,5 +800,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-28T14:28+09:00"
+ "updated": "2026-11-28T14:34+09:00"
 }
