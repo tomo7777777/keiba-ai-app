@@ -29,7 +29,7 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "11:56",
+    "at": "12:18",
     "kind": null,
     "fav": 1.0,
     "skip": "1番人気が1.0倍と強いため穴は見送り"
@@ -163,7 +163,12 @@
    "surface": "ダ",
    "distance": 900,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:18",
+    "kind": null,
+    "fav": 1.0
+   }
   },
   {
    "race_id": "202655112802",
@@ -287,5 +292,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-28T12:07+09:00"
+ "updated": "2026-11-28T12:18+09:00"
 }
