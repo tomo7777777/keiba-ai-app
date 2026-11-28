@@ -3321,7 +3321,7 @@
    "n": 11,
    "status": "wait",
    "cand": {
-    "at": "16:33",
+    "at": "16:43",
     "kind": null,
     "fav": 1.0
    }
@@ -3417,8 +3417,17 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 13,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "16:43",
+    "kind": "ana",
+    "fav": 4.9,
+    "axis": 8,
+    "name": "ラブビーチ",
+    "pop": 4,
+    "odds": 8.0
+   }
   }
  ],
- "updated": "2026-11-28T16:38+09:00"
+ "updated": "2026-11-28T16:42+09:00"
 }
