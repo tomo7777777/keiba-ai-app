@@ -2,7 +2,7 @@
  "demo": false,
  "date": "20261128",
  "fixed_at": "2026-11-28T14:23+09:00",
- "updated": "2026-11-28T16:33+09:00",
+ "updated": "2026-11-28T16:38+09:00",
  "races": [
   {
    "race_id": "202605050710",
@@ -321,7 +321,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:33",
+   "odds_time": "16:38",
    "bets": {
     "honmei": {
      "label": "本命",
@@ -706,7 +706,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:33",
+   "odds_time": "16:38",
    "bets": {},
    "confidence": 0.19
   },
@@ -1065,7 +1065,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:33",
+   "odds_time": "16:38",
    "bets": {},
    "confidence": 0.216
   },
@@ -1367,7 +1367,7 @@
      "mark": "▲"
     }
    ],
-   "odds_time": "16:33",
+   "odds_time": "16:38",
    "bets": {},
    "confidence": 0.228
   },
@@ -1574,7 +1574,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:33",
+   "odds_time": "16:38",
    "bets": {},
    "confidence": 0.273
   },
@@ -1933,7 +1933,7 @@
      "mark": ""
     }
    ],
-   "odds_time": "16:33",
+   "odds_time": "16:38",
    "bets": {},
    "confidence": 0.118
   }
