@@ -64,7 +64,12 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 8,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:35",
+    "kind": null,
+    "fav": 1.8
+   }
   },
   {
    "race_id": "202654112805",
@@ -206,7 +211,16 @@
    "surface": "ダ",
    "distance": 1400,
    "n": 11,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:35",
+    "kind": "hon",
+    "fav": 1.6,
+    "axis": 4,
+    "name": "リネンドライブ",
+    "pop": 2,
+    "odds": 3.6
+   }
   },
   {
    "race_id": "202655112805",
@@ -297,5 +311,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-28T12:29+09:00"
+ "updated": "2026-11-28T12:35+09:00"
 }
