@@ -44,7 +44,16 @@
    "surface": "ダ",
    "distance": 1600,
    "n": 10,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:07",
+    "kind": "hon",
+    "fav": 3.7,
+    "axis": 2,
+    "name": "ジャスタースパーク",
+    "pop": 1,
+    "odds": 3.7
+   }
   },
   {
    "race_id": "202654112804",
@@ -278,5 +287,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-28T12:01+09:00"
+ "updated": "2026-11-28T12:07+09:00"
 }
