@@ -46,13 +46,13 @@
    "n": 10,
    "status": "wait",
    "cand": {
-    "at": "12:07",
+    "at": "12:30",
     "kind": "hon",
-    "fav": 3.7,
-    "axis": 2,
-    "name": "ジャスタースパーク",
-    "pop": 1,
-    "odds": 3.7
+    "fav": 5.0,
+    "axis": 10,
+    "name": "アルマリカシバ",
+    "pop": 2,
+    "odds": 5.0
    }
   },
   {
@@ -179,7 +179,12 @@
    "surface": "ダ",
    "distance": 1300,
    "n": 9,
-   "status": "wait"
+   "status": "wait",
+   "cand": {
+    "at": "12:30",
+    "kind": null,
+    "fav": 1.2
+   }
   },
   {
    "race_id": "202655112803",
@@ -292,5 +297,5 @@
    "status": "wait"
   }
  ],
- "updated": "2026-11-28T12:24+09:00"
+ "updated": "2026-11-28T12:29+09:00"
 }
